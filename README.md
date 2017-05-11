@@ -1,8 +1,8 @@
-# FINAL PROJECT: STUYTINERARY
+STUYTINERARY
 
-**Team EighthGradeBully:** Kate Ly Johnston (Project Manager), Maddie Ostergaard, Winston Venderbush, Patrick Chan
+**Team EighthGradeBully:** Kate Ly Johnston, Maddie Ostergaard, Winston Venderbush, Patrick Chan
 
-*softdev pd9 -- spring*
+*softdev pd9 -- final project*
 
 
 # DESCRIPTION:
