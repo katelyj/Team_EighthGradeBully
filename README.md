@@ -1,4 +1,4 @@
-STUYTINERARY
+# STUYTINERARY
 
 **Team EighthGradeBully:** Kate Ly Johnston, Maddie Ostergaard, Winston Venderbush, Patrick Chan
 
