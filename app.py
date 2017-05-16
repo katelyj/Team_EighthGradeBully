@@ -1,14 +1,14 @@
 from flask import Flask, render_template, request
 
-from lib.security import security
+#from lib.security import security
 
 app = Flask(__name__)
 app.secret_key = "patrickchan"
-app.register_blueprint(security.security)
+#app.register_blueprint(security.security)
 
 @app.route("/")
 def root():
-    return render_template("index.html")
+    return render_template("schedule.html")
 
 @app.route("/settings")
 def settings():
