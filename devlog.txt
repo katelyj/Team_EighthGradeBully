@@ -6,3 +6,7 @@ kateJ -- 2017-05-11 14:16
 kateJ -- 2017-05-26
   Added data
   Worked on database/timer backend stuff
+
+winstonV -- 2017-05-26
+  Got skeletal front end working
+  Started layout for modular front end design
