@@ -1,0 +1,25 @@
+{% extends "index.html" %} 
+
+{% block title %}Stuytinerary{% endblock %}
+
+{% block content %}
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h2>Stuytinerary</h2>
+            <h3>
+	    <form action = "/login/" >
+		 <label for="username">Username</label><br>
+		 <input type="text" name="username" placeholder="Username" required>
+		 <br><br>
+		 <label for="pass">Password</label><br>
+		 <input type="password" name="pass" placeholder="Password" required>
+		 <br><br>
+		 <input type="submit" value="Log In">
+            </form>
+	    </h3>
+            <br>
+            <a href="/login" class="btn btn-dark btn-lg">Login</a>
+        </div>
+    </header>
+{% endblock %}
