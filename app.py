@@ -12,6 +12,9 @@ def root():
     now = datetime.datetime.now()
     midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
     seconds = (now - midnight).seconds
+    #seconds = 37190 #TEST CASE
+    #seconds = 56100
+    seconds = 28800
     return render_template("schedule.html", starttime = str(seconds))
 
 @app.route("/settings")

@@ -13,6 +13,7 @@ period[10]="Period 10|53640|56100";
 period[11]="After School|56100|86340";
 
 var ClientStartTime=0;
+var CurrPeriod = '';
 var PeriodNames = new Array();
 var PeriodStarts = new Array();
 var PeriodEnds = new Array();
@@ -66,6 +67,20 @@ function DisplayHoursMinutes()
 		return hours+':'+mins;
 	}
 }
+function ConvertSeconds(seconds)
+{	var mins = Math.floor(seconds/60)%60;
+	var hours = Math.floor(seconds/3600);
+	if (hours==0)
+		hours = 12;
+	if (hours > 12)
+		hours = hours - 12;
+	if (mins < 10){
+		return hours+':0'+mins;
+	}
+	else{
+		return hours+':'+mins;
+	}
+}
 function changePeriods()
 {	var pcolors = new Array(period.length);
 	var snow = SecondsNow();
@@ -81,6 +96,7 @@ function changePeriods()
 	for (i = 0; i < period.length; ++i)
 	{	if (snow >= PeriodStarts[i] && snow <= PeriodEnds[i])
 		{	periodname = PeriodNames[i];
+			CurrPeriod = periodname;
 			minutes_into = Math.floor((snow-PeriodStarts[i])/60);
 			minutes_left = Math.floor((PeriodEnds[i]-PeriodStarts[i])/60) - minutes_into;
 			pcolors[i] = 'active';
@@ -107,7 +123,19 @@ function changePeriods()
 	
 	for (i = 0; i < period.length; ++i)
 	{	periodid='period'+i;
-		if (document.all[periodid].className != pcolors[i])
-			document.all[periodid].className = pcolors[i];
+		if (document.all[periodid].className != pcolors[i]){
+			document.all[periodid].className = pcolors[i]
+			console.log(CurrPeriod)
+			if (CurrPeriod == "Before School" || CurrPeriod == "After School"){
+				document.getElementById('start_end').style.display='none';
+				document.getElementById('timer_row').style.display='none';
+			}
+			else {
+				document.getElementById('start_end').style.display='';
+				document.getElementById('timer_row').style.display='';
+				document.all['start_time'].innerHTML = ConvertSeconds(PeriodStarts[i])
+				document.all['end_time'].innerHTML = ConvertSeconds(PeriodEnds[i])
+			}
+		}
 	}
 }
