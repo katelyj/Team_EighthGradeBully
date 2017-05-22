@@ -19,3 +19,6 @@ winstonV -- 2017-05-21 21:36
 winstonV -- 2017-05-21 23:25
   Got basic time table pushing from flask app
   Got system time pushing from flask app
+
+winstonV -- 2017-05-22 9:53
+  Fixed schedule presentation on frontpage

@@ -1,5 +1,5 @@
 var period = Array(12);
-period[0]="Before school|0|28800";
+period[0]="Before School|0|28800";
 period[1]="Period 1|28800|31260";
 period[2]="Period 2|31500|33960";
 period[3]="Period 3|34260|36900";
@@ -10,7 +10,7 @@ period[7]="Period 7|45480|47940";
 period[8]="Period 8|48240|50700";
 period[9]="Period 9|50940|53400";
 period[10]="Period 10|53640|56100";
-period[11]="After school|56100|86340";
+period[11]="After School|56100|86340";
 
 var ClientStartTime=0;
 var PeriodNames = new Array();
@@ -60,11 +60,9 @@ function DisplayHoursMinutes()
 	if (hours > 12)
 		hours = hours - 12;
 	if (mins < 10){
-		console.log(hours+':0'+mins);
 		return hours+':0'+mins;
 	}
 	else{
-		console.log(hours+':'+mins);
 		return hours+':'+mins;
 	}
 }
@@ -78,21 +76,21 @@ function changePeriods()
 	var periodid;
 	
 	for (i = 0; i < period.length; ++i)
-		pcolors[i] = 'black';
+		pcolors[i] = 'inactive';
 	
 	for (i = 0; i < period.length; ++i)
 	{	if (snow >= PeriodStarts[i] && snow <= PeriodEnds[i])
 		{	periodname = PeriodNames[i];
 			minutes_into = Math.floor((snow-PeriodStarts[i])/60);
 			minutes_left = Math.floor((PeriodEnds[i]-PeriodStarts[i])/60) - minutes_into;
-			pcolors[i] = 'red';
+			pcolors[i] = 'active';
 			break;
 		}
 		else if (i > 0)
 		{	if (snow > PeriodEnds[i-1] && snow < PeriodStarts[i])
 			{	periodname='Before ' + PeriodNames[i];
-				pcolors[i-1] = 'red';
-				pcolors[i] = 'red';
+				pcolors[i-1] = 'active';
+				pcolors[i] = 'active';
 				minutes_into = Math.floor((snow-PeriodEnds[i-1])/60);
 				minutes_left = Math.floor((PeriodStarts[i]-PeriodEnds[i-1])/60) - minutes_into;
 				break;
@@ -109,7 +107,7 @@ function changePeriods()
 	
 	for (i = 0; i < period.length; ++i)
 	{	periodid='period'+i;
-		if (document.all[periodid].style.color != pcolors[i])
-			document.all[periodid].style.color = pcolors[i];
+		if (document.all[periodid].className != pcolors[i])
+			document.all[periodid].className = pcolors[i];
 	}
 }
