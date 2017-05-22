@@ -11,7 +11,11 @@ winstonV -- 2017-05-16
   Got skeletal front end working
   Started layout for modular front end design
 
-winstonV -- 2017-05-21
+winstonV -- 2017-05-21 21:36
   Imported basic clock skeleton
   Started work on clock presentation
   Tried to make clock work for dev presentation tomorrow
+
+winstonV -- 2017-05-21 23:25
+  Got basic time table pushing from flask app
+  Got system time pushing from flask app
