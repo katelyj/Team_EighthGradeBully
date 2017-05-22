@@ -1,0 +1,11 @@
+.sspacer { margin:0; padding:0; height:25px; }
+
+.mspacer { margin:0; padding:0; height:50px; }
+
+.lspacer { margin:0; padding:0; height:75px; }
+
+.xlspacer { margin:0; padding:0; height:100px; }
+
+.schedulecontainer {
+   background-color: rgba(245, 245, 245, 0.4);
+}
