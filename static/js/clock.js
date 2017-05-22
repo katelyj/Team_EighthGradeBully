@@ -1,4 +1,3 @@
-var ServerStartTime=73575;
 var period = Array(12);
 period[0]="Before school|0|28800";
 period[1]="Period 1|28800|31260";

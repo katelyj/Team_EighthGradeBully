@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import datetime
 
 #from lib.security import security
 
@@ -8,7 +9,11 @@ app.secret_key = "patrickchan"
 
 @app.route("/")
 def root():
-    return render_template("schedule.html")
+    now = datetime.datetime.now()
+    midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    seconds = (now - midnight).seconds
+    print(seconds)
+    return render_template("schedule.html", starttime = str(seconds))
 
 @app.route("/settings")
 def settings():
