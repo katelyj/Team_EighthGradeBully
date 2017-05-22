@@ -1,15 +1,17 @@
-from pymongo import MongoClient
-from bson.objectid import ObjectId
-
 from passlib.hash import argon2
-from security.utils import secure_hash_password
+import os
+import sys
 
-client = MongoClient()
+sys.path.insert(0, os.path.abspath('../utils/database'))
+print sys.path
 
-class DBManager:
+from utils.database.Database import client
+from security_utils import secure_hash_password
 
-    def __init__(self, db):
-        self.db = client[db]
+class AuthManager:
+
+    def __init__(self):
+        self.db = client['schedule_login']
 
     def is_registered(self, username):
         result = self.db.users.find_one({
@@ -134,3 +136,5 @@ class DBManager:
             })
 
             return True, 'Developer dropped!'
+
+db_manager = AuthManager()

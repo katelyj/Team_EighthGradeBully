@@ -2,11 +2,11 @@ from flask import (Blueprint, flash, get_flashed_messages, jsonify,
                    redirect, render_template, request, session, url_for)
 from functools import wraps
 
-from lib.database import DBManager
-from utils import redirect_back
+import AuthManager
+from security_utils import redirect_back
 
 security = Blueprint('security', __name__)
-db_manager = DBManager('bell_schedule')
+db_manager = AuthManager.AuthManager()
 
 def login_required(admin_required = False, developer_required = False):
     def actual_decorator(function):
@@ -102,4 +102,4 @@ def logout():
         if 'next' in session:
             session.pop('next')
 
-return redirect(url_for('public_views.home'))
+    return redirect(url_for('public_views.home'))
