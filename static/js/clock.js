@@ -60,10 +60,14 @@ function DisplayHoursMinutes()
 		hours = 12;
 	if (hours > 12)
 		hours = hours - 12;
-	if (mins < 10)
+	if (mins < 10){
+		console.log(hours+':0'+mins);
 		return hours+':0'+mins;
-	else
+	}
+	else{
+		console.log(hours+':'+mins);
 		return hours+':'+mins;
+	}
 }
 function changePeriods()
 {	var pcolors = new Array(period.length);
