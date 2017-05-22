@@ -45,7 +45,7 @@ def logged_in():
 @security.route('/register/')
 def register_form():
     if is_logged_in():
-        return redirect(url_for('public_views.home'))
+        return redirect(url_for('login'))
     else:
         return render_template('register.html')
 
@@ -70,7 +70,7 @@ def register():
 @security.route('/login/')
 def login_form():
     if is_logged_in():
-        return redirect(url_for('public_views.home'))
+        return redirect(url_for('root'))
     else:
         return render_template('login.html')
 

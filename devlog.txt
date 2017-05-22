@@ -22,3 +22,14 @@ winstonV -- 2017-05-21 23:25
 
 winstonV -- 2017-05-22 9:53
   Fixed schedule presentation on frontpage
+
+winstonV -- 2017-05-22 15:14
+  Added collapsable scheduler
+
+winstonV -- 2017-05-22 18:26
+  Added color changing to collapse button for ease of use
+  Added AM and PM tags to timetables
+  Fixed top clock border bug
+
+
+

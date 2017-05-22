@@ -42,7 +42,7 @@
 						      <td class="text-center"><h4>Start Time</h4><h3><label id="start_time">0</label></h3></td>
 						      <td class="text-center"><h4>End Time</h4><h3><label id="end_time">0</label></h3></td>
 						    </tr>
-						    <tr>
+						    <tr id="clock">
 						      <td class="text-center" width="50%" align="center" colspan="2">
 						      <h1><b><label id="hours_minutes">2:35</label></font></b><b><label id="seconds">:12</label></b></h1>
 						      </td>
@@ -56,19 +56,19 @@
 
         			<div class="col-md-12" align="center">
 						<table>
-						<tr><th class="text-center" colspan="2"><b>Regular Schedule</b></th></tr>
-						<tr id="period0"><td align="center">Before School</td><td>&nbsp;12:00am - 8:00am</td></tr>
-						<tr id="period1"><td align="center">Period 1</td><td>&nbsp;8:00am - 8:41am</td></tr>
-						<tr id="period2"><td align="center">Period 2</td><td>&nbsp;8:45am - 9:26am</td></tr>
-						<tr id="period3"><td align="center">Period 3</td><td>&nbsp;9:31am - 10:15am</td></tr>
-						<tr id="period4"><td align="center">Period 4</td><td>&nbsp;10:20am - 11:01am</td></tr>
-						<tr id="period5"><td align="center">Period 5</td><td>&nbsp;11:06am - 11:47am</td></tr>
-						<tr id="period6"><td align="center">Period 6</td><td>&nbsp;11:52am - 12:33pm</td></tr>
-						<tr id="period7"><td align="center">Period 7</td><td>&nbsp;12:38pm - 1:19pm</td></tr>
-						<tr id="period8"><td align="center">Period 8</td><td>&nbsp;1:24pm - 2:05pm</td></tr>
-						<tr id="period9"><td align="center">Period 9</td><td>&nbsp;2:09pm - 2:50pm</td></tr>
-						<tr id="period10"><td align="center">Period 10</td><td>&nbsp;2:54pm - 3:35pm</td></tr>
-						<tr id="period11"><td align="center">After School</td><td>&nbsp;3:35pm - 11:59pm</td></tr>
+						<tr id="schedule_header" style="cursor: pointer;"class="notshown"><th class="text-center" colspan="2"><b>{{schedulename}}</b></th></tr>
+						<tr id="period0" style="display: none"><td align="center">Before School</td><td>&nbsp;12:00am - 8:00am</td></tr>
+						<tr id="period1" style="display: none"><td align="center">Period 1</td><td>&nbsp;8:00am - 8:41am</td></tr>
+						<tr id="period2" style="display: none"><td align="center">Period 2</td><td>&nbsp;8:45am - 9:26am</td></tr>
+						<tr id="period3" style="display: none"><td align="center">Period 3</td><td>&nbsp;9:31am - 10:15am</td></tr>
+						<tr id="period4" style="display: none"><td align="center">Period 4</td><td>&nbsp;10:20am - 11:01am</td></tr>
+						<tr id="period5" style="display: none"><td align="center">Period 5</td><td>&nbsp;11:06am - 11:47am</td></tr>
+						<tr id="period6" style="display: none"><td align="center">Period 6</td><td>&nbsp;11:52am - 12:33pm</td></tr>
+						<tr id="period7" style="display: none"><td align="center">Period 7</td><td>&nbsp;12:38pm - 1:19pm</td></tr>
+						<tr id="period8" style="display: none"><td align="center">Period 8</td><td>&nbsp;1:24pm - 2:05pm</td></tr>
+						<tr id="period9" style="display: none"><td align="center">Period 9</td><td>&nbsp;2:09pm - 2:50pm</td></tr>
+						<tr id="period10" style="display: none"><td align="center">Period 10</td><td>&nbsp;2:54pm - 3:35pm</td></tr>
+						<tr id="period11" style="display: none"><td align="center">After School</td><td>&nbsp;3:35pm - 11:59pm</td></tr>
 
 						</table>
 					</div>

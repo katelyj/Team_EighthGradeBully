@@ -12,6 +12,7 @@
 }
 
 
+
 /*** IMPORTED TABLE STUFF **/
 
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
@@ -30,7 +31,7 @@
 }
  
 th {
-  color:#D5DDE5;;
+  color:#D5DDE5;
   background:#1b1e24;
   border-bottom:4px solid #9ea7af;
   border-right: 1px solid #343a45;
@@ -65,6 +66,28 @@ tr.active td {
   color:#FFFFFF;
   border-top: 1px solid #22262e;
   border-bottom: 1px solid #22262e;
+}
+
+tr.notshown th {
+  background:#4E5066;
+  color:#FFFFFF;
+}
+
+
+tr.notshown th:hover{
+  color:#D5DDE5;
+  background:#1b1e24;
+}
+
+tr.shown th:hover {
+  background:#4E5066;
+  color:#FFFFFF;
+}
+
+
+tr.shown th{
+  color:#D5DDE5;
+  background:#1b1e24;
 }
  
 tr:first-child {

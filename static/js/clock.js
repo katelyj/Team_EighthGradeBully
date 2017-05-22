@@ -17,6 +17,28 @@ var CurrPeriod = '';
 var PeriodNames = new Array();
 var PeriodStarts = new Array();
 var PeriodEnds = new Array();
+
+document.getElementById("schedule_header").addEventListener("click", function(){
+	var top = document.getElementById("schedule_header");
+	var tclass = top.getAttribute('class');
+	if (tclass == "notshown"){
+		top.className = "shown"
+		for (i = 0; i < period.length; ++i){
+			periodid='period'+i;
+			tr = document.getElementById(periodid);
+			tr.style.display = '';
+		}
+	}
+	else {
+		top.className = "notshown"
+		for (i = 0; i < period.length; ++i){
+			periodid='period'+i;
+			tr = document.getElementById(periodid);
+			tr.style.display = 'none';
+		}
+	}
+});
+
 function Init()
 {
 	ClientStartTime = ClientSeconds();
@@ -30,7 +52,13 @@ function Init()
 }
 function Tick()
 {	
-	document.all['seconds'].innerHTML = DisplaySeconds();
+
+	var hours = Math.floor(SecondsNow()/3600);
+	var suffix = " am";
+	if (hours > 12)
+		suffix = " pm"
+
+	document.all['seconds'].innerHTML = DisplaySeconds() + suffix;
 	document.all['hours_minutes'].innerHTML = DisplayHoursMinutes();
 	changePeriods();
 	setTimeout('Tick()',1000);
@@ -97,6 +125,23 @@ function changePeriods()
 	{	if (snow >= PeriodStarts[i] && snow <= PeriodEnds[i])
 		{	periodname = PeriodNames[i];
 			CurrPeriod = periodname;
+
+			if (i < 6){
+				var suffix1 = " am"
+				var suffix2 = " am"
+			}
+			if (i == 6){
+				var suffix1 = " am"
+				var suffix2 = " pm"
+			}
+			if (i > 6){
+				var suffix1 = " pm"
+				var suffix2 = " pm"
+			}
+			document.all['start_time'].innerHTML = ConvertSeconds(PeriodStarts[i]) + suffix1
+			document.all['end_time'].innerHTML = ConvertSeconds(PeriodEnds[i]) + suffix2
+
+
 			minutes_into = Math.floor((snow-PeriodStarts[i])/60);
 			minutes_left = Math.floor((PeriodEnds[i]-PeriodStarts[i])/60) - minutes_into;
 			pcolors[i] = 'active';
@@ -109,6 +154,7 @@ function changePeriods()
 				pcolors[i] = 'active';
 				minutes_into = Math.floor((snow-PeriodEnds[i-1])/60);
 				minutes_left = Math.floor((PeriodStarts[i]-PeriodEnds[i-1])/60) - minutes_into;
+				document.getElementById('start_end').style.display='none';
 				break;
 			}
 		}
@@ -125,16 +171,15 @@ function changePeriods()
 	{	periodid='period'+i;
 		if (document.all[periodid].className != pcolors[i]){
 			document.all[periodid].className = pcolors[i]
-			console.log(CurrPeriod)
 			if (CurrPeriod == "Before School" || CurrPeriod == "After School"){
 				document.getElementById('start_end').style.display='none';
 				document.getElementById('timer_row').style.display='none';
+				document.getElementById('clock').style.borderColor='black'
 			}
 			else {
+				document.getElementById('clock').style.borderColor=''
 				document.getElementById('start_end').style.display='';
 				document.getElementById('timer_row').style.display='';
-				document.all['start_time'].innerHTML = ConvertSeconds(PeriodStarts[i])
-				document.all['end_time'].innerHTML = ConvertSeconds(PeriodEnds[i])
 			}
 		}
 	}
