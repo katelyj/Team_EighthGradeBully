@@ -40,3 +40,7 @@ winstonV -- 2017-05-22 21:55
 
 patrickC -- 2017-05-22 23:21
   Fully integrated authentication system
+
+winstonV -- 2017-05-23 10:04
+  More jinja integration
+  Beautification of login and registration

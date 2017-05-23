@@ -48,14 +48,17 @@
 		<a href="/" onclick=$("#menu-close").click();>Schedule</a>
 	    </li>
 	    <li>
-		<a href="/login" onclick=$("#menu-close").click();>Login</a>
+		{% block loginbutton %}<a href="/login" onclick=$("#menu-close").click();>Login</a>{% endblock %}
 	    </li>
 	    <li>
-		<a href="/register" onclick=$("#menu-close").click();>Register</a>
+		{% block registerbutton %}<a href="/register" onclick=$("#menu-close").click();>Register</a>{% endblock %}
 	    </li>
 	    <li>
 		<a href="/about" onclick=$("#menu-close").click();>About</a>
 	    </li>
+        <li>
+        {% block adminbutton %}{% endblock %}
+        </li>
 	</ul>
     </nav>
 

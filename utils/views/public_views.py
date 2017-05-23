@@ -1,10 +1,11 @@
 import datetime
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 
 public_views = Blueprint('public_views', __name__)
 
 @public_views.route('/')
 def home():
+    schedule = "Regular Schedule"
     now = datetime.datetime.now()
     midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
     seconds = (now - midnight).seconds
@@ -14,7 +15,9 @@ def home():
     #seconds = 55000 #10th period
     #seconds = 56100 #switching to afterschool
     #seconds = 28800 #beginning of the day
-    return render_template('schedule.html', starttime=str(seconds), schedulename='Regular Schedule')
+    if ("username" in session):
+        return render_template('schedule.html', starttime=str(seconds), schedulename=schedule, login="True")
+    return render_template('schedule.html', starttime=str(seconds), schedulename=schedule)
 
 @public_views.route('/about')
 def about():
