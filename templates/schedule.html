@@ -32,8 +32,10 @@
 
 
 {% block content %}
+
     <header id="top" class="header">
 
+    	<div class="container-fluid">
     	<div class="row-fluid">
 
     		<div id="spacer" class="col-md-12 sspacer">
@@ -52,7 +54,9 @@
     		</div>
 
     		<div id="whitespace" class="col-md-3"></div>
-        	<div id="schedule" class="col-md-6 container schedulecontainer">
+
+
+        	<div id="schedule" class="col-md-6 container-fluid schedulecontainer">
 
         		<div id="spacer" class="col-md-12 sspacer">
     			</div>
@@ -68,7 +72,7 @@
 						<table class="table-fill" border="1" cellspacing="3" cellpadding="10" width="100%">
 						    <tr id="timer_row">
 						    	
-						      <td class="text-center" width="50%" align="center"><h4>Minutes Past</h4><font size="7" color="#008000" face="Verdana"><label id="minutes_into">31</label></font></td>
+						      <td class="text-center" width="50%" align="center"><h4>Minutes Passed</h4><font size="7" color="#008000" face="Verdana"><label id="minutes_into">31</label></font></td>
 						      <td class="text-center" width="50%" align="center"><h4>Minutes Remaining</h4><font size="7" color="#FF0000" face="Verdana"><label id="minutes_left">10</label></font></td>
 						    </tr>
 						    <tr id="start_end">
@@ -87,7 +91,7 @@
 					<div id="spacer" class="col-md-12 sspacer">
     				</div>
 
-        			<div class="col-md-12" align="center">
+        				<div class="col-md-12" align="center">
 						<table>
 						<tr id="schedule_header" style="cursor: pointer;"class="notshown"><th class="text-center" colspan="2"><b>{{schedulename}}</b></th></tr>
 						<tr id="period0" style="display: none"><td align="center">Before School</td><td>&nbsp;12:00am - 8:00am</td></tr>
@@ -104,7 +108,7 @@
 						<tr id="period11" style="display: none"><td align="center">After School</td><td>&nbsp;3:35pm - 11:59pm</td></tr>
 
 						</table>
-					</div>
+					</div>	
 
 
     			<div id="spacer" class="col-md-12 sspacer">
@@ -115,8 +119,12 @@
 
 		</div>
 
+
+
+
 		<div id="spacer" class="col-md-12 sspacer">
-    			</div>
+    	</div>
+    	</div> 
 
 		
         
