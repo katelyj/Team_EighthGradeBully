@@ -41,10 +41,14 @@
 
     		<div class="col-md-12 text-vertical-center">
             	<h1>Stuytinerary</h1>
+            	{% if login|string() == "True"|string() %}
+            	<h2>Hello <b>{{user}}</b>!</h2>
+            	{% else %}
             	<h4>The Official Stuyvesant High School Schedule</h4>
+            	{% endif %}
         	</div>
 
-        	<div id="spacer" class="col-md-12 mspacer">
+        	<div id="spacer" class="col-md-12 sspacer">
     		</div>
 
     		<div id="whitespace" class="col-md-3"></div>

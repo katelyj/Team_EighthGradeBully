@@ -2,6 +2,34 @@
 
 {% block title %}Login{% endblock %}
 
+{% block adminbutton %}{% endblock %}
+
+{% block loginbutton %}
+{% if login|string() == "True"|string() %}
+
+  <a href="/settings" onclick=$("#menu-close").click();>Settings</a>
+
+
+{% else %}
+
+  <a href="/login" onclick=$("#menu-close").click();>Login</a>
+
+{% endif %}
+{% endblock %}
+
+{% block registerbutton %}
+{% if login|string() == "True"|string() %}
+
+  <a href="/logout" onclick=$("#menu-close").click();>Logout</a>
+
+
+{% else %}
+
+  <a href="/register" onclick=$("#menu-close").click();>Register</a>
+
+{% endif %}
+{% endblock %}
+
 {% block content %}
     <!-- Header -->
     <header id="top" class="header">

@@ -44,3 +44,8 @@ patrickC -- 2017-05-22 23:21
 winstonV -- 2017-05-23 10:04
   More jinja integration
   Beautification of login and registration
+  Added login menubar options
+
+winstonV -- 2017-05-23 11:53
+  Added user customization for pages based on login
+  Added phone number input for registration
