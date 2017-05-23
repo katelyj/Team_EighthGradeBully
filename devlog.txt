@@ -31,5 +31,8 @@ winstonV -- 2017-05-22 18:26
   Added AM and PM tags to timetables
   Fixed top clock border bug
 
+winstonV -- 2017-05-22 21:55
+  Created herokuapp for deployment and mobile testing
+
 
 
