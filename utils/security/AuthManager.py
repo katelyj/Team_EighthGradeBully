@@ -3,7 +3,6 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('../utils/database'))
-print sys.path
 
 from utils.database.Database import client
 from security_utils import secure_hash_password

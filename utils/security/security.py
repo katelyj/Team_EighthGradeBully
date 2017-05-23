@@ -45,7 +45,7 @@ def logged_in():
 @security.route('/register/')
 def register_form():
     if is_logged_in():
-        return redirect(url_for('login'))
+        return redirect(url_for('public_views.home'))
     else:
         return render_template('register.html')
 
@@ -60,6 +60,7 @@ def register():
         return redirect(url_for('security.register_form'))
 
     results = db_manager.register(username, password, confirm_password)
+    print results
     flash(results[1])
 
     if results[0]:
@@ -70,7 +71,7 @@ def register():
 @security.route('/login/')
 def login_form():
     if is_logged_in():
-        return redirect(url_for('root'))
+        return redirect(url_for('public_views.home'))
     else:
         return render_template('login.html')
 
