@@ -11,6 +11,10 @@ winstonV -- 2017-05-16
   Got skeletal front end working
   Started layout for modular front end design
 
+patrickC -- 2017-05-16
+  Added DBManger.py
+  Added security.py, utils.py
+
 winstonV -- 2017-05-21 21:36
   Imported basic clock skeleton
   Started work on clock presentation
@@ -34,5 +38,5 @@ winstonV -- 2017-05-22 18:26
 winstonV -- 2017-05-22 21:55
   Created herokuapp for deployment and mobile testing
 
-
-
+patrickC -- 2017-05-22 23:21
+  Fully integrated authentication system
