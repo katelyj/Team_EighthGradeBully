@@ -23,7 +23,7 @@ input[type=text], input[type=password], input[type=number] {
 
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=number]:focusk {
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     border: 3px solid #555;
     outline:0;
     border-radius: 5px;
