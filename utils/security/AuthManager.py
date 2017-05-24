@@ -60,7 +60,9 @@ class AuthManager:
 
         if not result:
             return False, 'User does not exist.'
+        
         hashed_password = result.get('passhash')
+        
         if result and hashed_password.startswith('$argon2') and argon2.verify(password, hashed_password):
             return True, 'Successfully logged in!'
         else:
@@ -135,5 +137,5 @@ class AuthManager:
             })
 
             return True, 'Developer dropped!'
-
+        
 db_manager = AuthManager()
