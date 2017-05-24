@@ -58,7 +58,7 @@ function Tick()
 	if (hours > 12)
 		suffix = " pm"
 
-	document.all['seconds'].innerHTML = DisplaySeconds() + suffix;
+	document.all['seconds'].innerHTML = DisplaySeconds()
 	document.all['hours_minutes'].innerHTML = DisplayHoursMinutes();
 	changePeriods();
 	setTimeout('Tick()',1000);
