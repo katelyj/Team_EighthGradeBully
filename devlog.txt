@@ -47,6 +47,10 @@ winstonV -- 2017-05-23 11:53
   Added user customization for pages based on login
   Added phone number input for registration
 
+winstonV -- 2017-05-24 20:32
+  Changed layout of homepage to better reflect what we're going for
+  It's still very buggy!
+
 kateJ -- 2017-05-24 22:15
   User authentication things
   Changing password, sort of
