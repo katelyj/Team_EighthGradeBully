@@ -3,7 +3,7 @@ kateJ -- 2017-05-11 14:16
   README updated
   hello
 
-kateJ -- 2017-05-16
+kateJ -- 2017-05-16 14:16
   Added data
   Worked on database/timer backend stuff
 
@@ -23,9 +23,6 @@ winstonV -- 2017-05-21 21:36
 winstonV -- 2017-05-21 23:25
   Got basic time table pushing from flask app
   Got system time pushing from flask app
-
-winstonV -- 2017-05-22 9:53
-  Fixed schedule presentation on frontpage
 
 winstonV -- 2017-05-22 15:14
   Added collapsable scheduler
@@ -49,3 +46,7 @@ winstonV -- 2017-05-23 10:04
 winstonV -- 2017-05-23 11:53
   Added user customization for pages based on login
   Added phone number input for registration
+
+kateJ -- 2017-05-24 22:15
+  User authentication things
+  Changing password, sort of
