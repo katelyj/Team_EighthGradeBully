@@ -54,3 +54,6 @@ winstonV -- 2017-05-24 20:32
 kateJ -- 2017-05-24 22:15
   User authentication things
   Changing password, sort of
+
+patrickC -- 2017-05-26 22:13
+  Get rid of circular import and rewrote the interface
