@@ -67,12 +67,8 @@ class AuthManager:
         if not result:
             return False, 'Incorrect password.'
 
-        self.db.users.update_one({
-            'username': username
-        },{
-            '$set': {
-                'password': secure_hash_password(new_pass)
-            }
+        self.db.users.update_one({'username': username}, {
+            '$set': {'password': secure_hash_password(new_pass)}
         })
 
         return True, 'Password successfully updated!'
