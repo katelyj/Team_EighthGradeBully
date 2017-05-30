@@ -1,15 +1,149 @@
-<body>
-    <div class="grid">
-	<div class="row">
-	    <div class="schedulecontainer col-lg-3 col-md-3 col-sm-3 col-xs-12"><font size="100">Under me should be a DIV</font></div>
-	    <div class="schedulecontainer col-lg-6 col-md-6 col-sm-5 col-xs-12"><font size="100">Under me should be a DIV</font></div>
-	</div>
-	<div class="row">
-	    <div class="schedulecontainer col-lg-3 col-md-3 col-sm-4 col-xs-12"><font size="100">I am the last DIV</font></div>
-	</div>
+{% extends "base.html" %} 
 
-	<script src="/static/js/jquery.js"></script>
-	<script src="/static/js/schedule_data.js"></script>
+{% block title %}Stuytinerary{% endblock %}
 
-    </div>
-</body>
+{% block adminbutton %}{% endblock %}
+
+{% block loginbutton %}
+{% if login|string() == "True"|string() %}
+
+  <a href="/settings" onclick=$("#menu-close").click();>Settings</a>
+
+
+{% else %}
+
+  <a href="/login" onclick=$("#menu-close").click();>Login</a>
+
+{% endif %}
+{% endblock %}
+
+{% block registerbutton %}
+{% if login|string() == "True"|string() %}
+
+  <a href="/logout" onclick=$("#menu-close").click();>Logout</a>
+
+
+{% else %}
+
+  <a href="/register" onclick=$("#menu-close").click();>Register</a>
+
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+    <header id="top" class="header">
+
+    	<div class="container-fluid">
+    	<div class="row-fluid">
+
+    		<div id="spacer" class="col-md-12 sspacer">
+    		</div>
+
+    		<div class="col-md-12 text-vertical-center">
+            	<h1>Stuytinerary</h1>
+            	{% if login|string() == "True"|string() %}
+            	<h2>Hello <b>{{user}}</b>!</h2>
+            	{% else %}
+            	<h4>The Official Stuyvesant High School Schedule</h4>
+            	{% endif %}
+        	</div>
+
+        	<div id="spacer" class="col-md-12 sspacer">
+    		</div>
+
+    		<div id="whitespace" class="col-md-1"></div>
+
+
+
+
+        	<div id="schedule" class="col-md-4 col-md-offset-3 container-fluid schedulecontainer">
+
+        		<div id="spacer" class="col-md-12 sspacer">
+    			</div>
+
+    			<div class="col-md-12 text-center">
+	            	<h2>It is currently <b><label id="PeriodName"></label></b></h2>
+        		</div>
+
+        		<div id="spacer" class="col-md-12 sspacer">
+    			</div>
+
+					<div class="col-md-12" align="center">
+						<table class="table-fill" border="1" cellspacing="3" cellpadding="10" width="100%">
+						    <tr id="timer_row">
+						    	
+						      <td class="text-center" width="50%" align="center"><h4>Minutes Passed </h4><font size="100" color="#008000" face="Verdana"><label id="minutes_into">31</label></font></td>
+						      <td class="text-center" width="50%" align="center"><h4>Minutes Remaining</h4><font size="100" color="#FF0000" face="Verdana"><label id="minutes_left">10</label></font></td>
+						    </tr>
+						    <tr id="start_end">
+						      <td class="text-center"><h4>Start Time</h4><h3><label id="start_time">0</label></h3></td>
+						      <td class="text-center"><h4>End Time</h4><h3><label id="end_time">0</label></h3></td>
+						    </tr>
+						    <tr id="clock">
+						      <td class="text-center" width="50%" align="center" colspan="2">
+						      <font size="100" face="Verdana"><b><label id="hours_minutes">2:35</label></b></font><font size="5" face="Verdana"><label id="seconds">:12</label></font>
+						      </td>
+						    </tr>
+						  </table>
+					</div>
+
+
+					<div id="spacer" class="col-md-12 sspacer">
+    				</div>
+
+        				
+
+
+    			<div id="spacer" class="col-md-12 sspacer">
+    			</div>
+        		
+
+
+
+		</div>
+
+		<div class="col-md-3" align="center">
+						<table>
+						<tr id="schedule_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>{{schedulename}}</b></th></tr>
+						<tr id="period0" style="display: "><td align="center">Before School</td><td>&nbsp;12:00am - 8:00am</td></tr>
+						<tr id="period1" style="display: "><td align="center">Period 1</td><td>&nbsp;8:00am - 8:41am</td></tr>
+						<tr id="period2" style="display: "><td align="center">Period 2</td><td>&nbsp;8:45am - 9:26am</td></tr>
+						<tr id="period3" style="display: "><td align="center">Period 3</td><td>&nbsp;9:31am - 10:15am</td></tr>
+						<tr id="period4" style="display: "><td align="center">Period 4</td><td>&nbsp;10:20am - 11:01am</td></tr>
+						<tr id="period5" style="display: "><td align="center">Period 5</td><td>&nbsp;11:06am - 11:47am</td></tr>
+						<tr id="period6" style="display: "><td align="center">Period 6</td><td>&nbsp;11:52am - 12:33pm</td></tr>
+						<tr id="period7" style="display: "><td align="center">Period 7</td><td>&nbsp;12:38pm - 1:19pm</td></tr>
+						<tr id="period8" style="display: "><td align="center">Period 8</td><td>&nbsp;1:24pm - 2:05pm</td></tr>
+						<tr id="period9" style="display: "><td align="center">Period 9</td><td>&nbsp;2:09pm - 2:50pm</td></tr>
+						<tr id="period10" style="display: "><td align="center">Period 10</td><td>&nbsp;2:54pm - 3:35pm</td></tr>
+						<tr id="period11" style="display: "><td align="center">After School</td><td>&nbsp;3:35pm - 11:59pm</td></tr>
+
+						</table>
+					</div>	
+
+		<div class="col-md-3 inset12" align="center">
+			<table>
+				<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>Weekly Schedule</b></th></tr>
+			</table>
+		</div>	
+
+
+
+
+		<div id="spacer" class="col-md-12 sspacer">
+    	</div>
+    	</div> 
+
+		
+        
+
+    </header>
+  <script>
+  	var ServerStartTime={{starttime}};
+  </script>
+  <script src="/static/js/clock.js"></script>
+
+    
+{% endblock %}
