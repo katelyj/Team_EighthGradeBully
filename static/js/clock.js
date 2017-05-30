@@ -12,7 +12,17 @@
 // period[10]="Period 10|53640|56100";
 // period[11]="After School|56100|86340";
 
-var period = new Array():
+var ajaxinfo = '';
+
+var ajax = function(){
+    $.getJSON('/schedule_jsonify/fall-14-regular', {},
+	      function(data){
+		  console.log(data);
+		  ajaxinfo = data;
+	      });
+};
+
+var period = new Array();
 var ClientStartTime=0;
 var CurrPeriod = '';
 var PeriodNames = new Array();
@@ -42,9 +52,12 @@ document.getElementById("schedule_header").addEventListener("click", function(){
 
 function Init()
 {
+	ajax();
 	ClientStartTime = ClientSeconds();
+	plist = ajaxinfo.split('~');
+	console.log(plist)
 	for (var i = 0; i < period.length; ++i)
-	{	a=period[i].split('|');
+	{	a=plist[i].split('|');
 		PeriodNames[i] = a[0];
 		PeriodStarts[i] = a[1];
 		PeriodEnds[i] = a[2];

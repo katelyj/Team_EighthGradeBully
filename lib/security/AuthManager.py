@@ -1,4 +1,4 @@
-nfrom passlib.hash import argon2
+from passlib.hash import argon2
 from pymongo import MongoClient
 
 from security_utils import secure_hash_password
