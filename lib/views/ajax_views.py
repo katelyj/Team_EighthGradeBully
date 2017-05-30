@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 import os
 import sys
 
@@ -9,4 +9,4 @@ ajax_views = Blueprint('ajax_views', __name__)
 
 @ajax_views.route('/schedule_jsonify/<schedule_name>')
 def schedule_jsonify(schedule_name):
-    return Schedule.Schedule(schedule_name).get_schedule_jsonify()
+    return jsonify(Schedule.Schedule(schedule_name).get_schedule_jsonify())
