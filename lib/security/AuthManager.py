@@ -73,7 +73,7 @@ class AuthManager:
                 '$set': {
                     'password': secure_hash_password(new_pass)
                 }
-            })
+            }, upsert=False)
 
         return True, 'Password successfully updated!'
 
