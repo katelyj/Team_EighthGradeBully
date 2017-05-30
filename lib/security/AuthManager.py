@@ -58,6 +58,25 @@ class AuthManager:
         else:
             return False, 'Invalid username or password.'
 
+    def change_pass(self, username, old_pass, new_pass):
+        result = self.db.users.find_one({
+            'username': username
+            'password': secure_hash_password(old_pass)
+        })
+
+        if not result:
+            return False, 'Incorrect password.'
+
+        self.db.users.update_one({
+            'username': username
+            },{
+                '$set': {
+                    'password': secure_hash_password(new_pass)
+                }
+            })
+
+        return True, 'Password successfully updated!'
+
     def drop_user(self, username):
         if not self.is_registered(username):
             return False, 'User does not exist.'

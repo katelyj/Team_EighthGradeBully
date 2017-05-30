@@ -57,3 +57,6 @@ kateJ -- 2017-05-24 22:15
 
 patrickC -- 2017-05-26 22:13
   Get rid of circular import and rewrote the interface
+
+kateJ -- 2017-05-30 22:22
+  User settings works
