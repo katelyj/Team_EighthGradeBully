@@ -15,11 +15,15 @@
 var ajaxinfo = '';
 
 var ajax = function(){
-    $.getJSON('/schedule_jsonify/fall-14-regular', {},
-	      function(data){
-		  console.log(data);
-		  ajaxinfo = data;
-	      });
+    $.ajax({
+	url: '/schedule_jsonify/fall-14-regular', {},
+	dataType: 'json',
+	async: false,
+	success: function(data){
+	    console.log(data);
+	    ajaxinfo = data;
+	}
+    });
 };
 
 var period = new Array();
@@ -65,11 +69,11 @@ function Init()
 	Tick();
 }
 function Tick()
-{	
+{
 
-	var hours = Math.floor(SecondsNow()/3600);
-	var suffix = " am";
-	if (hours > 12)
+    var hours = Math.floor(SecondsNow()/3600);
+    var suffix = " am";
+    if (hours > 12)
 		suffix = " pm"
 
 	document.all['seconds'].innerHTML = DisplaySeconds()
@@ -80,7 +84,7 @@ function Tick()
 
 function ClientSeconds()
 {	var d = new Date();
-	return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();	
+	return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
 }
 function SecondsNow()
 {	var secs = ServerStartTime + ClientSeconds() - ClientStartTime;
@@ -131,10 +135,10 @@ function changePeriods()
 	var minutes_left = 0;
 	var i;
 	var periodid;
-	
+
 	for (i = 0; i < period.length; ++i)
-		pcolors[i] = 'inactive';
-	
+	    pcolors[i] = 'inactive';
+
 	for (i = 0; i < period.length; ++i)
 	{	if (snow >= PeriodStarts[i] && snow <= PeriodEnds[i])
 		{	periodname = PeriodNames[i];
@@ -173,14 +177,14 @@ function changePeriods()
 			}
 		}
 	}
-	
+
 	if (document.all['PeriodName'].innerHTML != periodname)
-		document.all['PeriodName'].innerHTML = periodname;
+	    document.all['PeriodName'].innerHTML = periodname;
 	if (document.all['minutes_into'].innerHTML != minutes_into)
 	{	document.all['minutes_into'].innerHTML = minutes_into;
 		document.all['minutes_left'].innerHTML = minutes_left;
 	}
-	
+
 	for (i = 0; i < period.length; ++i)
 	{	periodid='period'+i;
 		if (document.all[periodid].className != pcolors[i]){
