@@ -69,11 +69,11 @@ class AuthManager:
 
         self.db.users.update_one({
             'username': username
-            },{
-                '$set': {
-                    'password': secure_hash_password(new_pass)
-                }
-            }, upsert=False)
+        },{
+            '$set': {
+                'password': secure_hash_password(new_pass)
+            }
+        })
 
         return True, 'Password successfully updated!'
 
