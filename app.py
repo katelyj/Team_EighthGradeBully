@@ -8,16 +8,8 @@ app = Flask(__name__)
 app.secret_key = "patrickchan"
 app.register_blueprint(security.security)
 app.register_blueprint(public_views.public_views)
+app.register_blueprint(settings_views.settings_views)
 app.register_blueprint(ajax_views.ajax_views)
-
-
-@app.route("/settings")
-def settings():
-    if ("username" in session):
-        username = session["username"]
-        return render_template('settings.html', user=username, login="True")
-    else:
-        return redirect(url_for('/'))
 
 if __name__ == '__main__':
     app.debug = True
