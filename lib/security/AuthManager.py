@@ -1,4 +1,4 @@
-from passlib.hash import argon2
+nfrom passlib.hash import argon2
 from pymongo import MongoClient
 
 from security_utils import secure_hash_password
@@ -60,20 +60,16 @@ class AuthManager:
 
     def change_pass(self, username, old_pass, new_pass):
         result = self.db.users.find_one({
-            'username': username
+            'username': username,
             'password': secure_hash_password(old_pass)
         })
 
         if not result:
             return False, 'Incorrect password.'
 
-        self.db.users.update_one({
-            'username': username
-            },{
-                '$set': {
-                    'password': secure_hash_password(new_pass)
-                }
-            })
+        self.db.users.update_one({'username': username}, {
+            '$set': {'password': secure_hash_password(new_pass)}
+        })
 
         return True, 'Password successfully updated!'
 
