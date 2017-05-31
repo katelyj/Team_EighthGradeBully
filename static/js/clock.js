@@ -1,215 +1,169 @@
-// var period = Array(12);
-// period[0]="Before School|0|28800";
-// period[1]="Period 1|28800|31260";
-// period[2]="Period 2|31500|33960";
-// period[3]="Period 3|34260|36900";
-// period[4]="Period 4|37200|39660";
-// period[5]="Period 5|39960|42420";
-// period[6]="Period 6|42720|45180";
-// period[7]="Period 7|45480|47940";
-// period[8]="Period 8|48240|50700";
-// period[9]="Period 9|50940|53400";
-// period[10]="Period 10|53640|56100";
-// period[11]="After School|56100|86340";
+var CLIENT_START_TIME;
+var HOURS_IN_DAY = 24;
+var SECONDS_IN_HOUR = 3600;
+var SECONDS_IN_MINUTE = 60;
 
-var ajaxinfo = '';
+var current_period = '';
+var schedule_data = '';
+var periods_data = new Array();
 
-var ajax = function(){
+var getScheduleData = function(){
+    schedule_data = '';
     $.ajax({
 	url: '/schedule_jsonify/fall-14-regular',
 	dataType: 'json',
 	async: false,
 	success: function(data){
-	    console.log(data);
-	    ajaxinfo = data;
+	    schedule_data = data;
 	}
     });
+    return schedule_data;
 };
 
-var period = new Array();
-var ClientStartTime=0;
-var CurrPeriod = '';
-var PeriodNames = new Array();
-var PeriodStarts = new Array();
-var PeriodEnds = new Array();
-
-document.getElementById("schedule_header").addEventListener("click", function(){
-	var top = document.getElementById("schedule_header");
-	var tclass = top.getAttribute('class');
-	if (tclass == "notshown"){
-	    top.className = "shown";
-	    for (i = 0; i < period.length; ++i){
-		var period_id = 'period'+i;
-		var tr = document.getElementById(period_id);
-		tr.style.display = '';
-	    }
-	}
-	else {
-	    top.className = "notshown";
-	    for (i = 0; i < period.length; ++i){
-		var period_id='period'+i;
-		var tr = document.getElementById(period_id);
-		tr.style.display = 'none';
-	    }
-	}
-});
-
-function Init()
-{
-    ajax();
-    ClientStartTime = ClientSeconds();
-    var plist = ajaxinfo.split('~');
-    console.log(plist);
-    for (var i = 0; i < plist.length; i++) {
-	var a = plist[i].split('|');
-	PeriodNames[i] = a[0];
-	PeriodStarts[i] = a[1];
-	PeriodEnds[i] = a[2];
+var inititalizeSchedule = function(){
+    schedule_data = getScheduleData();
+    var schedule_data_list = schedule_data.split('~');
+    for(var i = 0; i < schedule_data_list.length; i++){
+	periods_data[i] = schedule_data_list[i].split('|');
+	periods_data[i][1] = parseInt(periods_data[i][1]);
+	periods_data[i][2] = parseInt(periods_data[i][2]);
     }
-    Tick();
-}
+    console.log(periods_data);
+    CLIENT_START_TIME = clientSeconds();
+    tick();
+};
 
-function Tick()
-{
+var clientSeconds = function(){
+    var date = new Date();
+    return date.getHours() * SECONDS_IN_HOUR + date.getMinutes() * SECONDS_IN_MINUTE + date.getSeconds();
+};
 
-    var hours = Math.floor(SecondsNow()/3600);
-    var suffix = " am";
-    if (hours > 12)
-	suffix = " pm";
+var secondsNow = function(){
+    var seconds = SERVER_START_TIME + clientSeconds() - CLIENT_START_TIME;
+    seconds %= (HOURS_IN_DAY * SECONDS_IN_HOUR);
+    return seconds;
+};
 
-    document.all['seconds'].innerHTML = DisplaySeconds();
-    document.all['hours_minutes'].innerHTML = DisplayHoursMinutes();
+var secondsToMinutesHours = function(total_seconds){
+    var hours = Math.floor(total_seconds / SECONDS_IN_HOUR);
+    total_seconds -= hours * SECONDS_IN_HOUR;
+    var minutes = Math.floor(total_seconds / SECONDS_IN_MINUTE);
+
+    if (hours == 0){
+	hours = 12;
+    }else if (hours > 12){
+	hours -= 12;
+    }
+    if (minutes < 10){
+	return hours + ':0' + minutes;
+    }else{
+	return hours + ':' + minutes;
+    }
+};
+
+var displaySeconds = function(){
+    var seconds = secondsNow() % 60;
+    if (seconds < 10){
+	return ':0' + seconds;
+    }else{
+	return ':' + seconds;
+    }
+};
+
+var displayHoursMinutes = function(){
+    var current_time = secondsNow();
+    return secondsToMinutesHours(current_time);
+};
+
+var tick = function(){
+    var hours_now = Math.floor(secondsNow() / SECONDS_IN_HOUR);
+    var time_suffix = " AM";
+    if (hours_now > 12){
+	time_suffix = " PM";
+    }
+    document.all['hours_minutes'].innerHTML = displayHoursMinutes();
+    document.all['seconds'].innerHTML = displaySeconds();
     changePeriods();
-    setTimeout('Tick()', 1000);
-}
+    setTimeout('tick()', 1000);
+};
 
-function ClientSeconds()
-{
-    var d = new Date();
-    return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
-}
+var changePeriods = function(){
+    var current_time = secondsNow();
 
-function SecondsNow()
-{
-    var secs = ServerStartTime + ClientSeconds() - ClientStartTime;
-    if (secs >= 24*3600)
-	secs = secs - 24*3600;
-    return secs;
-}
-function DisplaySeconds()
-{
-    var secs = SecondsNow() % 60;
-    if (secs < 10)
-	return ':0'+secs;
-    else
-	return ':'+secs;
-}
-function DisplayHoursMinutes()
-{
-    var mins = Math.floor(SecondsNow()/60)%60;
-    var hours = Math.floor(SecondsNow()/3600);
-    if (hours==0)
-	hours = 12;
-    if (hours > 12)
-	hours = hours - 12;
-    if (mins < 10){
-	return hours+':0'+mins;
-    }
-    else{
-	return hours+':'+mins;
-    }
-}
+    for(var index = 0; index < periods_data.length; index++){
+	var period_id = 'period' + index;
+	var period_start_time = periods_data[index][1];
+	var period_end_time = periods_data[index][2];
 
-function ConvertSeconds(seconds)
-{
-    var mins = Math.floor(seconds/60)%60;
-    var hours = Math.floor(seconds/3600);
-    if (hours==0)
-	hours = 12;
-    if (hours > 12)
-	hours = hours - 12;
-    if (mins < 10){
-	return hours+':0'+mins;
-    }
-    else{
-	return hours+':'+mins;
-    }
-}
+	if (period_start_time <= current_time && current_time <= period_end_time){
+	    document.all['PeriodName'].innerHTML = periods_data[index][0];
+	    document.all[period_id].className = 'active';
 
-function changePeriods()
-{
-    var pcolors = new Array(PeriodNames.length);
-    var snow = SecondsNow();
-    var periodname = '';
-    var minutes_into = 0;
-    var minutes_left = 0;
-    var i;
-    var period_id;
+	    var minutes_into = Math.floor((current_time - period_start_time) / SECONDS_IN_MINUTE);
+	    var minutes_left = ((period_end_time - period_start_time) / SECONDS_IN_MINUTE) - minutes_into;
 
-    for (i = 0; i < PeriodNames.length; ++i)
-	pcolors[i] = 'inactive';
+	    var period_table_data_element = document.all[period_id].getElementsByTagName('td')[1];
+	    var period_times = period_table_data_element.innerText.split('-');
+	    document.all['start_time'].innerHTML = period_times[0].trim();
+	    document.all['end_time'].innerHTML = period_times[1].trim();
 
-    for (i = 0; i < PeriodNames.length; ++i)
-    {
-	if (snow >= PeriodStarts[i] && snow <= PeriodEnds[i]){
-	    periodname = PeriodNames[i];
-	    CurrPeriod = periodname;
-
-	    if (i < 6){
-		var suffix1 = " am";
-		var suffix2 = " am";
-	    }
-	    if (i == 6){
-		var suffix1 = " am";
-		var suffix2 = " pm";
-	    }
-	    if (i > 6){
-		var suffix1 = " pm";
-		var suffix2 = " pm";
-	    }
-	    document.all['start_time'].innerHTML = ConvertSeconds(PeriodStarts[i]) + suffix1;
-	    document.all['end_time'].innerHTML = ConvertSeconds(PeriodEnds[i]) + suffix2;
-
-
-	    minutes_into = Math.floor((snow-PeriodStarts[i])/60);
-	    minutes_left = Math.floor((PeriodEnds[i]-PeriodStarts[i])/60) - minutes_into;
-	    pcolors[i] = 'active';
-	    break;
-	}
-	else if (i > 0){
-	    if (snow > PeriodEnds[i-1] && snow < PeriodStarts[i]){
-		periodname='Before ' + PeriodNames[i];
-		pcolors[i-1] = 'active';
-		pcolors[i] = 'active';
-		minutes_into = Math.floor((snow-PeriodEnds[i-1])/60);
-		minutes_left = Math.floor((PeriodStarts[i]-PeriodEnds[i-1])/60) - minutes_into;
-		document.getElementById('start_end').style.display='none';
-		break;
-	    }
-	}
-    }
-
-    if (document.all['PeriodName'].innerHTML != periodname)
-	document.all['PeriodName'].innerHTML = periodname;
-    if (document.all['minutes_into'].innerHTML != minutes_into){
-	document.all['minutes_into'].innerHTML = minutes_into;
-	document.all['minutes_left'].innerHTML = minutes_left;
-    }
-
-    for (i = 0; i < PeriodNames.length; ++i){
-	period_id='period'+i;
-	if (document.all[period_id].className != pcolors[i]){
-	    document.all[period_id].className = pcolors[i];
-	    if (CurrPeriod == "Before School" || CurrPeriod == "After School"){
+	    var period_name = periods_data[index][0];
+	    if (period_name == 'Before School' || period_name == 'After School'){
 		document.getElementById('start_end').style.display='none';
 		document.getElementById('timer_row').style.display='none';
 		document.getElementById('clock').style.borderColor='black';
-	    }
-	    else {
+	    }else{
 		document.getElementById('clock').style.borderColor='';
 		document.getElementById('start_end').style.display='';
 		document.getElementById('timer_row').style.display='';
 	    }
+
+	}else if(index > 0 && periods_data[index - 1][2] < current_time && current_time < periods_data[index][1]){
+	    document.all[period_id].className = 'active';
+	    var period_table_data_element = document.all[period_id].getElementsByTagName('td')[1];
+	    var period_times = period_table_data_element.innerText.split('-');
+	    document.all['end_time'].innerHTML = period_times[0].trim();
+	    document.all['PeriodName'].innerHTML = 'Before ' + periods_data[index][0];
+
+	    period_id = 'period' + (index - 1);
+	    document.all[period_id].className = 'active';
+	    var period_table_data_element = document.all[period_id].getElementsByTagName('td')[1];
+	    var period_times = period_table_data_element.innerText.split('-');
+	    document.all['start_time'].innerHTML = period_times[1].trim();
+
+	    var period_start_time = periods_data[index - 1][2];
+	    var period_end_time = periods_data[index][1];
+
+	    var minutes_into = Math.floor((current_time - period_start_time) / SECONDS_IN_MINUTE);
+	    var minutes_left = ((period_end_time - period_start_time) / SECONDS_IN_MINUTE) - minutes_into;
+	}else{
+	    document.all[period_id].className = 'inactive';
 	}
     }
-}
+
+    document.all['minutes_into'].innerHTML = minutes_into;
+    document.all['minutes_left'].innerHTML = minutes_left;
+};
+
+var schedule_header = document.getElementById('schedule_header');
+schedule_header.addEventListener("click", function(){
+    var schedule_header_class_attribute = schedule_header.getAttribute('class');
+    if (schedule_header_class_attribute == "notshown"){
+	schedule_header.className = "shown";
+	for (var index = 0; index < periods_data.length; index++){
+	    var period_id = 'period' + index;
+	    var period_row = document.getElementById(period_id);
+	    period_row.style.display = '';
+	}
+    }
+    else {
+	schedule_header.className = "notshown";
+	for (var index = 0; index < periods_data.length; index++){
+	    var period_id = 'period' + index;
+	    var period_row = document.getElementById(period_id);
+	    period_row.style.display = 'none';
+	}
+    }
+});
+
+inititalizeSchedule();

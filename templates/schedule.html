@@ -100,7 +100,7 @@
 		    <table>
 			<tr id="schedule_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>{{ schedule.schedule_name }}</b></th></tr>
 			{% for data in schedule %}
-			    <tr id="period0" style="display: ">
+			    <tr id={{ "period{}".format(loop.index0) }} style="display: ">
 				<td align="center">{{ data[0] }}</td>
 				<td>&nbsp;{{ data[1][0] }} - {{ data[1][1] }}</td>
 			    </tr>
@@ -126,7 +126,7 @@
 
     </header>
     <script>
-     var ServerStartTime={{starttime}};
+     var SERVER_START_TIME = {{starttime}};
     </script>
     <script src="/static/js/clock.js"></script>
     <!-- <script src="/static/js/schedule_data.js"></script> -->
