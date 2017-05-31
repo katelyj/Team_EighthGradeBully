@@ -2,6 +2,7 @@ import datetime
 from flask import Blueprint, render_template, session, url_for
 
 from lib.Schedule import Schedule
+from lib.security import security
 
 public_views = Blueprint('public_views', __name__)
 
@@ -17,10 +18,7 @@ def home():
     #seconds = 55000 #10th period
     #seconds = 56100 #switching to afterschool
     #seconds = 28800 #beginning of the day
-    if ("username" in session):
-        username = session["username"]
-        return render_template('schedule.html', starttime=str(seconds), user=username, schedulename=username+"'s " + schedule, login="True")
-    return render_template('schedule.html', starttime=str(seconds), schedule=schedule)
+    return render_template('schedule.html', starttime=str(seconds), schedule=schedule, is_logged_in=security.is_logged_in)
 
 @public_views.route('/about')
 def about():

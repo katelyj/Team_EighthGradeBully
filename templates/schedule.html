@@ -7,7 +7,7 @@
 {% block adminbutton %}{% endblock %}
 
 {% block loginbutton %}
-    {% if login|string() == "True"|string() %}
+    {% if is_logged_in %}
 	<a href="/settings" onclick=$("#menu-close").click();>Settings</a>
     {% else %}
 	<a href="/login" onclick=$("#menu-close").click();>Login</a>
@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block registerbutton %}
-    {% if login|string() == "True"|string() %}
+    {% if is_logged_in %}
 	<a href="/logout" onclick=$("#menu-close").click();>Logout</a>
     {% else %}
 	<a href="/register" onclick=$("#menu-close").click();>Register</a>
@@ -35,8 +35,8 @@
 
 		<div class="col-md-12 text-vertical-center">
 		    <h1>Stuytinerary</h1>
-		    {% if login|string() == "True"|string() %}
-			<h2>Hello <b>{{user}}</b>!</h2>
+		    {% if is_logged_in %}
+			<h2>Hello <b>{{ session.get('username') }}</b>!</h2>
 		    {% else %}
 			<h4>The Official Stuyvesant High School Schedule</h4>
 		    {% endif %}
@@ -98,9 +98,15 @@
 
 		<div class="col-md-3" align="center">
 		    <table>
-			<tr id="schedule_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>{{ schedule.schedule_name }}</b></th></tr>
+			<tr id="schedule_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>
+			    {% if is_logged_in %}
+				{{ "{0}'s {1}".format(session.get("username"), schedule.schedule_name) }}
+			    {% else %}
+				{{ schedule.schedule_name }}
+			    {% endif %}
+			</b></th></tr>
 			{% for data in schedule %}
-			    <tr id={{ "period{}".format(loop.index0) }} style="display: ">
+			    <tr id={{ "period{}".format(loop.index0) }} style="display">
 				<td align="center">{{ data[0] }}</td>
 				<td>&nbsp;{{ data[1][0] }} - {{ data[1][1] }}</td>
 			    </tr>
@@ -129,7 +135,4 @@
      var SERVER_START_TIME = {{starttime}};
     </script>
     <script src="/static/js/clock.js"></script>
-    <!-- <script src="/static/js/schedule_data.js"></script> -->
-
-
-{% endblock %}
+    {% endblock %}
