@@ -61,3 +61,7 @@ patrickC -- 2017-05-26 22:13
 kateJ -- 2017-05-30 22:22
   User settings
   Routing for settings page
+
+winstonV -- 2017-05-31 9:21
+  Updated displays on the home page
+  Optimizing font sizing

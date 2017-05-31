@@ -65,16 +65,16 @@
 
 				<td class="text-center" width="50%" align="center">
 				    <h4>Minutes Passed </h4>
-				    <font size="100" color="#008000" face="Verdana"><label id="minutes_into">31</label></font>
+				    <font size="100" color="#008000" face="Verdana"><label class="minutedisplay" id="minutes_into">31</label></font>
 				</td>
 				<td class="text-center" width="50%" align="center">
-				    <h4>Minutes Remaining</h4>
-				    <font size="100" color="#FF0000" face="Verdana"><label id="minutes_left">10</label></font>
+				    <h4>Minutes Left</h4>
+				    <font size="100" color="#FF0000" face="Verdana"><label class="minutedisplay" id="minutes_left">10</label></font>
 				</td>
 			    </tr>
 			    <tr id="start_end">
-				<td class="text-center"><h4>Start Time</h4><h3><label id="start_time">0</label></h3></td>
-				<td class="text-center"><h4>End Time</h4><h3><label id="end_time">0</label></h3></td>
+				<td class="text-center">Start Time<br><label id="start_time">0</label></td>
+				<td class="text-center">End Time<br><label id="end_time">0</label></td>
 			    </tr>
 			    <tr id="clock">
 				<td class="text-center" width="50%" align="center" colspan="2">
@@ -96,7 +96,11 @@
 
 		</div>
 
-		<div class="col-md-3" align="center">
+		<div id="spacer" class="col-md-12 sspacer">
+		    </div>
+
+
+		<div class="col-md-12" align="center">
 		    <table>
 			<tr id="schedule_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>
 			    {% if is_logged_in %}
@@ -114,11 +118,11 @@
 		    </table>
 		</div>
 
-		<div class="col-md-3 inset12" align="center">
+		<!-- <div class="col-md-3 inset12" align="center">
 		    <table>
 			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>Weekly Schedule</b></th></tr>
 		    </table>
-		</div>
+		</div> -->
 
 
 
