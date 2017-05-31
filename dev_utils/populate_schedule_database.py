@@ -4,7 +4,7 @@ import sys
 
 sys.path.insert(0, '../')
 
-from utils.database import ScheduleDBManager
+from lib.Schedule import ScheduleDBManager
 
 class ScheduleCSVExtracter:
 
@@ -30,12 +30,13 @@ def main():
     list_of_valid_schedules = ['fall-14-regular',
                                'fall-14-homeroom',]
     schedule_csv_extracter = ScheduleCSVExtracter()
+    schedule_db_manager = ScheduleDBManager.ScheduleDBManager()
     for schedule_name in list_of_valid_schedules:
         schedule = schedule_csv_extracter.retrieve_schedule(schedule_name)
         # for period, period_data in schedule.items():
         #     print period, period_data
-        ScheduleDBManager.db_manager.add_schedule(schedule_name, schedule)
-    return
+        schedule_db_manager.add_schedule(schedule_name, schedule)
+        return
 
 if __name__ == '__main__':
     main()

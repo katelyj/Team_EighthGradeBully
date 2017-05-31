@@ -16,7 +16,7 @@ var ajaxinfo = '';
 
 var ajax = function(){
     $.ajax({
-	url: '/schedule_jsonify/fall-14-regular', {},
+	url: '/schedule_jsonify/fall-14-regular',
 	dataType: 'json',
 	async: false,
 	success: function(data){
@@ -37,168 +37,179 @@ document.getElementById("schedule_header").addEventListener("click", function(){
 	var top = document.getElementById("schedule_header");
 	var tclass = top.getAttribute('class');
 	if (tclass == "notshown"){
-		top.className = "shown"
-		for (i = 0; i < period.length; ++i){
-			periodid='period'+i;
-			tr = document.getElementById(periodid);
-			tr.style.display = '';
-		}
+	    top.className = "shown";
+	    for (i = 0; i < period.length; ++i){
+		var period_id = 'period'+i;
+		var tr = document.getElementById(period_id);
+		tr.style.display = '';
+	    }
 	}
 	else {
-		top.className = "notshown"
-		for (i = 0; i < period.length; ++i){
-			periodid='period'+i;
-			tr = document.getElementById(periodid);
-			tr.style.display = 'none';
-		}
+	    top.className = "notshown";
+	    for (i = 0; i < period.length; ++i){
+		var period_id='period'+i;
+		var tr = document.getElementById(period_id);
+		tr.style.display = 'none';
+	    }
 	}
 });
 
 function Init()
 {
-	ajax();
-	ClientStartTime = ClientSeconds();
-	plist = ajaxinfo.split('~');
-	console.log(plist)
-	for (var i = 0; i < period.length; ++i)
-	{	a=plist[i].split('|');
-		PeriodNames[i] = a[0];
-		PeriodStarts[i] = a[1];
-		PeriodEnds[i] = a[2];
-	}
-	Tick();
+    ajax();
+    ClientStartTime = ClientSeconds();
+    var plist = ajaxinfo.split('~');
+    console.log(plist);
+    for (var i = 0; i < plist.length; i++) {
+	var a = plist[i].split('|');
+	PeriodNames[i] = a[0];
+	PeriodStarts[i] = a[1];
+	PeriodEnds[i] = a[2];
+    }
+    Tick();
 }
+
 function Tick()
 {
 
     var hours = Math.floor(SecondsNow()/3600);
     var suffix = " am";
     if (hours > 12)
-		suffix = " pm"
+	suffix = " pm";
 
-	document.all['seconds'].innerHTML = DisplaySeconds()
-	document.all['hours_minutes'].innerHTML = DisplayHoursMinutes();
-	changePeriods();
-	setTimeout('Tick()',1000);
+    document.all['seconds'].innerHTML = DisplaySeconds();
+    document.all['hours_minutes'].innerHTML = DisplayHoursMinutes();
+    changePeriods();
+    setTimeout('Tick()', 1000);
 }
 
 function ClientSeconds()
-{	var d = new Date();
-	return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+{
+    var d = new Date();
+    return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
 }
+
 function SecondsNow()
-{	var secs = ServerStartTime + ClientSeconds() - ClientStartTime;
-	if (secs >= 24*3600)
-		secs = secs - 24*3600;
-	return secs;
+{
+    var secs = ServerStartTime + ClientSeconds() - ClientStartTime;
+    if (secs >= 24*3600)
+	secs = secs - 24*3600;
+    return secs;
 }
 function DisplaySeconds()
-{	var secs = SecondsNow() % 60;
-	if (secs < 10)
-		return ':0'+secs;
-	else
-		return ':'+secs;
+{
+    var secs = SecondsNow() % 60;
+    if (secs < 10)
+	return ':0'+secs;
+    else
+	return ':'+secs;
 }
 function DisplayHoursMinutes()
-{	var mins = Math.floor(SecondsNow()/60)%60;
-	var hours = Math.floor(SecondsNow()/3600);
-	if (hours==0)
-		hours = 12;
-	if (hours > 12)
-		hours = hours - 12;
-	if (mins < 10){
-		return hours+':0'+mins;
-	}
-	else{
-		return hours+':'+mins;
-	}
+{
+    var mins = Math.floor(SecondsNow()/60)%60;
+    var hours = Math.floor(SecondsNow()/3600);
+    if (hours==0)
+	hours = 12;
+    if (hours > 12)
+	hours = hours - 12;
+    if (mins < 10){
+	return hours+':0'+mins;
+    }
+    else{
+	return hours+':'+mins;
+    }
 }
+
 function ConvertSeconds(seconds)
-{	var mins = Math.floor(seconds/60)%60;
-	var hours = Math.floor(seconds/3600);
-	if (hours==0)
-		hours = 12;
-	if (hours > 12)
-		hours = hours - 12;
-	if (mins < 10){
-		return hours+':0'+mins;
-	}
-	else{
-		return hours+':'+mins;
-	}
+{
+    var mins = Math.floor(seconds/60)%60;
+    var hours = Math.floor(seconds/3600);
+    if (hours==0)
+	hours = 12;
+    if (hours > 12)
+	hours = hours - 12;
+    if (mins < 10){
+	return hours+':0'+mins;
+    }
+    else{
+	return hours+':'+mins;
+    }
 }
+
 function changePeriods()
-{	var pcolors = new Array(period.length);
-	var snow = SecondsNow();
-	var periodname = '';
-	var minutes_into = 0;
-	var minutes_left = 0;
-	var i;
-	var periodid;
+{
+    var pcolors = new Array(PeriodNames.length);
+    var snow = SecondsNow();
+    var periodname = '';
+    var minutes_into = 0;
+    var minutes_left = 0;
+    var i;
+    var period_id;
 
-	for (i = 0; i < period.length; ++i)
-	    pcolors[i] = 'inactive';
+    for (i = 0; i < PeriodNames.length; ++i)
+	pcolors[i] = 'inactive';
 
-	for (i = 0; i < period.length; ++i)
-	{	if (snow >= PeriodStarts[i] && snow <= PeriodEnds[i])
-		{	periodname = PeriodNames[i];
-			CurrPeriod = periodname;
+    for (i = 0; i < PeriodNames.length; ++i)
+    {
+	if (snow >= PeriodStarts[i] && snow <= PeriodEnds[i]){
+	    periodname = PeriodNames[i];
+	    CurrPeriod = periodname;
 
-			if (i < 6){
-				var suffix1 = " am"
-				var suffix2 = " am"
-			}
-			if (i == 6){
-				var suffix1 = " am"
-				var suffix2 = " pm"
-			}
-			if (i > 6){
-				var suffix1 = " pm"
-				var suffix2 = " pm"
-			}
-			document.all['start_time'].innerHTML = ConvertSeconds(PeriodStarts[i]) + suffix1
-			document.all['end_time'].innerHTML = ConvertSeconds(PeriodEnds[i]) + suffix2
+	    if (i < 6){
+		var suffix1 = " am";
+		var suffix2 = " am";
+	    }
+	    if (i == 6){
+		var suffix1 = " am";
+		var suffix2 = " pm";
+	    }
+	    if (i > 6){
+		var suffix1 = " pm";
+		var suffix2 = " pm";
+	    }
+	    document.all['start_time'].innerHTML = ConvertSeconds(PeriodStarts[i]) + suffix1;
+	    document.all['end_time'].innerHTML = ConvertSeconds(PeriodEnds[i]) + suffix2;
 
 
-			minutes_into = Math.floor((snow-PeriodStarts[i])/60);
-			minutes_left = Math.floor((PeriodEnds[i]-PeriodStarts[i])/60) - minutes_into;
-			pcolors[i] = 'active';
-			break;
-		}
-		else if (i > 0)
-		{	if (snow > PeriodEnds[i-1] && snow < PeriodStarts[i])
-			{	periodname='Before ' + PeriodNames[i];
-				pcolors[i-1] = 'active';
-				pcolors[i] = 'active';
-				minutes_into = Math.floor((snow-PeriodEnds[i-1])/60);
-				minutes_left = Math.floor((PeriodStarts[i]-PeriodEnds[i-1])/60) - minutes_into;
-				document.getElementById('start_end').style.display='none';
-				break;
-			}
-		}
+	    minutes_into = Math.floor((snow-PeriodStarts[i])/60);
+	    minutes_left = Math.floor((PeriodEnds[i]-PeriodStarts[i])/60) - minutes_into;
+	    pcolors[i] = 'active';
+	    break;
 	}
-
-	if (document.all['PeriodName'].innerHTML != periodname)
-	    document.all['PeriodName'].innerHTML = periodname;
-	if (document.all['minutes_into'].innerHTML != minutes_into)
-	{	document.all['minutes_into'].innerHTML = minutes_into;
-		document.all['minutes_left'].innerHTML = minutes_left;
+	else if (i > 0){
+	    if (snow > PeriodEnds[i-1] && snow < PeriodStarts[i]){
+		periodname='Before ' + PeriodNames[i];
+		pcolors[i-1] = 'active';
+		pcolors[i] = 'active';
+		minutes_into = Math.floor((snow-PeriodEnds[i-1])/60);
+		minutes_left = Math.floor((PeriodStarts[i]-PeriodEnds[i-1])/60) - minutes_into;
+		document.getElementById('start_end').style.display='none';
+		break;
+	    }
 	}
+    }
 
-	for (i = 0; i < period.length; ++i)
-	{	periodid='period'+i;
-		if (document.all[periodid].className != pcolors[i]){
-			document.all[periodid].className = pcolors[i]
-			if (CurrPeriod == "Before School" || CurrPeriod == "After School"){
-				document.getElementById('start_end').style.display='none';
-				document.getElementById('timer_row').style.display='none';
-				document.getElementById('clock').style.borderColor='black'
-			}
-			else {
-				document.getElementById('clock').style.borderColor=''
-				document.getElementById('start_end').style.display='';
-				document.getElementById('timer_row').style.display='';
-			}
-		}
+    if (document.all['PeriodName'].innerHTML != periodname)
+	document.all['PeriodName'].innerHTML = periodname;
+    if (document.all['minutes_into'].innerHTML != minutes_into){
+	document.all['minutes_into'].innerHTML = minutes_into;
+	document.all['minutes_left'].innerHTML = minutes_left;
+    }
+
+    for (i = 0; i < PeriodNames.length; ++i){
+	period_id='period'+i;
+	if (document.all[period_id].className != pcolors[i]){
+	    document.all[period_id].className = pcolors[i];
+	    if (CurrPeriod == "Before School" || CurrPeriod == "After School"){
+		document.getElementById('start_end').style.display='none';
+		document.getElementById('timer_row').style.display='none';
+		document.getElementById('clock').style.borderColor='black';
+	    }
+	    else {
+		document.getElementById('clock').style.borderColor='';
+		document.getElementById('start_end').style.display='';
+		document.getElementById('timer_row').style.display='';
+	    }
 	}
+    }
 }
