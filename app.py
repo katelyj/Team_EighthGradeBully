@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 from lib.security import security
 from lib.views import ajax_views
@@ -12,6 +12,10 @@ app.register_blueprint(security.security)
 app.register_blueprint(ajax_views.ajax_views)
 app.register_blueprint(public_views.public_views)
 app.register_blueprint(settings_views.settings_views)
+
+@app.route('/admin')
+def admin():
+	return render_template('admin.html')
 
 if __name__ == '__main__':
     app.debug = True
