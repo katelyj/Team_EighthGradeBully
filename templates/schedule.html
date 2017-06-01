@@ -103,7 +103,7 @@
 		<div class="col-md-12" align="center">
 		    <table>
 			<tr id="schedule_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>
-			    {% if is_logged_in %}
+			    {% if is_logged_in() %}
 				{{ "{0}'s {1}".format(session.get("username"), schedule.schedule_name) }}
 			    {% else %}
 				{{ schedule.schedule_name }}
