@@ -1,0 +1,118 @@
+{% extends "base.html" %} 
+
+{% block title %}Admin{% endblock %}
+
+{% block adminbutton %}{% endblock %}
+
+{% block content %}
+    <!-- Header -->
+    <header id="top" class="header">
+	
+	<div class="row-fluid">
+
+	<div id="spacer" class="col-md-12 sspacer">
+    </div>
+
+    	<div class="col-md-12 text-vertical-center">
+            	<h1>Stuytinerary</h1>
+            	<h4>The Official Stuyvesant High School Schedule</h4>
+        </div>
+
+        <div id="spacer" class="col-md-12 mspacer">
+    	</div>
+
+
+	<div class="col-md-12 text-vertical-center">
+
+	  <div id="whitespace" class="col-md-3"></div>
+          <div id="schedule" class="col-md-12 container schedulecontainer">
+
+
+	    <h2>Admin Page</h2>
+	    <div id="spacer" class="col-md-12 xsspacer">
+    	</div>
+
+	    
+	
+	    <form action = "/admin/" id="adminform" method="POST">
+
+	      <input type="submit" class="btn btn-dark btn-lg" value="Replace Current Schedule">
+	      <input type="submit" class="btn btn-dark btn-lg" value="Save As Next Week's Schedule">
+	      <br><br>
+
+	      <table class="admintable" cellspacing="0" cellpadding="0">
+	      	<tr>
+	      		<td>Monday</td>
+	      		<td>Tuesday</td>
+	      		<td>Wednesday</td>
+	      		<td>Thursday</td>
+	      		<td>Friday</td>
+	      	</tr>
+	      	<tr>
+	      		<td>
+	      			<input type="radio" name="day_mon" value="a_day"> A<br>
+  		  			<input type="radio" name="day_mon" value="b_day"> B<br>
+  		  			<input id="no_school_mon" type="radio" name="day_mon" value="no_school"> No School
+  		  		</td>
+  		  		<td>
+  		  			<input type="radio" name="day_tues" value="a_day"> A<br>
+  		  			<input type="radio" name="day_tues" value="b_day"> B<br>
+  		  			<input id="no_school_tues" type="radio" name="day_tues" value="no_school"> No School
+  		  		</td>
+  		  		<td>
+  		  			<input type="radio" name="day_wed" value="a_day"> A<br>
+  		  			<input type="radio" name="day_wed" value="b_day"> B<br>
+  		  			<input id="no_school_wed" type="radio" name="day_wed" value="no_school"> No School
+  		  		</td>
+  		  		<td>
+  		  			<input type="radio" name="day_thurs" value="a_day"> A<br>
+  		  			<input type="radio" name="day_thurs" value="b_day"> B<br>
+  		  			<input id="no_school_thurs" type="radio" name="day_thurs" value="no_school"> No School
+  		  		</td>
+  		  		<td>
+  		  			<input type="radio" name="day_fri" value="a_day"> A<br>
+  		  			<input type="radio" name="day_fri" value="b_day"> B<br>
+  		  			<input id="no_school_fri" type="radio" name="day_fri" value="no_school"> No School
+  		  		</td>
+  		  	</tr>
+  		  	<tr>
+	      		<td id="sched_select_mon">
+	      			<input type="radio" name="schedule_mon" value="a_day"> Regular Schedule<br>
+  		  			<input type="radio" name="schedule_mon" value="b_day"> Homeroom<br>
+  		  			<input type="radio" name="schedule_mon" value="no_school"> Special Schedule
+  		  		</td>
+  		  		<td id="sched_select_tues">
+  		  			<input type="radio" name="schedule_tues" value="a_day"> Regular Schedule<br>
+  		  			<input type="radio" name="schedule_tues" value="b_day"> Homeroom<br>
+  		  			<input type="radio" name="schedule_tues" value="no_school"> Special Schedule
+  		  		</td>
+  		  		<td id="sched_select_wed">
+  		  			<input type="radio" name="schedule_wed" value="a_day"> Regular Schedule<br>
+  		  			<input type="radio" name="schedule_wed" value="b_day"> Homeroom<br>
+  		  			<input type="radio" name="schedule_wed" value="no_school"> Special Schedule
+  		  		</td>
+  		  		<td id="sched_select_thurs">
+  		  			<input type="radio" name="schedule_thurs" value="a_day"> Regular Schedule<br>
+  		  			<input type="radio" name="schedule_thurs" value="b_day"> Homeroom<br>
+  		  			<input type="radio" name="schedule_thurs" value="no_school"> Special Schedule
+  		  		</td>
+  		  		<td id="sched_select_fri">
+  		  			<input type="radio" name="schedule_fri" value="a_day"> Regular Schedule<br>
+  		  			<input type="radio" name="schedule_fri" value="b_day"> Homeroom<br>
+  		  			<input type="radio" name="schedule_fri" value="no_school"> Special Schedule
+  		  		</td>
+  		  	</tr>
+  		 </table>
+	    
+	      <br><br>
+	     
+	    </form>
+
+	    <div id="spacer" class="col-md-12 sspacer">
+    	</div>
+
+        </div>
+    </header>
+
+    <script src="/static/js/admin.js"></script>
+{% endblock %}
