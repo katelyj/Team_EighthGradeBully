@@ -21,7 +21,9 @@
 }
 
 .small_text{
-	
+	width: 100px;
+	margin: 0px;
+	padding: 0px;
 }
 
 input[type=text], input[type=password], input[type=number] {
@@ -29,7 +31,7 @@ input[type=text], input[type=password], input[type=number] {
 	border-radius: 5px;
     padding: 10px 15px;
     margin: 8px 0;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 
 }
 

@@ -36,8 +36,8 @@
 	
 	    <form action = "/admin/" id="adminform" method="POST">
 
-	      <input type="submit" class="btn btn-dark btn-lg" value="Replace Current Schedule">
-	      <input type="submit" class="btn btn-dark btn-lg" value="Save As Next Week's Schedule">
+	      <input type="submit" class="btn btn-dark btn-lg" name="replace" value="Replace Current Schedule">
+	      <input type="submit" class="btn btn-dark btn-lg" name="new" value="Save As Next Week's Schedule">
 	      <br><br>
 
 	      <table class="admintable" cellspacing="0" cellpadding="0">
@@ -103,7 +103,7 @@
   		  		</td>
   		  	</tr>
 
-  		  	<tr>
+  		  	<!-- <tr>
   		  		<td>
 	  		  		<div class="col-xs-6">
 	  		  			Period Name
@@ -111,10 +111,10 @@
 	  		  		</div>
 	  		  		<div class="col-xs-6">
 	  		  			<div class="col-xs-9">
-	  		  				Start <input type="text" name="start_time">
+	  		  				Start <input class="small_text" type="text" name="start_time">
 	  		  			</div>
 	  		  			<div class="col-xs-9">
-	  		  				End <input type="text" name="end_time">
+	  		  				End <input class="small_text" type="text" name="end_time">
 	  		  			</div>
 	  		  		</div>
   		  		</td>
@@ -125,10 +125,10 @@
 	  		  		</div>
 	  		  		<div class="col-xs-6">
 	  		  			<div class="col-xs-9">
-	  		  				Start <input type="text" name="start_time">
+	  		  				Start <input class="small_text" type="text" name="start_time">
 	  		  			</div>
 	  		  			<div class="col-xs-9">
-	  		  				End <input type="text" name="end_time">
+	  		  				End <input class="small_text" type="text" name="end_time">
 	  		  			</div>
 	  		  		</div>
   		  		</td>
@@ -139,14 +139,42 @@
 	  		  		</div>
 	  		  		<div class="col-xs-6">
 	  		  			<div class="col-xs-9">
-	  		  				Start <input type="text" name="start_time">
+	  		  				Start <input class="small_text" type="text" name="start_time">
 	  		  			</div>
 	  		  			<div class="col-xs-9">
-	  		  				End <input type="text" name="end_time">
+	  		  				End <input class="small_text" type="text" name="end_time">
 	  		  			</div>
 	  		  		</div>
   		  		</td>
-  		  	</tr>
+  		  		<td>
+	  		  		<div class="col-xs-6">
+	  		  			Period Name
+	  		  			<input class="small_text" type="text" name="period_name">
+	  		  		</div>
+	  		  		<div class="col-xs-6">
+	  		  			<div class="col-xs-9">
+	  		  				Start <input class="small_text" type="text" name="start_time">
+	  		  			</div>
+	  		  			<div class="col-xs-9">
+	  		  				End <input class="small_text" type="text" name="end_time">
+	  		  			</div>
+	  		  		</div>
+  		  		</td>
+  		  		<td>
+	  		  		<div class="col-xs-6">
+	  		  			Period Name
+	  		  			<input class="small_text" type="text" name="period_name">
+	  		  		</div>
+	  		  		<div class="col-xs-6">
+	  		  			<div class="col-xs-9">
+	  		  				Start <input class="small_text" type="text" name="start_time">
+	  		  			</div>
+	  		  			<div class="col-xs-9">
+	  		  				End <input class="small_text" type="text" name="end_time">
+	  		  			</div>
+	  		  		</div>
+  		  		</td>
+  		  	</tr> -->
   		 </table>
 	    
 	      <br><br>
