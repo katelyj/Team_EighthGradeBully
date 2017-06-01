@@ -7,7 +7,7 @@
 {% block adminbutton %}{% endblock %}
 
 {% block loginbutton %}
-    {% if is_logged_in %}
+    {% if is_logged_in() %}
 	<a href="/settings" onclick=$("#menu-close").click();>Settings</a>
     {% else %}
 	<a href="/login" onclick=$("#menu-close").click();>Login</a>
@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block registerbutton %}
-    {% if is_logged_in %}
+    {% if is_logged_in() %}
 	<a href="/logout" onclick=$("#menu-close").click();>Logout</a>
     {% else %}
 	<a href="/register" onclick=$("#menu-close").click();>Register</a>
@@ -35,7 +35,7 @@
 
 		<div class="col-md-12 text-vertical-center">
 		    <h1>Stuytinerary</h1>
-		    {% if is_logged_in %}
+		    {% if is_logged_in() %}
 			<h2>Hello <b>{{ session.get('username') }}</b>!</h2>
 		    {% else %}
 			<h4>The Official Stuyvesant High School Schedule</h4>
