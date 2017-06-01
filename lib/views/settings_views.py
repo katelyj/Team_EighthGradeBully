@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, session, url_for, redirect
 
+
 settings_views = Blueprint('settings_views', __name__)
+
 
 @settings_views.route('/settings', methods = ['GET', 'POST'])
 def settings():
@@ -16,4 +18,6 @@ def change_schedule():
 
 @settings_views.route('/changepassword/', methods = ['GET', 'POST'])
 def change_password():
+    old_pass = session.get('old_pass')
+    new_pass = session.get('new_pass')
     return redirect(url_for('settings_views.settings'))
