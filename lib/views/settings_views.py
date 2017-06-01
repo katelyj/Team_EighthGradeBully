@@ -10,6 +10,10 @@ def settings():
     else:
         return render_template('settings.html')
 
-@settings_views.route('/changesettings/', methods = ['GET', 'POST'])
-def change_settings():
+@settings_views.route('/changeschedule/', methods = ['GET', 'POST'])
+def change_schedule():
+    return redirect(url_for('settings_views.settings'))
+
+@settings_views.route('/changepassword/', methods = ['GET', 'POST'])
+def change_password():
     return redirect(url_for('settings_views.settings'))
