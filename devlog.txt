@@ -65,3 +65,9 @@ kateJ -- 2017-05-30 22:22
 winstonV -- 2017-05-31 9:21
   Updated displays on the home page
   Optimizing font sizing
+
+winstonV -- 2017-06-01 0:35
+  Did work on admin page
+
+kateJ -- 2015-06-02 22:30
+  more settings things

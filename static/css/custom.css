@@ -1,6 +1,3 @@
-/*ADD VIEWPOINT 0 so that people can't scroll when on mobile!*/
-
-
 .sspacer { margin:0; padding:0; height:25px; }
 
 .mspacer { margin:0; padding:0; height:50px; }
@@ -8,6 +5,7 @@
 .lspacer { margin:0; padding:0; height:75px; }
 
 .xlspacer { margin:0; padding:0; height:100px; }
+
 
 .schedulecontainer {
    background-color: rgba(245, 245, 245, 0.4);
@@ -18,12 +16,26 @@
 	font-size: 85px;
 }
 
+.admintable {
+  width: 100%;
+}
+
+.small_text{
+	width: 100px;
+	margin: 0px
+	padding: 0px;
+}
+
+hr.vis{
+	border-top: 1px solid #8c8b8b;
+}
+
 input[type=text], input[type=password], input[type=number] {
 	border: 3px solid #ecf2f9;
 	border-radius: 5px;
     padding: 10px 15px;
     margin: 8px 0;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 
 }
 
