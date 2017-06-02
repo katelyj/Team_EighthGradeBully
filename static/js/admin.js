@@ -52,3 +52,46 @@ if ($("#no_school_fri").is(":checked")) {
 });
 
 //End Radio Button Enable Disables//
+
+var counter = 0;
+function add_language()
+{
+	// Ask the user for input
+	var language = prompt("Language Name","");
+	if (language == "" || language == null)
+	{
+		alert("Please enter a language.");
+	}
+	else
+	{
+		counter++;
+		// Find the element to be copied
+		var newNode = document.getElementById('container').cloneNode(true);
+		newNode.id = '';
+		newNode.style.display = 'block';
+		var newField = newNode.childNodes;
+		// Give all fields a unique value
+		for (var i=0;i<newField.length;i++)
+		{
+			var theName = newField[i].name;
+			var theId = newField[i].id;
+			if (theName)
+			{
+				newField[i].name = theName + counter;
+			}
+			if (theId == "languagename")
+			{
+				// Change the field to the user input
+				newField[i].innerHTML = language;
+			}
+			if (theName == "languagehidden")
+			{
+				// Replace the hidden field with the correct language
+				newField[i].value = language;
+			}
+		}
+		// Insert the elements
+		var insertHere = document.getElementById('writenode');
+		insertHere.parentNode.insertBefore(newNode,insertHere);
+	}
+}

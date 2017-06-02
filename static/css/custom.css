@@ -22,8 +22,12 @@
 
 .small_text{
 	width: 100px;
-	margin: 0px;
+	margin: 0px
 	padding: 0px;
+}
+
+hr.vis{
+	border-top: 1px solid #8c8b8b;
 }
 
 input[type=text], input[type=password], input[type=number] {
