@@ -21,8 +21,7 @@ def change_schedule():
 	d = request.form()
 	with open('changed_schedule.txt', 'a') as file_:
 		file_.write(str(d))
-
-    return redirect(url_for('settings_views.settings'))
+	return redirect(url_for('settings_views.settings'))
 
 @settings_views.route('/changepassword/', methods = ['GET', 'POST'])
 def change_password():
