@@ -60,7 +60,7 @@
     <div class="col-md-12 text-vertical-center">
 
       <div id="whitespace" class="col-md-3"></div>
-      <div id="schedule" class="col-md-6 container generalcontainer">
+      <div id="schedule" class="col-md-6 container schedulecontainer">
 
 
 	<h2>Change     Schedule</h2>
@@ -128,7 +128,7 @@
 	  <h3> What day do you have Phys Ed?</h3>
 	  <center> <h4>A Day  <input name="phys_ed_day" type="radio" value="a_day" id="a_day">  &nbsp; &nbsp; &nbsp; <input name="phys_ed_day" type="radio" value="b_day"id="b_day">  B Day </h4></center>
 	  
-	  <br><br><br>
+	  <br><br>
 	  
 	  
 
@@ -146,16 +146,16 @@
 	<div id="whitespace" class="col-md-3"></div>
 
 
-	<div id="schedule" class="col-md-6 container generalcontainer">
+	<div id="schedule" class="col-md-6 container schedulecontainer">
 
           <h2> Change Password</h2>
           <form action = "/changepassword/" method="POST">
 	    <br>
-	    <input type="password" name="old_pass" placeholder="Old Password" id="old_pass" required>
+	    <input type="password" name="old_pass" style="width:250px" placeholder="Old Password" id="old_pass" required>
 	    <br><br>
-	    <input type="password" name="new_pass" placeholder="New Password" id="new_pass" required>
+	    <input type="password" name="new_pass" style="width:250px" placeholder="New Password" id="new_pass" required>
 	    <br><br>
-	    <input type="password" name="conf_new_pass" placeholder="Confirm New Password" id="conf_new_pass" required>
+	    <input type="password" name="conf_new_pass" style="width:250px" placeholder="Confirm New Password" id="conf_new_pass" required>
 	    
 	    <br><br><br>
 
