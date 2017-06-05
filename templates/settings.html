@@ -7,12 +7,12 @@
 {% block loginbutton %}
 {% if login|string() == "True"|string() %}
 
-<a href="/settings" onclick=$("#menu-close").click();>Settings</a>
+  <a href="/settings" onclick=$("#menu-close").click();>Settings</a>
 
 
 {% else %}
 
-<a href="/login" onclick=$("#menu-close").click();>Login</a>
+  <a href="/login" onclick=$("#menu-close").click();>Login</a>
 
 {% endif %}
 {% endblock %}
@@ -20,43 +20,44 @@
 {% block registerbutton %}
 {% if login|string() == "True"|string() %}
 
-<a href="/logout" onclick=$("#menu-close").click();>Logout</a>
+  <a href="/logout" onclick=$("#menu-close").click();>Logout</a>
 
 
 {% else %}
 
-<a href="/register" onclick=$("#menu-close").click();>Register</a>
+  <a href="/register" onclick=$("#menu-close").click();>Register</a>
 
 {% endif %}
 {% endblock %}
 
 {% block content %}
-<!-- Header -->
-<header id="top" class="header">
-  
-  <div class="row-fluid">
+    <!-- Header -->
+    <header id="top" class="header">
+	
+	<div class="row-fluid">
 
-    <div id="spacer" class="col-md-12 sspacer">
+	<div id="spacer" class="col-md-12 sspacer">
     </div>
 
-    <div class="col-md-12 text-vertical-center">
-      <h1>Stuytinerary</h1>
-      <h4>The Official Stuyvesant High School Schedule</h4>
-    </div>
+    	<div class="col-md-12 text-vertical-center">
+            	<h1>Stuytinerary</h1>
+            	<h4>The Official Stuyvesant High School Schedule</h4>
+        </div>
 
-    <div id="spacer" class="col-md-12 mspacer">
-    </div>
-
-
-    <div class="col-md-12 text-vertical-center">
-
-      <div id="whitespace" class="col-md-3"></div>
-      <div id="schedule" class="col-md-6 container schedulecontainer">
+        <div id="spacer" class="col-md-12 mspacer">
+    	</div>
 
 
-	<h2>Change     Schedule</h2>
+	<div class="col-md-12 text-vertical-center">
 
-	{% with messages = get_flashed_messages() %}
+	  <div id="whitespace" class="col-md-3"></div>
+          <div id="schedule" class="col-md-6 container schedulecontainer">
+
+
+	    <h2>Change     Schedule</h2>
+
+
+	    {% with messages = get_flashed_messages() %}
 	{% if messages %}
 	<ul class=flashes><i>
 	  {% for message in messages %}
@@ -66,112 +67,119 @@
 	{% endif %}
 	{% endwith %}
 	{% block body %}{% endblock %}
-	
-	<Form action = "/changeschedule/" method="POST">
-	  <br><br> <input type="text" name="pd_1_class" style="width : 200px" placeholder="Period 1 Class">
-	  <input type="text" name="pd_1_teacher" style="width:200px"placeholder = "Period 1 Teacher">
-	  <input type="text" name="pd_1_room " style="width:200px"placeholder="Period 1 Room ">
-	  
-	  <br><br> <input type="text" name="pd_2_class" style="width:200px"placeholder="Period 2 Class">
-	  <input type="text" name="pd_2_teacher" style="width:200px"placeholder = "Period 2 Teacher">
-	  <input type="text" name="pd_2_room " style="width:200px"placeholder="Period 2 Room ">
-	  
-	  <br><br> <input type="text" name="pd_3_class" style="width:200px"placeholder="Period 3 Class">
-	  <input type="text" name="pd_3_teacher" style="width:200px"placeholder = "Period 3 Teacher">
-	  <input type="text" name="pd_3_room " style="width:200px"placeholder="Period 3 Room ">
-	  
-	  <br><br> <input type="text" name="pd_4_class" style="width:200px"placeholder="Period 4 Class">
-	  <input type="text" name="pd_4_teacher" style="width:200px"placeholder = "Period 4 Teacher">
-	  <input type="text" name="pd_4_room " style="width:200px"placeholder="Period 4 Room ">
-	  
-	  <br><br> <input type="text" name="pd_5_class" style="width:200px"placeholder="Period 5 Class">
-	  <input type="text" name="pd_5_teacher" style="width:200px"placeholder = "Period 5 Teacher">
-	  <input type="text" name="pd_5_room " style="width:200px"placeholder="Period 5 Room ">
-	  
-	  <br><br> <input type="text" name="pd_6_class" style="width:200px"placeholder="Period 6 Class">
-	  <input type="text" name="pd_6_teacher" style="width:200px"placeholder = "Period 6 Teacher">
-	  <input type="text" name="pd_6_room " style="width:200px"placeholder="Period 6 Room ">
-	  
-	  <br><br> <input type="text" name="pd_7_class" style="width:200px"placeholder="Period 7 Class">
-	  <input type="text" name="pd_7_teacher" style="width:200px"placeholder = "Period 7 Teacher">
-	  <input type="text" name="pd_7_room " style="width:200px"placeholder="Period 7 Room ">
-	  
-	  <br><br> <input type="text" name="pd_8_class" style="width:200px"placeholder="Period 8 Class">
-	  <input type="text" name="pd_8_teacher" style="width:200px"placeholder = "Period 8 Teacher">
-	  <input type="text" name="pd_8_room " style="width:200px"placeholder="Period 8 Room ">
-	  
-	  <br><br> <input type="text" name="pd_9_class" style="width: 200px"placeholder="Period 9 Class">
-	  <input type="text" name="pd_9_teacher" style="width:200px"placeholder = "Period 9 Teacher">
-	  <input type="text" name="pd_9_room " style="width:200px"placeholder="Period 9 Room ">
-	  
-	  <br><br> <input type="text" name="pd_10class" style="width:200px"placeholder="Period 10 Class">
-	  <input type="text" name="pd_10_teacher" style="width:200px"placeholder = "Period 10 Teacher">
-	  <input type="text" name="pd_10_room " style="width:200px"placeholder="Period 10 Room">
-	  
-	  <div id="spacer" class="col-xs-12 lspacer">
-	  </div>
 
-	  <div class="row">
-	    <div class="col-xs-12">
- 	      
-	    </div>
-	    <div class="col-md-4">
-	      <input type="text" name="phys_ed_class" style="width:200px"placeholder="Phys Ed Class">
-	    </div>
-	    <div class="col-md-4">
-	      <input type="text" name="phys_ed_teacher" style="width:200px"placeholder = "Phys Ed Teacher">
-	    </div>
-	    <div class="col-md-4">
-	      <input type="text" name="phys_ed_room " style="width:200px"placeholder="Phys Ed Room">
-	    </div>
-
-	    <div class="col-md-2">
-	      A Cycle<br><input name="phys_day" type="radio" id="a_day" value="a_day">
-	    </div>
-
-	    <div class="col-md-2">
-	      B Cycle<br><input name="phys_day" type="radio" id="b_day" value="b_day">
-	    </div>
-
-	  </div>
-	  
-	  <br><br><br><br>
-	  
-
-	  <input type="submit" class="btn btn-dark btn-lg" value="Save Changes">
-	</form><br><br>
-
-      </div>
-      <br><br>
-      
-      <div class="col-md-12 sspacer">
-      </div>
-
-      <div class="col-md-12 text-vertical-center">
-
-	<div id="whitespace" class="col-md-3"></div>
-
-
-	<div id="schedule" class="col-md-6 container schedulecontainer">
-
-          <h2> Change Password</h2>
-          <form action = "/changepassword/" method="POST">
-	    <label for="old_pass">Old Password</label>
-	    <br>
-	    <input type="password" name="old_pass" placeholder="Old Password" id="old_pass" required>
-	    <br><br>
-	    <label for="new_pass">New Password</label>
-	    <br>
-	    <input type="password" name="new_pass" placeholder="New Password" id="new_pass" required>
 	    
-	    <br><br><br><br>
+	    <form action = "/changeschedule/" method="POST">
+	      <br><br> <input type="text" name="pd_1_class" style="width : 200px" placeholder="Period 1 Class">
+	      <input type="text" name="pd_1_teacher" style="width:200px"placeholder = "Period 1 Teacher">
+	      <input type="text" name="pd_1_room " style="width:200px"placeholder="Period 1 Room ">
+	      
+	      <br><br> <input type="text" name="pd_2_class" style="width:200px"placeholder="Period 2 Class">
+	      <input type="text" name="pd_2_teacher" style="width:200px"placeholder = "Period 2 Teacher">
+	      <input type="text" name="pd_2_room " style="width:200px"placeholder="Period 2 Room ">
+	      
+	      <br><br> <input type="text" name="pd_3_class" style="width:200px"placeholder="Period 3 Class">
+	      <input type="text" name="pd_3_teacher" style="width:200px"placeholder = "Period 3 Teacher">
+	      <input type="text" name="pd_3_room " style="width:200px"placeholder="Period 3 Room ">
+	      
+	      <br><br> <input type="text" name="pd_4_class" style="width:200px"placeholder="Period 4 Class">
+	      <input type="text" name="pd_4_teacher" style="width:200px"placeholder = "Period 4 Teacher">
+	      <input type="text" name="pd_4_room " style="width:200px"placeholder="Period 4 Room ">
+	      
+	      <br><br> <input type="text" name="pd_5_class" style="width:200px"placeholder="Period 5 Class">
+	      <input type="text" name="pd_5_teacher" style="width:200px"placeholder = "Period 5 Teacher">
+	      <input type="text" name="pd_5_room " style="width:200px"placeholder="Period 5 Room ">
+	      
+	      <br><br> <input type="text" name="pd_6_class" style="width:200px"placeholder="Period 6 Class">
+	      <input type="text" name="pd_6_teacher" style="width:200px"placeholder = "Period 6 Teacher">
+	      <input type="text" name="pd_6_room " style="width:200px"placeholder="Period 6 Room ">
+	      
+	      <br><br> <input type="text" name="pd_7_class" style="width:200px"placeholder="Period 7 Class">
+	      <input type="text" name="pd_7_teacher" style="width:200px"placeholder = "Period 7 Teacher">
+	      <input type="text" name="pd_7_room " style="width:200px"placeholder="Period 7 Room ">
+	      
+	      <br><br> <input type="text" name="pd_8_class" style="width:200px"placeholder="Period 8 Class">
+	      <input type="text" name="pd_8_teacher" style="width:200px"placeholder = "Period 8 Teacher">
+	      <input type="text" name="pd_8_room " style="width:200px"placeholder="Period 8 Room ">
+	      
+	      <br><br> <input type="text" name="pd_9_class" style="width: 200px"placeholder="Period 9 Class">
+	      <input type="text" name="pd_9_teacher" style="width:200px"placeholder = "Period 9 Teacher">
+	      <input type="text" name="pd_9_room " style="width:200px"placeholder="Period 9 Room ">
+	      
+	      <br><br> <input type="text" name="pd_10class" style="width:200px"placeholder="Period 10 Class">
+	      <input type="text" name="pd_10_teacher" style="width:200px"placeholder = "Period 10 Teacher">
+	      <input type="text" name="pd_10_room " style="width:200px"placeholder="Period 10 Room">
+	      
+	      <div id="spacer" class="col-xs-12 lspacer">
+		  </div>
+
+	      <div class="row">
+	      	<div class="col-xs-12">
+ 			  
+		    </div>
+		    <div class="col-md-4">
+		    	<input type="text" name="phys_ed_class" style="width:200px"placeholder="Phys Ed Class">
+		    </div>
+		    <div class="col-md-4">
+		      <input type="text" name="phys_ed_teacher" style="width:200px"placeholder = "Phys Ed Teacher">
+		    </div>
+		    <div class="col-md-4">
+		      <input type="text" name="phys_ed_room " style="width:200px"placeholder="Phys Ed Room">
+		    </div>
+
+			<div class="col-md-2">
+		      A Cycle<br><input name="phys_day" type="radio" id="a_day" value="a_day">
+		    </div>
+
+		    <div class="col-md-2">
+		      B Cycle<br><input name="phys_day" type="radio" id="b_day" value="b_day">
+		    </div>
+
+		  </div>
+	      
+	      <br><br>
+	      
+
+	      <input type="submit" class="btn btn-dark btn-lg" value="Save Changes">
+	    </form><br><br>
+
+        </div>
+        <br><br>
+        
+        <div class="col-md-12 sspacer">
+        </div>
+
+        <div class="col-md-12 text-vertical-center">
+
+	  <div id="whitespace" class="col-md-3"></div>
 
 
-	    <input type="submit" class="btn btn-dark btn-lg" value="Save Changes">
-	  </form><br><br>
+	  <div id="schedule" class="col-md-6 container schedulecontainer">
+
+          	<h2> Change Password</h2>
+          	<form action = "/changepassword/" method="POST">
+          	<label for="old_pass">Old Password</label>
+	      	<br>
+	      	<input type="password" name="old_pass" placeholder="" id="old_pass" required>
+	      	<br><br>
+	      	<label for="new_pass">New Password</label>
+	      	<br>
+	      	<input type="password" name="new_pass" placeholder="" id="new_pass" required>
+	      	<br><br>
+	      	<label for="new_pass">Confirm New Password</label>
+	      	<br>
+	      	<input type="password" name="conf_new_pass" placeholder="" id="conf_new_pass" required>
+	      	
+	      	<br><br><br>
+
+
+	      	<input type="submit" class="btn btn-dark btn-lg" value="Save Changes">
+	    	</form><br>
 
         </div>
 
+        <div id="whitespace" class="col-md-12 sspacer"></div>
 
-</header>
+
+    </header>
 {% endblock %}

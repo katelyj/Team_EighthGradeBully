@@ -41,6 +41,8 @@ class AuthManager:
                 'passhash': secure_hash_password(password)
             })
 
+            print("Registered " + username + " with password " + password)
+
             return True, 'Successfully registered!'
 
     def login(self, username, password):
@@ -58,11 +60,39 @@ class AuthManager:
         else:
             return False, 'Invalid username or password.'
 
-    def change_pass(self, username, old_pass, new_pass):
+    def change_pass(self, username, old_pass, new_pass, conf_new_pass):
+        # if new_pass != conf_new_pass:
+        #     return False, 'Passwords do not match.'
+
+        # dev = False
+        # admin = False
+
+        # if self.is_admin(username):
+        #     admin = True
+        # if self.is_developer(username):
+        #     dev = True
+
+        # #self.drop_user(username)
+
+        # ,
+
+        # #self.register(username, new_pass, conf_new_pass)
+        # if dev == True:
+        #     self.make_developer(username)
+        # if dev == True:
+        #     self.make_admin(username)
+
+        # return True, 'Successfully registered!'
+
+        if new_pass != conf_new_pass:
+            return False, 'Passwords do not match.'
+
         result = self.db.users.find_one({
             'username': username,
             'password': secure_hash_password(old_pass)
         })
+
+        print(result)
 
         if not result:
             return False, 'Incorrect password.'
@@ -72,6 +102,7 @@ class AuthManager:
         })
 
         return True, 'Password successfully updated!'
+
 
     def drop_user(self, username):
         if not self.is_registered(username):
