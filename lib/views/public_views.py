@@ -2,7 +2,7 @@ import datetime
 from flask import Blueprint, render_template, session, url_for
 
 from lib.Schedule import Schedule
-from lib.security import security
+from lib.security import AuthManager, security
 
 public_views = Blueprint('public_views', __name__)
 
@@ -23,5 +23,5 @@ def home():
 @public_views.route('/about')
 def about():
     if ("username" in session):
-        return render_template('about.html', login="True")
-    return render_template('about.html')
+        return render_template('about.html', login="True", is_logged_in=security.is_logged_in)
+    return render_template('about.html', is_logged_in=security.is_logged_in)
