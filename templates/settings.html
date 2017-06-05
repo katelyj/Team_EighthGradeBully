@@ -1,4 +1,4 @@
-mac{% extends "base.html" %} 
+{% extends "base.html" %} 
 
 {% block title %}Settings{% endblock %}
 
@@ -80,7 +80,7 @@ mac{% extends "base.html" %}
 	      
 	      <br><br> <input type="text" name="pd_6_class" style="width:200px"placeholder="Period 6 Class">
 	      <input type="text" name="pd_6_teacher" style="width:200px"placeholder = "Period 6 Teacher">
-	      <input type="text" name="pd_6_room " style="width:200px"placehoder="Period 6 Room ">
+	      <input type="text" name="pd_6_room " style="width:200px"placeholder="Period 6 Room ">
 	      
 	      <br><br> <input type="text" name="pd_7_class" style="width:200px"placeholder="Period 7 Class">
 	      <input type="text" name="pd_7_teacher" style="width:200px"placeholder = "Period 7 Teacher">
@@ -108,7 +108,7 @@ mac{% extends "base.html" %}
 	      
 
 	      <input type="submit" class="btn btn-dark btn-lg" value="Save Changes">
-	    </form>
+	    </form><br><br>
 
         </div>
         <br><br>
@@ -127,17 +127,17 @@ mac{% extends "base.html" %}
           	<form action = "/changepassword/" method="POST">
           	<label for="old_pass">Old Password</label>
 	      	<br>
-	      	<input type="password" name="password" placeholder="Old Password" required>
+	      	<input type="password" name="old_pass" placeholder="Old Password" id="old_pass" required>
 	      	<br><br>
 	      	<label for="new_pass">New Password</label>
 	      	<br>
-	      	<input type="password" name="password" placeholder="New Password" required>
+	      	<input type="password" name="new_pass" placeholder="New Password" id="new_pass" required>
 	      	
 	      	<br><br><br><br>
 
 
 	      	<input type="submit" class="btn btn-dark btn-lg" value="Save Changes">
-	    	</form>
+	    	</form><br><br>
 
         </div>
 
