@@ -3,60 +3,63 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-    <!-- Header -->
-    <header id="top" class="header">
-	
-    <div class="row-fluid">
+<!-- Header -->
+<header id="top" class="header">
+  
+  <div class="row-fluid">
 
     <div id="spacer" class="col-md-12 sspacer">
     </div>
 
-	
+    
     <div class="col-md-12 text-vertical-center">
 
-    	<div class="col-md-12 text-vertical-center">
-            	<h1>Stuytinerary</h1>
-            	<h4>The Official Stuyvesant High School Schedule</h4>
-        </div>
+      <div class="col-md-12 text-vertical-center">
+        <h1>Stuytinerary</h1>
+        <h4>The Official Stuyvesant High School Schedule</h4>
+      </div>
 
-        <div id="spacer" class="col-md-12 mspacer">
-    	</div>
+      <div id="spacer" class="col-md-12 mspacer">
+      </div>
 
-			<div id="whitespace" class="col-md-3"></div>
-        	<div id="schedule" class="col-md-6 container schedulecontainer">
+      <div id="whitespace" class="col-md-3"></div>
+      <div id="schedule" class="col-md-6 container schedulecontainer">
 
 
-			    <h2>Create Account</h2>
-			    {% if get_flashed_messages()[0] %}
-				<script>
-				 $(document).ready(function(){
-				   $.notify({
-				     message: '{{ get_flashed_messages()[0] }}'
-				   });
-				 })
-				</script>
-			    {% endif %}
-			    <h3>
-				<form action = "/register/"  method="POST">
-				    <label for="username">Username</label><br>
-				    <input type="text" name="username" placeholder="Username" required>
-				    <br><br>
-				    <label for="pass">Password</label><br>
-				    <input type="password" name="password" placeholder="Password" required>
-				    <br><br>
-				    <label for="pass">Confirm Password</label><br>
-				    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-				    <br> <br>
-				    <input type="submit" class="btn btn-dark btn-lg" value="Register">
-				</form>
-			    </h3>
+	<h2>Create Account</h2>
+	
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<ul class=flashes><i>
+	  {% for message in messages %}
+	  {{ message }}
+	  {% endfor %}
+	</i></ul>
+	{% endif %}
+	{% endwith %}
+	{% block body %}{% endblock %}
+	
+	<h3>
+	  <form action = "/register/"  method="POST">
+	    <label for="username">Username</label><br>
+	    <input type="text" name="username" placeholder="Username" required>
+	    <br><br>
+	    <label for="pass">Password</label><br>
+	    <input type="password" name="password" placeholder="Password" required>
+	    <br><br>
+	    <label for="pass">Confirm Password</label><br>
+	    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+	    <br> <br>
+	    <input type="submit" class="btn btn-dark btn-lg" value="Register">
+	  </form>
+	</h3>
 
-	    <br>
-	</div>
-	<div id="whitespace" class="col-md-12 sspacer"></div>
-	</div>
-    </header>
-    <body>
+	<br>
+      </div>
+      <div id="whitespace" class="col-md-12 sspacer"></div>
+    </div>
+</header>
+<body>
 
-    </body>
+</body>
 {% endblock %}
