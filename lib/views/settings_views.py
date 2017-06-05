@@ -29,12 +29,13 @@ def change_schedule():
 def change_password():
     old_pass = request.form.get('old_pass')
     new_pass = request.form.get('new_pass')
+    conf_new_pass = request.form.get('conf_new_pass')
     user = session.get('username')
 
     if not new_pass or not old_pass:
         flash('Please fill out all fields!')
         return redirect(url_for('settings_views.settings'))
     else:
-        AuthManager.AuthManager().change_pass(user, old_pass, new_pass)
+        AuthManager.AuthManager().change_pass(user, old_pass, new_pass, conf_new_pass)
         
     return redirect(url_for('settings_views.settings'))
