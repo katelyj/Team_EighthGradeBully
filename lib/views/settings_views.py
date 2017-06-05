@@ -13,10 +13,6 @@ settings_views = Blueprint('settings_views', __name__)
 def settings():
     return render_template('settings.html', is_logged_in=security.is_logged_in, is_admin=security.is_admin)
 
-@settings_views.route('/admin')
-def admin():
-    return render_template('admin.html', is_logged_in=security.is_logged_in, is_admin=security.is_admin)
-
 @settings_views.route('/changeschedule/', methods = ['GET', 'POST'])
 def change_schedule():
     d = request.form()
