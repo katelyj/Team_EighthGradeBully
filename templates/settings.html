@@ -5,19 +5,29 @@
 {% block adminbutton %}{% endblock %}
 
 {% block loginbutton %}
-    {% if is_logged_in() %}
-	<a href="/settings" onclick=$("#menu-close").click();>Settings</a>
-    {% else %}
-	<a href="/login" onclick=$("#menu-close").click();>Login</a>
-    {% endif %}
+{% if login|string() == "True"|string() %}
+
+  <a href="/settings" onclick=$("#menu-close").click();>Settings</a>
+
+
+{% else %}
+
+  <a href="/login" onclick=$("#menu-close").click();>Login</a>
+
+{% endif %}
 {% endblock %}
 
 {% block registerbutton %}
-    {% if is_logged_in() %}
-	<a href="/logout" onclick=$("#menu-close").click();>Logout</a>
-    {% else %}
-	<a href="/register" onclick=$("#menu-close").click();>Register</a>
-    {% endif %}
+{% if login|string() == "True"|string() %}
+
+  <a href="/logout" onclick=$("#menu-close").click();>Logout</a>
+
+
+{% else %}
+
+  <a href="/register" onclick=$("#menu-close").click();>Register</a>
+
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -44,7 +54,7 @@
           <div id="schedule" class="col-md-6 container schedulecontainer">
 
 
-	    <h2> <b> Change  Schedule </b></h2>
+	    <h2>Change     Schedule</h2>
 
 
 	    {% with messages = get_flashed_messages() %}
@@ -81,13 +91,8 @@
 	      <input type="text" name="pd_5_room " style="width:200px"placeholder="Period 5 Room ">
 	      
 	      <br><br> <input type="text" name="pd_6_class" style="width:200px"placeholder="Period 6 Class">
-<<<<<<< HEAD
-	      <input type="text" name="pd_6_teacher" style="width:200px"placeholder = "Period 6 Teacher">
-	      <input type="text" name="pd_6_room " style="width:200px"placeholder="Period 6 Room ">
-=======
 	      <input type="text" name="pd_6_teacher" style="width:200px" placeholder="Period 6 Teacher">
 	      <input type="text" name="pd_6_teacher" style="width:200px" placeholder="Period 6 Room">
->>>>>>> f2e8fc1579f4c7e6b18b8c3aef6cf7248858a99c
 	      
 	      <br><br> <input type="text" name="pd_7_class" style="width:200px"placeholder="Period 7 Class">
 	      <input type="text" name="pd_7_teacher" style="width:200px"placeholder = "Period 7 Teacher">
@@ -105,10 +110,6 @@
 	      <input type="text" name="pd_10_teacher" style="width:200px"placeholder = "Period 10 Teacher">
 	      <input type="text" name="pd_10_room " style="width:200px"placeholder="Period 10 Room">
 	      
-<<<<<<< HEAD
-
-=======
->>>>>>> f2e8fc1579f4c7e6b18b8c3aef6cf7248858a99c
 	      <br><br><br> <input type="text" name="phys_ed_class" style="width:200px"placeholder="Phys Ed Class">
 	      <input type="text" name="phys_ed_teacher" style="width:200px"placeholder = "Phys Ed Teacher">
 	      <input type="text" name="phys_ed_room " style="width:200px"placeholder="Phys Ed Room">
@@ -118,18 +119,9 @@
 	      <h3> What day do you have Phys Ed?</h3>
 	      <center> <h4>A Day  <input name="phys_ed_day" type="radio" value="a_day" id="a_day">  &nbsp; &nbsp; &nbsp; <input name="phys_ed_day" type="radio" value="b_day"id="b_day">  B Day </h4></center>
 	            
-<<<<<<< HEAD
-	     
-
-	      <!-- <div id="spacer" class="col-xs-12 lspacer">
-		  </div> -->  
-
-			<br><br><br>	    
-=======
 	      <br><br><br>
 	     
 	      
->>>>>>> f2e8fc1579f4c7e6b18b8c3aef6cf7248858a99c
 
 	      <input type="submit" class="btn btn-dark btn-lg" value="Save Changes">
 	    </form><br><br>
@@ -147,14 +139,19 @@
 
 	  <div id="schedule" class="col-md-6 container schedulecontainer">
 
-          	<h2> <b>Change Password</b> </h2>
+          	<h2> Change Password</h2>
           	<form action = "/changepassword/" method="POST">
+          	<label for="old_pass">Old Password</label>
 	      	<br>
-	      	<input type="password" name="old_pass" style="width:210px" placeholder="Old Password" id="old_pass" required>
+	      	<input type="password" name="old_pass" placeholder="" id="old_pass" required>
 	      	<br><br>
-	      	<input type="password" name="new_pass" style="width:210px" placeholder="New Password" id="new_pass" required>
+	      	<label for="new_pass">New Password</label>
+	      	<br>
+	      	<input type="password" name="new_pass" placeholder="" id="new_pass" required>
 	      	<br><br>
-	      	<input type="password" name="conf_new_pass" style="width:210px" placeholder="Confirm Password" id="conf_new_pass" required>
+	      	<label for="new_pass">Confirm New Password</label>
+	      	<br>
+	      	<input type="password" name="conf_new_pass" placeholder="" id="conf_new_pass" required>
 	      	
 	      	<br><br><br>
 

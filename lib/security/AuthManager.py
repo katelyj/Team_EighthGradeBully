@@ -61,44 +61,19 @@ class AuthManager:
             return False, 'Invalid username or password.'
 
     def change_pass(self, username, old_pass, new_pass, conf_new_pass):
-        # if new_pass != conf_new_pass:
-        #     return False, 'Passwords do not match.'
-
-        # dev = False
-        # admin = False
-
-        # if self.is_admin(username):
-        #     admin = True
-        # if self.is_developer(username):
-        #     dev = True
-
-        # #self.drop_user(username)
-
-        # ,
-
-        # #self.register(username, new_pass, conf_new_pass)
-        # if dev == True:
-        #     self.make_developer(username)
-        # if dev == True:
-        #     self.make_admin(username)
-
-        # return True, 'Successfully registered!'
 
         if new_pass != conf_new_pass:
             return False, 'Passwords do not match.'
 
         result = self.db.users.find_one({
             'username': username,
-            'password': secure_hash_password(old_pass)
         })
-
-        print(result)
 
         if not result:
             return False, 'Incorrect password.'
 
         self.db.users.update_one({'username': username}, {
-            '$set': {'password': secure_hash_password(new_pass)}
+            '$set': {'passhash': secure_hash_password(new_pass)}
         })
 
         return True, 'Password successfully updated!'
