@@ -101,3 +101,7 @@ kateJ -- 2017-06-05 18:30
 winstonV -- 2017-06-05 18:53
   fixed password changing
   optimized background display on setting
+
+kateJ -- 2017-06-05 19:50
+  fixed admin page, created admin_views.py
+  started admin database functions
