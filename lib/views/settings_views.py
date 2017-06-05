@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, url_for, redirect
+from flask import Blueprint, render_template, session, url_for, redirect, request, flash, get_flashed_messages
 import os
 import sys
 
@@ -18,16 +18,22 @@ def settings():
 
 @settings_views.route('/changeschedule/', methods = ['GET', 'POST'])
 def change_schedule():
-	d = request.form()
-	with open('changed_schedule.txt', 'a') as file_:
-		file_.write(str(d))
-	return redirect(url_for('settings_views.settings'))
+    d = request.form()
+    with open('changed_schedule.txt', 'a') as file_:
+	file_.write(str(d))
+    return redirect(url_for('settings_views.settings'))
 
 @settings_views.route('/changepassword/', methods = ['GET', 'POST'])
 def change_password():
-    d = request.form()
-    old_pass = d['old_pass']
-    new_pass = d['new_pass']
+    old_pass = request.form.get('old_pass')
+    new_pass = request.form.get('new_pass')
+    conf_new_pass = request.form.get('conf_new_pass')
     user = session.get('username')
-    AuthManager.AuthManager().change_pass(user, old_pass, new_pass)
+
+    if not new_pass or not old_pass:
+        flash('Please fill out all fields!')
+        return redirect(url_for('settings_views.settings'))
+    else:
+        AuthManager.AuthManager().change_pass(user, old_pass, new_pass, conf_new_pass)
+        
     return redirect(url_for('settings_views.settings'))

@@ -3,60 +3,64 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <!-- Header -->
-    <header id="top" class="header">
-	
-	<div class="row-fluid">
+<!-- Header -->
+<header id="top" class="header">
+  
+  <div class="row-fluid">
 
-	<div id="spacer" class="col-md-12 sspacer">
+    <div id="spacer" class="col-md-12 sspacer">
     </div>
 
-    	<div class="col-md-12 text-vertical-center">
-            	<h1>Stuytinerary</h1>
-            	<h4>The Official Stuyvesant High School Schedule</h4>
-        </div>
+    <div class="col-md-12 text-vertical-center">
+      <h1>Stuytinerary</h1>
+      <h4>The Official Stuyvesant High School Schedule</h4>
+    </div>
 
-        <div id="spacer" class="col-md-12 mspacer">
-    	</div>
-
-
-		<div class="col-md-12 text-vertical-center">
-
-			<div id="whitespace" class="col-md-3"></div>
-        	<div id="schedule" class="col-md-6 container schedulecontainer">
+    <div id="spacer" class="col-md-12 mspacer">
+    </div>
 
 
-			    <h2>Sign In</h2>
-			    {% if get_flashed_messages()[0] %}
-				<script>
-				 var $toastContent = $('<span><strong>{{ get_flashed_messages()[0] }}</strong></span>');
-				 $.notify({
-				   message: $toastContent
-				 });
-				</script>
-			    {% endif %}
-			    <h3>
-				<form action = "/login/" method="POST">
-				    <label for="username">Username</label>
-				    <br>
-				    <input type="text" name="username" placeholder="Username" required>
-				    
-				    <br>
-				    <br>
-				    
-				    <label for="pass">Password</label><br>
-				    <input type="password" name="password" placeholder="Password" required>
-				    <br><br>
-				    <input type="submit" class="btn btn-dark btn-lg" value="Log In">
-			    </form>
-			    </h3>
-			    <br>
+    <div class="col-md-12 text-vertical-center">
 
-			   </div>
-			   <div id="whitespace" class="col-md-12 sspacer"></div>
+      <div id="whitespace" class="col-md-3"></div>
+      <div id="schedule" class="col-md-6 container schedulecontainer">
 
 
-	</div>
-	</div>
-    </header>
+	<h2>Sign In</h2>
+
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<ul class=flashes><i>
+	  {% for message in messages %}
+	  {{ message }}
+	  {% endfor %}
+	</i></ul>
+	{% endif %}
+	{% endwith %}
+	{% block body %}{% endblock %}
+
+	<h3>
+	  <form action = "/login/" method="POST">
+	    <label for="username">Username</label>
+	    <br>
+	    <input type="text" name="username" placeholder="Username" required>
+	    
+	    <br>
+	    <br>
+	    
+	    <label for="pass">Password</label><br>
+	    <input type="password" name="password" placeholder="Password" required>
+	    <br><br>
+	    <input type="submit" class="btn btn-dark btn-lg" value="Log In">
+	  </form>
+	</h3>
+	<br>
+
+      </div>
+      <div id="whitespace" class="col-md-12 sspacer"></div>
+
+
+    </div>
+  </div>
+</header>
 {% endblock %}

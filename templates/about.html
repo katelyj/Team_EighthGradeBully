@@ -5,7 +5,7 @@
 {% block adminbutton %}{% endblock %}
 
 {% block loginbutton %}
-{% if is_logged_in() %}
+{% if login|string() == "True"|string() %}
 
   <a href="/settings" onclick=$("#menu-close").click();>Settings</a>
 
@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block registerbutton %}
-{% if is_logged_in() %}
+{% if login|string() == "True"|string() %}
 
   <a href="/logout" onclick=$("#menu-close").click();>Logout</a>
 
@@ -33,10 +33,42 @@
 {% block content %}
     <!-- Header -->
     <header id="top" class="header">
-        <div class="text-vertical-center">
+        <div id="spacer" class="col-md-12 mspacer">
+		</div>
+
+        <div class="col-xs-12 text-vertical-center">
             <h1>About</h1>
         </div>
 
-        <div class=""
+        <div id="spacer" class="col-xs-12 sspacer">
+		</div>
+
+		<div class="col-md-6 col-md-offset-3 col-xs-12 container-fluid schedulecontainer">
+			<div class="col-xs-12 text-vertical-center">
+	            <h2><b>What is Stuytinerary?</b></h2>
+	        </div>
+	        <div class="col-xs-12 text-vertical-center">
+	            <h4>Stuytinerary is the official schedule application for students at Stuyvesant High School!</h4>
+	            <h4>It was created in 2017 in Stuyvesant High School's Software Development class, taught by Mr. Dyrland-Weaver. </h4>
+	           	<h4>This application continues to be available thanks to the hard work of the Stuyvesant CS department, and the Stuyvesant Administration.</h4>
+	        </div>
+	    </div>
+
+	        <div id="spacer" class="col-xs-12 sspacer">
+			</div>
+
+	    <div class="col-md-6 col-md-offset-3 col-xs-12 container-fluid schedulecontainer">
+			<div class="col-xs-12 text-vertical-center">
+	            <h2><b>What Can You Use It For?</b></h2>
+	        </div>
+	        <div class="col-xs-12 text-vertical-center">
+	          <h4>Stuytinerary offers a suite of functional applications to both students and faculty alike!</h4>
+		  <h4>Check the bell schedule, whether it's an A or B day, log in and customize your home schedule to see which classes you have next... and more!</h4>
+	        </div>
+	    </div>
+
+
+
+
     </header>
 {% endblock %}

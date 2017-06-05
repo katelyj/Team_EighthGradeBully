@@ -48,7 +48,7 @@
 
 		<div class="col-md-4" align="center">
 		    <table>
-			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>Weekly Schedule</b></th></tr>
+			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>Weekly Schedule<br><img id="week_arrow" width="50px" src="/static/img/up.png"></b></th></tr>
 		    </table>
 		</div>
 
@@ -121,8 +121,10 @@
 			<tr id="schedule_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>
 			    {% if is_logged_in() %}
 				{{ "{0}'s {1}".format(session.get("username"), schedule.schedule_name) }}
+				<br><img id="daily_arrow" width="50px" src="/static/img/up.png">
 			    {% else %}
 				{{ schedule.schedule_name }}
+				<br><img id="daily_arrow" width="50px" src="/static/img/up.png">
 			    {% endif %}
 			</b></th></tr>
 			{% for data in schedule %}
