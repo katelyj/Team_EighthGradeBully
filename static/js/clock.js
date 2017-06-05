@@ -148,17 +148,44 @@ var changePeriods = function(){
 
 var schedule_header = document.getElementById('schedule_header');
 schedule_header.addEventListener("click", function(){
+	var arrow_image = document.getElementById('daily_arrow');
     var schedule_header_class_attribute = schedule_header.getAttribute('class');
     if (schedule_header_class_attribute == "notshown"){
-	schedule_header.className = "shown";
+		schedule_header.className = "shown";
+		arrow_image.setAttribute("src", "/static/img/up.png");
+		for (var index = 0; index < periods_data.length; index++){
+		    var period_id = 'period' + index;
+		    var period_row = document.getElementById(period_id);
+		    period_row.style.display = '';
+		}
+	}
+    else {
+	schedule_header.className = "notshown";
+	arrow_image.setAttribute("src", "/static/img/down.png");
 	for (var index = 0; index < periods_data.length; index++){
 	    var period_id = 'period' + index;
 	    var period_row = document.getElementById(period_id);
-	    period_row.style.display = '';
+	    period_row.style.display = 'none';
 	}
     }
+});
+
+var weekly_header = document.getElementById('weekly_header');
+weekly_header.addEventListener("click", function(){
+	var arrow_image = document.getElementById('week_arrow');
+    var weekly_header_class_attribute = weekly_header.getAttribute('class');
+    if (weekly_header_class_attribute == "notshown"){
+		weekly_header.className = "shown";
+		arrow_image.setAttribute("src", "/static/img/up.png");
+		for (var index = 0; index < periods_data.length; index++){
+		    var period_id = 'period' + index;
+		    var period_row = document.getElementById(period_id);
+		    period_row.style.display = '';
+		}
+	}
     else {
-	schedule_header.className = "notshown";
+	weekly_header.className = "notshown";
+	arrow_image.setAttribute("src", "/static/img/down.png");
 	for (var index = 0; index < periods_data.length; index++){
 	    var period_id = 'period' + index;
 	    var period_row = document.getElementById(period_id);
