@@ -8,14 +8,9 @@ from lib.views import settings_views
 app = Flask(__name__)
 app.secret_key = "patrickchan"
 app.register_blueprint(security.security)
-
 app.register_blueprint(ajax_views.ajax_views)
 app.register_blueprint(public_views.public_views)
 app.register_blueprint(settings_views.settings_views)
-
-@app.route('/admin')
-def admin():
-	return render_template('admin.html')
 
 if __name__ == '__main__':
     app.debug = True

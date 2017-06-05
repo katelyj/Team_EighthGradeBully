@@ -18,10 +18,8 @@ def home():
     #seconds = 55000 #10th period
     #seconds = 56100 #switching to afterschool
     #seconds = 28800 #beginning of the day
-    return render_template('schedule.html', starttime=str(seconds), schedule=schedule, is_logged_in=security.is_logged_in)
+    return render_template('schedule.html', starttime=str(seconds), schedule=schedule, is_logged_in=security.is_logged_in, is_admin=security.is_admin)
 
 @public_views.route('/about')
 def about():
-    if ("username" in session):
-        return render_template('about.html', login="True", is_logged_in=security.is_logged_in)
-    return render_template('about.html', is_logged_in=security.is_logged_in)
+    return render_template('about.html', is_logged_in=security.is_logged_in, is_admin=security.is_admin)

@@ -11,11 +11,11 @@ settings_views = Blueprint('settings_views', __name__)
 
 @settings_views.route('/settings/', methods = ['GET', 'POST'])
 def settings():
-    if ("username" in session):
-        username = session["username"]
-        return render_template('settings.html', user=username, login="True", is_logged_in=security.is_logged_in)
-    else:
-        return render_template('settings.html', is_logged_in=security.is_logged_in)
+    return render_template('settings.html', is_logged_in=security.is_logged_in, is_admin=security.is_admin)
+
+@settings_views.route('/admin')
+def admin():
+    return render_template('admin.html', is_logged_in=security.is_logged_in, is_admin=security.is_admin)
 
 @settings_views.route('/changeschedule/', methods = ['GET', 'POST'])
 def change_schedule():

@@ -21,6 +21,16 @@ def login_required(admin_required = False, developer_required = False):
         return wrapper
     return actual_decorator
 
+def is_admin():
+    username = session.get('username')
+
+    if not username:
+        return False
+    elif db_manager.is_registered(username) and db_manager.is_admin(username):
+        return True
+    else:
+        return False
+
 def is_logged_in(admin_required = False, developer_required = False):
     username = session.get('username')
 
