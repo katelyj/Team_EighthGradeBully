@@ -54,7 +54,7 @@
           <div id="schedule" class="col-md-6 container schedulecontainer">
 
 
-	    <h2>Change     Schedule</h2>
+	    <h2> <b> Change  Schedule </b></h2>
 
 
 	    {% with messages = get_flashed_messages() %}
@@ -91,13 +91,8 @@
 	      <input type="text" name="pd_5_room " style="width:200px"placeholder="Period 5 Room ">
 	      
 	      <br><br> <input type="text" name="pd_6_class" style="width:200px"placeholder="Period 6 Class">
-<<<<<<< HEAD
-	      <input type="text" name="pd_6_teacher" style="width:200px" placeholder="Period 6 Teacher">
-	      <input type="text" name="pd_6_room" style="width:200px" placehoder="Period 6 Room ">
-=======
 	      <input type="text" name="pd_6_teacher" style="width:200px"placeholder = "Period 6 Teacher">
 	      <input type="text" name="pd_6_room " style="width:200px"placeholder="Period 6 Room ">
->>>>>>> b924f5e0ec2db2ca32c9306a17d649b1bb8bb351
 	      
 	      <br><br> <input type="text" name="pd_7_class" style="width:200px"placeholder="Period 7 Class">
 	      <input type="text" name="pd_7_teacher" style="width:200px"placeholder = "Period 7 Teacher">
@@ -115,7 +110,7 @@
 	      <input type="text" name="pd_10_teacher" style="width:200px"placeholder = "Period 10 Teacher">
 	      <input type="text" name="pd_10_room " style="width:200px"placeholder="Period 10 Room">
 	      
-<<<<<<< HEAD
+
 	      <br><br><br> <input type="text" name="phys_ed_class" style="width:200px"placeholder="Phys Ed Class">
 	      <input type="text" name="phys_ed_teacher" style="width:200px"placeholder = "Phys Ed Teacher">
 	      <input type="text" name="phys_ed_room " style="width:200px"placeholder="Phys Ed Room">
@@ -125,38 +120,12 @@
 	      <h3> What day do you have Phys Ed?</h3>
 	      <center> <h4>A Day  <input name="phys_ed_day" type="radio" id="a_day">  &nbsp; &nbsp; &nbsp; <input name="phys_ed_day" type="radio" id="b_day">  B Day </h4></center>
 	            
-	      <br><br><br><br>
-=======
-	      <div id="spacer" class="col-xs-12 lspacer">
-		  </div>
+	     
 
-	      <div class="row">
-	      	<div class="col-xs-12">
- 			  
-		    </div>
-		    <div class="col-md-4">
-		    	<input type="text" name="phys_ed_class" style="width:200px"placeholder="Phys Ed Class">
-		    </div>
-		    <div class="col-md-4">
-		      <input type="text" name="phys_ed_teacher" style="width:200px"placeholder = "Phys Ed Teacher">
-		    </div>
-		    <div class="col-md-4">
-		      <input type="text" name="phys_ed_room " style="width:200px"placeholder="Phys Ed Room">
-		    </div>
+	      <!-- <div id="spacer" class="col-xs-12 lspacer">
+		  </div> -->  
 
-			<div class="col-md-2">
-		      A Cycle<br><input name="phys_day" type="radio" id="a_day" value="a_day">
-		    </div>
-
-		    <div class="col-md-2">
-		      B Cycle<br><input name="phys_day" type="radio" id="b_day" value="b_day">
-		    </div>
-
-		  </div>
-	      
-	      <br><br>
->>>>>>> b924f5e0ec2db2ca32c9306a17d649b1bb8bb351
-	      
+			<br><br><br>	    
 
 	      <input type="submit" class="btn btn-dark btn-lg" value="Save Changes">
 	    </form><br><br>
@@ -174,19 +143,14 @@
 
 	  <div id="schedule" class="col-md-6 container schedulecontainer">
 
-          	<h2> Change Password</h2>
+          	<h2> <b>Change Password</b> </h2>
           	<form action = "/changepassword/" method="POST">
-          	<label for="old_pass">Old Password</label>
 	      	<br>
-	      	<input type="password" name="old_pass" placeholder="" id="old_pass" required>
+	      	<input type="password" name="old_pass" style="width:210px" placeholder="Old Password" id="old_pass" required>
 	      	<br><br>
-	      	<label for="new_pass">New Password</label>
-	      	<br>
-	      	<input type="password" name="new_pass" placeholder="" id="new_pass" required>
+	      	<input type="password" name="new_pass" style="width:210px" placeholder="New Password" id="new_pass" required>
 	      	<br><br>
-	      	<label for="new_pass">Confirm New Password</label>
-	      	<br>
-	      	<input type="password" name="conf_new_pass" placeholder="" id="conf_new_pass" required>
+	      	<input type="password" name="conf_new_pass" style="width:210px" placeholder="Confirm Password" id="conf_new_pass" required>
 	      	
 	      	<br><br><br>
 
