@@ -85,3 +85,8 @@ winstonV -- 2017-06-05 9:25
 winstonV -- 2017-06-05 15:07
   Added up/down arrows to dropdowns
   Started about page
+
+kateJ -- 2017-06-05 15:00
+  what is wrong with change password
+  why isnt flash working
+  edited about page
