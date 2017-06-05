@@ -4,6 +4,8 @@ import sys
 
 sys.path.insert(0, os.path.abspath("../")) 
 from lib.security import AuthManager
+from lib.Schedule import Schedule
+from lib.security import security
 
 settings_views = Blueprint('settings_views', __name__)
 
