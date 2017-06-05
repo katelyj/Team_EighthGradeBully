@@ -108,7 +108,8 @@ var changePeriods = function(){
 	    document.all['end_time'].innerHTML = period_times[1].trim();
 
 	    var period_name = periods_data[index][0];
-	    if (period_name == 'Before School' || period_name == 'After School'){
+	    console.log(period_name)
+	    if (period_name == 'Before school' || period_name == 'After school'){
 		document.getElementById('start_end').style.display='none';
 		document.getElementById('timer_row').style.display='none';
 		document.getElementById('clock').style.borderColor='black';

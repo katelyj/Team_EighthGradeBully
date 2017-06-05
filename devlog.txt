@@ -71,3 +71,8 @@ winstonV -- 2017-06-01 0:35
 
 kateJ -- 2015-06-02 22:30
   more settings things
+
+winstonV -- 2017-06-04 21:31
+  More work on admin page
+  Added A/B seperators on the front end
+  Optimized clock for new JS build
