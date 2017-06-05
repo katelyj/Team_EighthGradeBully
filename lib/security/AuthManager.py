@@ -1,5 +1,6 @@
 from passlib.hash import argon2
 from pymongo import MongoClient
+from flask import flash
 
 from security_utils import secure_hash_password
 
@@ -75,6 +76,8 @@ class AuthManager:
         self.db.users.update_one({'username': username}, {
             '$set': {'passhash': secure_hash_password(new_pass)}
         })
+
+        flash("Password successfully changed!")
 
         return True, 'Password successfully updated!'
 
