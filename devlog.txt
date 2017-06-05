@@ -94,3 +94,6 @@ kateJ -- 2017-06-05 15:00
 kateJ -- 2017-06-05 16:14
   flash FINALLY works
   still working on settings
+
+kateJ -- 2017-06-05 18:30
+  is_logged_in FINALLY works on every page
