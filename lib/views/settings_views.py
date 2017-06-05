@@ -3,9 +3,8 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath("../")) 
-from lib.security import AuthManager
+from lib.security import AuthManager, security
 from lib.Schedule import Schedule
-from lib.security import security
 
 settings_views = Blueprint('settings_views', __name__)
 
@@ -14,9 +13,9 @@ settings_views = Blueprint('settings_views', __name__)
 def settings():
     if ("username" in session):
         username = session["username"]
-        return render_template('settings.html', user=username, login="True")
+        return render_template('settings.html', user=username, login="True", is_logged_in=security.is_logged_in)
     else:
-        return render_template('settings.html')
+        return render_template('settings.html', is_logged_in=security.is_logged_in)
 
 @settings_views.route('/changeschedule/', methods = ['GET', 'POST'])
 def change_schedule():
