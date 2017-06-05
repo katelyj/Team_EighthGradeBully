@@ -5,7 +5,7 @@
 {% block adminbutton %}{% endblock %}
 
 {% block loginbutton %}
-{% if login|string() == "True"|string() %}
+{% if is_logged_in() %}
 
   <a href="/settings" onclick=$("#menu-close").click();>Settings</a>
 
@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block registerbutton %}
-{% if login|string() == "True"|string() %}
+{% if is_logged_in() %}
 
   <a href="/logout" onclick=$("#menu-close").click();>Logout</a>
 
@@ -36,5 +36,7 @@
         <div class="text-vertical-center">
             <h1>About</h1>
         </div>
+
+        <div class=""
     </header>
 {% endblock %}

@@ -76,3 +76,8 @@ winstonV -- 2017-06-04 21:31
   More work on admin page
   Added A/B seperators on the front end
   Optimized clock for new JS build
+
+winstonV -- 2017-06-05 9:25
+  Optimized A/B Display
+  Login flags from backend are not working on certain page!
+    Need Optimization!
