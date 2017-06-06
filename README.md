@@ -46,6 +46,6 @@ $ python populate_schedule_database.py
 
 # Features In Development
 - Display User Schedule Info
-- Custom Schedules
+- Custom Schedules / No Schedule Error Handling
 - Logging
 - Robustification
