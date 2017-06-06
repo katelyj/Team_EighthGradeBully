@@ -19,7 +19,15 @@ Check the bell schedule, whether it's an A or B day, log in and customize your h
 $ git clone <https link... found above!>
 ```
 
-2. Enter the repository, and run the flask app:
+2. If never run before:
+
+- CD into 'dev_utils'
+- Run the following command to initialize the database:
+  ```
+$ python populate_schedule_database.py
+  ```
+
+3. Enter the repository, and run the flask app:
 
   *If never used before:*
 
@@ -34,7 +42,7 @@ $ git clone <https link... found above!>
   $ python app.py
   ```
 
-3. Go to the app, view the schedule, make an account... anything you want!
+4. Go to the app, view the schedule, make an account... anything you want!
 
 # Features In Development
 - Display User Schedule Info
