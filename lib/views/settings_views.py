@@ -26,6 +26,7 @@ def change_schedule():
 
     user_schedule_db_manager.insert_user_schedule(session.get('username'), schedule_data)
     print user_schedule_db_manager.retrieve_user_schedule(session.get('username'))
+    flash("Schedule Saved!")
     return redirect(url_for('settings_views.settings'))
 
 @settings_views.route('/changepassword/', methods = ['GET', 'POST'])

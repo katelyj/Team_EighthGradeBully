@@ -35,3 +35,9 @@ $ git clone <https link... found above!>
   ```
 
 3. Go to the app, view the schedule, make an account... anything you want!
+
+# Features In Development
+- Display User Schedule Info
+- Custom Schedules
+- Logging
+- Robustification

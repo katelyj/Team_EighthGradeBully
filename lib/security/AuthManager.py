@@ -146,4 +146,4 @@ class AuthManager:
 
 db_manager = AuthManager()
 if (db_manager.make_admin("mod")):
-    print("Mod made admin!")
+    print("Admin Username = 'mod'")

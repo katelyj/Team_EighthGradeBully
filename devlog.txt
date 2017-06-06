@@ -138,3 +138,7 @@ kateJ -- 2017-06-06 1:30
 
 patrickC -- 2017-06-06 01:38
   Added ajax call for getting user schedule and saving user schedule
+
+winstonV -- 2017-06-06 03:24
+  Wow, lots of work......
+  Finished first draft

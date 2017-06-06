@@ -52,12 +52,129 @@
 		<div id="spacer" class="col-md-12 sspacer">
 		</div>
 
+		{% if weekly_schedule != None %}
+
 
 		<div class="col-md-4" align="center">
 		    <table>
-			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>Weekly Schedule<br><img id="week_arrow" width="50px" src="/static/img/up.png"></b></th></tr>
+			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="3"><b>Weekly Schedule<br><img id="week_arrow" width="50px" src="/static/img/up.png"></b></th></tr>
+
+			{% if weekly_schedule != None %}
+				    <tr id="day0" style="display">
+						<td align="center">Monday</td>
+						<td>
+						{% if weekly_schedule['mon'][0] == None %}
+							No School
+						{% else %}
+							{{ weekly_schedule['mon'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['mon'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['mon'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day1" style="display">
+						<td align="center">Tuesday</td>
+						<td>
+						{% if weekly_schedule['tues'][0] == None %}
+							No School
+						{% else %}
+							{{ weekly_schedule['tues'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['tues'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['tues'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day2" style="display">
+						<td align="center">Wednesday</td>
+						<td>
+						{% if weekly_schedule['wed'][0] == None %}
+							No School
+						{% else %}
+							{{ weekly_schedule['wed'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['wed'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['wed'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day3" style="display">
+						<td align="center">Thursday</td>
+						<td>
+						{% if weekly_schedule['thurs'][0] == None %}
+							No School
+						{% else %}
+							{{ weekly_schedule['thurs'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['thurs'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['thurs'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day4" style="display">
+						<td align="center">Friday</td>
+						<td>
+						{% if weekly_schedule['fri'][0] == None %}
+							No School
+						{% else %}
+							{{ weekly_schedule['fri'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['fri'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['fri'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+			{% else %}
+				<tr id="day0" style="display">
+					<td align="center"><h3>No Weekly Schedule Entered</h3></td>
+				</tr>
+				<tr id="day1" style="display">
+					<td align="center"><center>Click Below for Updated Info!</center></td>
+				</tr>
+				<tr id="day2" style="display">
+					<td align="center"><center><a href="http://bert.stuy.edu/pbrooks/schedules/schedules.py?">Updated Schedules</a></center></td>
+				</tr>
+				<tr id="day3" style="hidden">
+				</tr>
+				<tr id="day4" style="hidden">
+				</tr>
+			{% endif %}
 		    </table>
+
 		</div>
+
+		{% if weekly_schedule != None %}
 
 		<div id="schedule" class="col-md-4 container-fluid schedulecontainer">
 
@@ -132,6 +249,10 @@
 
 		</div>
 
+		{% endif %}
+
+
+
 
 
 
@@ -139,10 +260,10 @@
 		    <table>
 			<tr id="schedule_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>
 			    {% if is_logged_in() %}
-				{{ "{0}'s {1}".format(session.get("username"), schedule.schedule_name) }}
+				{{ "{0}'s {1}".format(session.get("username"), schedule.schedule_name) }} Schedule
 				<br><img id="daily_arrow" width="50px" src="/static/img/up.png">
 			    {% else %}
-				{{ schedule.schedule_name }}
+				{{ schedule.schedule_name }} Schedule
 				<br><img id="daily_arrow" width="50px" src="/static/img/up.png">
 			    {% endif %}
 			</b></th></tr>
@@ -153,12 +274,62 @@
 					<td>&nbsp;{{ data[1][0] }} - {{ data[1][1] }}</td>
 				    </tr>
 				{% endfor %}
+			{% else %}
+				<tr id="period0" style="display">
+					<td align="center"><h3>No Weekly Schedule Entered</h3></td>
+				</tr>
+				<tr id="period1" style="display">
+					<td align="center"><center>Click Below for Updated Info!</center></td>
+				</tr>
+				<tr id="period2" style="display">
+					<td align="center"><center><a href="http://bert.stuy.edu/pbrooks/schedules/schedules.py?">Updated Schedules</a></center></td>
+				</tr>
+				<tr id="period3" style="hidden">
+				</tr>
+				<tr id="period4" style="hidden">
+				</tr>
+				<tr id="period5" style="hidden">
+				</tr>
+				<tr id="period6" style="hidden">
+				</tr>
+				<tr id="period7" style="hidden">
+				</tr>
+				<tr id="period8" style="hidden">
+				</tr>
+				<tr id="period9" style="hidden">
+				</tr>
+				<tr id="period10" style="hidden">
+				</tr>
 			{% endif %}
 		    </table>
 		</div>
 
 		<div id="spacer" class="col-md-12 sspacer">
 		</div>
+
+		{% else %}
+
+		<div id="schedule" class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedulecontainer">
+
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
+
+		    <center>
+		    <h2> <b>Weekly Schedule Not Set!</b> </h2>
+		    <h4> <i>Please Contact an Administrator</i> </h4>
+
+		    <div id="spacer" class="col-xs-12 mspacer">
+		    </div>
+
+		    <h3> Click <a href="http://bert.stuy.edu/pbrooks/schedules/schedules.py?">here</a> for updated schedules. </h3>
+		    </center>
+
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
+
+		</div>
+
+		{% endif %}
 
 
 
@@ -173,6 +344,7 @@
     </header>
     <script>
      var SERVER_START_TIME = {{starttime}};
+     var CURR_DAY = '{{curr_day}}';
     </script>
     <script src="/static/js/clock.js"></script>
 {% endblock %}

@@ -34,7 +34,9 @@ def save():
 
     operation = request.form.get('new') or request.form.get('replace')
     if operation == 'replace':
+        flash("Schedule Replaced!")
         weekly_schedule_db_manager.modify_weekly_schedule(date, weekly_schedule_data)
     elif operation == 'save':
+        flash("Schedule Saved!")
         weekly_schedule_db_manager.insert_weekly_schedule(date, weekly_schedule_data)
     return redirect(url_for('admin_views.admin'))

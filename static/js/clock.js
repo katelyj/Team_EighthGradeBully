@@ -10,7 +10,7 @@ var periods_data = new Array();
 var getScheduleData = function(){
     schedule_data = '';
     $.ajax({
-	url: '/schedule_jsonify/Regular',
+	url: '/schedule_jsonify/' + CURR_DAY,
 	dataType: 'json',
 	async: false,
 	success: function(data){
@@ -177,8 +177,8 @@ weekly_header.addEventListener("click", function(){
     if (weekly_header_class_attribute == "notshown"){
 		weekly_header.className = "shown";
 		arrow_image.setAttribute("src", "/static/img/up.png");
-		for (var index = 0; index < periods_data.length; index++){
-		    var period_id = 'period' + index;
+		for (var index = 0; index < 5; index++){
+		    var period_id = 'day' + index;
 		    var period_row = document.getElementById(period_id);
 		    period_row.style.display = '';
 		}
@@ -186,8 +186,8 @@ weekly_header.addEventListener("click", function(){
     else {
 	weekly_header.className = "notshown";
 	arrow_image.setAttribute("src", "/static/img/down.png");
-	for (var index = 0; index < periods_data.length; index++){
-	    var period_id = 'period' + index;
+	for (var index = 0; index < 5; index++){
+	    var period_id = 'day' + index;
 	    var period_row = document.getElementById(period_id);
 	    period_row.style.display = 'none';
 	}
