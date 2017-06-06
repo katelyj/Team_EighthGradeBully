@@ -68,6 +68,15 @@
 	<div id="spacer" class="col-md-12 xsspacer">
     	</div>
 
+    {% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<div class="col-xs-12 sspacer"></div>
+	<div class="generalcontainer col-md-6 col-md-offset-3 col-xs-12 col-sm-6 col-sm-offset-3 flashes"><h4><b><i>{% for message in messages %}{{ message }}{% endfor %}</i></b></h4></div>
+	<div class="col-xs-12 sspacer">
+	</div>
+	{% endif %}
+	{% endwith %}
+
 	
 	
 	<form action = "/save/" id="adminform" method="POST">
