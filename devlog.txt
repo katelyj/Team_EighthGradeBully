@@ -109,3 +109,6 @@ kateJ -- 2017-06-05 19:50
 winstonV -- 2017-06-05 20:14
   General bugfixes
   Fixed flash messages
+
+kateJ -- 2017-06-05 20:30
+  Started A/B day implementation
