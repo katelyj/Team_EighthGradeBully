@@ -45,6 +45,7 @@ $ python populate_schedule_database.py
 4. Go to the app, view the schedule, make an account... anything you want!
 
 # Features In Development
+
 - Display User Schedule Info
 - Custom Schedules / No Schedule Error Handling
 - Logging
