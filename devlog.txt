@@ -86,7 +86,7 @@ winstonV -- 2017-06-04 21:31
 winstonV -- 2017-06-05 9:25
   Optimized A/B Display
   Login flags from backend are not working on certain page!
-    Need Optimization!
+  Need Optimization!
 
 winstonV -- 2017-06-05 15:07
   Added up/down arrows to dropdowns
@@ -98,7 +98,7 @@ kateJ -- 2017-06-05 15:00
   edited about page
 
 kateJ -- 2017-06-05 16:14
-  flash FINALLY works
+  flash messages FINALLY works
   still working on settings
 
 kateJ -- 2017-06-05 18:30
@@ -131,3 +131,7 @@ patrickC -- 2017-06-06 01:05
   Modified the admin.html page to prefill the bubbles if database already contain data for this week
   Increased security for admin pages, automatically redirect you to login page if you're not logged in as
   admin
+
+kateJ -- 2017-06-06 1:30
+  design changes doc
+  readme
