@@ -23,18 +23,19 @@ $ git clone <https link... found above!>
 
 - CD into 'dev_utils'
 - Run the following command to initialize the database:
-  ```
+
+```
 $ python populate_schedule_database.py
-  ```
+```
 
 3. Enter the repository, and run the flask app:
 
   *If never used before:*
 
-  ```
+```
   $ pip install docs/requirements.txt
   $ python app.py
-  ```
+```
 
   *If already used:*
 
