@@ -32,7 +32,7 @@ $ python populate_schedule_database.py
   *If never used before:*
 
   ```
-  $ pip install requirements.txt
+  $ pip install docs/requirements.txt
   $ python app.py
   ```
 
