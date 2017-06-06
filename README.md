@@ -21,17 +21,17 @@ $ git clone <https link... found above!>
 
 2. Enter the repository, and run the flask app:
 
-*If never used before:*
+  *If never used before:*
 
-```
-$ pip install requirements.txt
-$ python app.py
-```
+  ```
+  $ pip install requirements.txt
+  $ python app.py
+  ```
 
-*If already used:*
+  *If already used:*
 
-```
-$ python app.py
-```
+  ```
+  $ python app.py
+  ```
 
 3. Go to the app, view the schedule, make an account... anything you want!
