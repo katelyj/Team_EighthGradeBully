@@ -67,7 +67,11 @@
 		    <div class="row">
 
 			<div class="col-xs-2">
-			    <img width="50px" src="/static/img/a.png">
+			    {% if a_b_day == 'a_day' %}
+				<img width="50px" src="/static/img/a.png">
+			    {% else %}
+				<img width="50px" src="/static/img/b.png">
+			    {% endif %}
 			</div>
 
 			<div class="col-xs-8 text-center">
@@ -75,7 +79,11 @@
 			</div>
 
 			<div class="col-xs-2">
-			    <img width="50px" src="/static/img/a.png">
+			    {% if a_b_day == 'a_day' %}
+				<img width="50px" src="/static/img/a.png">
+			    {% else %}
+				<img width="50px" src="/static/img/b.png">
+			    {% endif %}
 			</div>
 
 		    </div>

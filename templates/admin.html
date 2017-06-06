@@ -1,4 +1,4 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
 {% block title %}Admin Settings{% endblock %}
 
@@ -43,7 +43,7 @@
 {% block content %}
 <!-- Header -->
 <header id="top" class="header">
-  
+
   <div class="row-fluid">
 
     <div id="spacer" class="col-md-12 sspacer">
@@ -66,7 +66,7 @@
 
 	<h2>Admin Settings</h2>
 	<div id="spacer" class="col-md-12 xsspacer">
-    	</div>
+	</div>
 
     {% with messages = get_flashed_messages() %}
 	{% if messages %}
@@ -77,192 +77,192 @@
 	{% endif %}
 	{% endwith %}
 
-	
-	
+
+
 	<form action = "/save/" id="adminform" method="POST">
 
-	  <input type="submit" class="btn btn-dark btn-lg" name="replace" value="Replace Current Schedule">
-	  <input type="submit" class="btn btn-dark btn-lg" name="new" value="Save As Next Week's Schedule">
-	  <br><br>
+	    <input type="submit" class="btn btn-dark btn-lg" name="replace" value="replace">
+	    <input type="submit" class="btn btn-dark btn-lg" name="new" value="save">
+	    <br><br>
 
-	  <table class="admintable" cellspacing="0" cellpadding="0">
-	    <tr>
-	      <td>Monday</td>
-	      <td>Tuesday</td>
-	      <td>Wednesday</td>
-	      <td>Thursday</td>
-	      <td>Friday</td>
-	    </tr>
-	    <tr>
-	      <td>
-	      	<input type="radio" name="day_mon" value="a_day"> A<br>
-  		<input type="radio" name="day_mon" value="b_day"> B<br>
-  		<input id="no_school_mon" type="radio" name="day_mon" value="no_school"> No School
-  	      </td>
-  	      <td>
-  		<input type="radio" name="day_tues" value="a_day"> A<br>
-  		<input type="radio" name="day_tues" value="b_day"> B<br>
-  		<input id="no_school_tues" type="radio" name="day_tues" value="no_school"> No School
-  	      </td>
-  	      <td>
-  		<input type="radio" name="day_wed" value="a_day"> A<br>
-  		<input type="radio" name="day_wed" value="b_day"> B<br>
-  		<input id="no_school_wed" type="radio" name="day_wed" value="no_school"> No School
-  	      </td>
-  	      <td>
-  		<input type="radio" name="day_thurs" value="a_day"> A<br>
-  		<input type="radio" name="day_thurs" value="b_day"> B<br>
-  		<input id="no_school_thurs" type="radio" name="day_thurs" value="no_school"> No School
-  	      </td>
-  	      <td>
-  		<input type="radio" name="day_fri" value="a_day"> A<br>
-  		<input type="radio" name="day_fri" value="b_day"> B<br>
-  		<input id="no_school_fri" type="radio" name="day_fri" value="no_school"> No School
-  	      </td>
-  	    </tr>
-  	    <tr>
-	      <td id="sched_select_mon">
-	      	<input type="radio" name="schedule_mon" value="a_day"> Regular Schedule<br>
-  		<input type="radio" name="schedule_mon" value="b_day"> Homeroom<br>
-  		<input type="radio" name="schedule_mon" value="no_school"> Special Schedule
-  	      </td>
-  	      <td id="sched_select_tues">
-  		<input type="radio" name="schedule_tues" value="a_day"> Regular Schedule<br>
-  		<input type="radio" name="schedule_tues" value="b_day"> Homeroom<br>
-  		<input type="radio" name="schedule_tues" value="no_school"> Special Schedule
-  	      </td>
-  	      <td id="sched_select_wed">
-  		<input type="radio" name="schedule_wed" value="a_day"> Regular Schedule<br>
-  		<input type="radio" name="schedule_wed" value="b_day"> Homeroom<br>
-  		<input type="radio" name="schedule_wed" value="no_school"> Special Schedule
-  	      </td>
-  	      <td id="sched_select_thurs">
-  		<input type="radio" name="schedule_thurs" value="a_day"> Regular Schedule<br>
-  		<input type="radio" name="schedule_thurs" value="b_day"> Homeroom<br>
-  		<input type="radio" name="schedule_thurs" value="no_school"> Special Schedule
-  	      </td>
-  	      <td id="sched_select_fri">
-  		<input type="radio" name="schedule_fri" value="a_day"> Regular Schedule<br>
-  		<input type="radio" name="schedule_fri" value="b_day"> Homeroom<br>
-  		<input type="radio" name="schedule_fri" value="no_school"> Special Schedule
-  	      </td>
-  	    </tr>
+	    <table class="admintable" cellspacing="0" cellpadding="0">
+		<tr>
+		    <td>Monday</td>
+		    <td>Tuesday</td>
+		    <td>Wednesday</td>
+		    <td>Thursday</td>
+		    <td>Friday</td>
+		</tr>
+		<tr>
+		    <td>
+			<input type="radio" name="day_mon" value="a_day"> A<br>
+			<input type="radio" name="day_mon" value="b_day"> B<br>
+			<input id="no_school_mon" type="radio" name="day_mon" value="no_school"> No School
+		    </td>
+		    <td>
+			<input type="radio" name="day_tues" value="a_day"> A<br>
+			<input type="radio" name="day_tues" value="b_day"> B<br>
+			<input id="no_school_tues" type="radio" name="day_tues" value="no_school"> No School
+		    </td>
+		    <td>
+			<input type="radio" name="day_wed" value="a_day"> A<br>
+			<input type="radio" name="day_wed" value="b_day"> B<br>
+			<input id="no_school_wed" type="radio" name="day_wed" value="no_school"> No School
+		    </td>
+		    <td>
+			<input type="radio" name="day_thurs" value="a_day"> A<br>
+			<input type="radio" name="day_thurs" value="b_day"> B<br>
+			<input id="no_school_thurs" type="radio" name="day_thurs" value="no_school"> No School
+		    </td>
+		    <td>
+			<input type="radio" name="day_fri" value="a_day"> A<br>
+			<input type="radio" name="day_fri" value="b_day"> B<br>
+			<input id="no_school_fri" type="radio" name="day_fri" value="no_school"> No School
+		    </td>
+		</tr>
+		<tr>
+		    <td id="sched_select_mon">
+			<input type="radio" name="schedule_mon" value="Regular"> Regular Schedule<br>
+			<input type="radio" name="schedule_mon" value="Homeroom"> Homeroom<br>
+			<input type="radio" name="schedule_mon" value="no_school"> Special Schedule
+		    </td>
+		    <td id="sched_select_tues">
+			<input type="radio" name="schedule_tues" value="Regular"> Regular Schedule<br>
+			<input type="radio" name="schedule_tues" value="Homeroom"> Homeroom<br>
+			<input type="radio" name="schedule_tues" value="no_school"> Special Schedule
+		    </td>
+		    <td id="sched_select_wed">
+			<input type="radio" name="schedule_wed" value="Regular"> Regular Schedule<br>
+			<input type="radio" name="schedule_wed" value="Homeroom"> Homeroom<br>
+			<input type="radio" name="schedule_wed" value="no_school"> Special Schedule
+		    </td>
+		    <td id="sched_select_thurs">
+			<input type="radio" name="schedule_thurs" value="Regular"> Regular Schedule<br>
+			<input type="radio" name="schedule_thurs" value="Homeroom"> Homeroom<br>
+			<input type="radio" name="schedule_thurs" value="no_school"> Special Schedule
+		    </td>
+		    <td id="sched_select_fri">
+			<input type="radio" name="schedule_fri" value="Regular"> Regular Schedule<br>
+			<input type="radio" name="schedule_fri" value="Homeroom"> Homeroom<br>
+			<input type="radio" name="schedule_fri" value="no_school"> Special Schedule
+		    </td>
+		</tr>
 
-  	    <!-- <tr>
-  		 <td>
-  		   <div id="container">
-  		     <div class="form-group text-center">
-    		       <label for="inputsm">Period Name</label>
-    		       <input class="form-control input-sm" id="period_name" type="text">
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>Start</label>
-    		       <input class="form-control input-sm" id="start" type="text">
-    		       <input type="radio" name="start_time_frame" value="AM"> AM
-    		       <input type="radio" name="start_time_frame" value="PM"> PM
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>End</label>
-    		       <input class="form-control input-sm" id="end" type="text">
-    		       <input type="radio" name="end_time_frame" value="AM"> AM
-    		       <input type="radio" name="end_time_frame" value="PM"> PM
-  		     </div>
-  		     <div class="col-xs-12">
-  		       <hr class="vis">
-  		     </div>
-  		     <span id="writenode"></span>
-	  	   </div>
-	  	   <input type="button" value="Add language" onClick="add_language()" >
-  		 </td>
-  		 <td>
-  		   <div id="container">
-  		     <div class="form-group text-center">
-    		       <label for="inputsm">Period Name</label>
-    		       <input class="form-control input-sm" id="period_name" type="text">
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>Start</label>
-    		       <input class="form-control input-sm" id="start" type="text">
-    		       <input type="radio" name="start_time_frame" value="AM"> AM
-    		       <input type="radio" name="start_time_frame" value="PM"> PM
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>End</label>
-    		       <input class="form-control input-sm" id="end" type="text">
-    		       <input type="radio" name="end_time_frame" value="AM"> AM
-    		       <input type="radio" name="end_time_frame" value="PM"> PM
-  		     </div>
-	  	   </div>
-  		 </td>
-  		 <td>
-  		   <div id="container">
-  		     <div class="form-group text-center">
-    		       <label for="inputsm">Period Name</label>
-    		       <input class="form-control input-sm" id="period_name" type="text">
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>Start</label>
-    		       <input class="form-control input-sm" id="start" type="text">
-    		       <input type="radio" name="start_time_frame" value="AM"> AM
-    		       <input type="radio" name="start_time_frame" value="PM"> PM
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>End</label>
-    		       <input class="form-control input-sm" id="end" type="text">
-    		       <input type="radio" name="end_time_frame" value="AM"> AM
-    		       <input type="radio" name="end_time_frame" value="PM"> PM
-  		     </div>
-	  	   </div>
-  		 </td>
-  		 <td>
-  		   <div id="container">
-  		     <div class="form-group text-center">
-    		       <label for="inputsm">Period Name</label>
-    		       <input class="form-control input-sm" id="period_name" type="text">
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>Start</label>
-    		       <input class="form-control input-sm" id="start" type="text">
-    		       <input type="radio" name="start_time_frame" value="AM"> AM
-    		       <input type="radio" name="start_time_frame" value="PM"> PM
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>End</label>
-    		       <input class="form-control input-sm" id="end" type="text">
-    		       <input type="radio" name="end_time_frame" value="AM"> AM
-    		       <input type="radio" name="end_time_frame" value="PM"> PM
-  		     </div>
-	  	   </div>
-  		 </td>
-  		 <td>
-  		   <div id="container">
-  		     <div class="form-group text-center">
-    		       <label for="inputsm">Period Name</label>
-    		       <input class="form-control input-sm" id="period_name" type="text">
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>Start</label>
-    		       <input class="form-control input-sm" id="start" type="text">
-    		       <input type="radio" name="start_time_frame" value="AM"> AM
-    		       <input type="radio" name="start_time_frame" value="PM"> PM
-  		     </div>
-  		     <div class="form-group col-xs-6">
-    		       <label for="inputsm"><center>End</label>
-    		       <input class="form-control input-sm" id="end" type="text">
-    		       <input type="radio" name="end_time_frame" value="AM"> AM
-    		       <input type="radio" name="end_time_frame" value="PM"> PM
-  		     </div>
-	  	   </div>
-  		 </td>
-  	    </tr> -->
-  	  </table>
-	  
-	  <br><br>
-	  
+		<!-- <tr>
+		     <td>
+		     <div id="container">
+		     <div class="form-group text-center">
+		     <label for="inputsm">Period Name</label>
+		     <input class="form-control input-sm" id="period_name" type="text">
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>Start</label>
+		     <input class="form-control input-sm" id="start" type="text">
+		     <input type="radio" name="start_time_frame" value="AM"> AM
+		     <input type="radio" name="start_time_frame" value="PM"> PM
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>End</label>
+		     <input class="form-control input-sm" id="end" type="text">
+		     <input type="radio" name="end_time_frame" value="AM"> AM
+		     <input type="radio" name="end_time_frame" value="PM"> PM
+		     </div>
+		     <div class="col-xs-12">
+		     <hr class="vis">
+		     </div>
+		     <span id="writenode"></span>
+		     </div>
+		     <input type="button" value="Add language" onClick="add_language()" >
+		     </td>
+		     <td>
+		     <div id="container">
+		     <div class="form-group text-center">
+		     <label for="inputsm">Period Name</label>
+		     <input class="form-control input-sm" id="period_name" type="text">
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>Start</label>
+		     <input class="form-control input-sm" id="start" type="text">
+		     <input type="radio" name="start_time_frame" value="AM"> AM
+		     <input type="radio" name="start_time_frame" value="PM"> PM
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>End</label>
+		     <input class="form-control input-sm" id="end" type="text">
+		     <input type="radio" name="end_time_frame" value="AM"> AM
+		     <input type="radio" name="end_time_frame" value="PM"> PM
+		     </div>
+		     </div>
+		     </td>
+		     <td>
+		     <div id="container">
+		     <div class="form-group text-center">
+		     <label for="inputsm">Period Name</label>
+		     <input class="form-control input-sm" id="period_name" type="text">
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>Start</label>
+		     <input class="form-control input-sm" id="start" type="text">
+		     <input type="radio" name="start_time_frame" value="AM"> AM
+		     <input type="radio" name="start_time_frame" value="PM"> PM
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>End</label>
+		     <input class="form-control input-sm" id="end" type="text">
+		     <input type="radio" name="end_time_frame" value="AM"> AM
+		     <input type="radio" name="end_time_frame" value="PM"> PM
+		     </div>
+		     </div>
+		     </td>
+		     <td>
+		     <div id="container">
+		     <div class="form-group text-center">
+		     <label for="inputsm">Period Name</label>
+		     <input class="form-control input-sm" id="period_name" type="text">
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>Start</label>
+		     <input class="form-control input-sm" id="start" type="text">
+		     <input type="radio" name="start_time_frame" value="AM"> AM
+		     <input type="radio" name="start_time_frame" value="PM"> PM
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>End</label>
+		     <input class="form-control input-sm" id="end" type="text">
+		     <input type="radio" name="end_time_frame" value="AM"> AM
+		     <input type="radio" name="end_time_frame" value="PM"> PM
+		     </div>
+		     </div>
+		     </td>
+		     <td>
+		     <div id="container">
+		     <div class="form-group text-center">
+		     <label for="inputsm">Period Name</label>
+		     <input class="form-control input-sm" id="period_name" type="text">
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>Start</label>
+		     <input class="form-control input-sm" id="start" type="text">
+		     <input type="radio" name="start_time_frame" value="AM"> AM
+		     <input type="radio" name="start_time_frame" value="PM"> PM
+		     </div>
+		     <div class="form-group col-xs-6">
+		     <label for="inputsm"><center>End</label>
+		     <input class="form-control input-sm" id="end" type="text">
+		     <input type="radio" name="end_time_frame" value="AM"> AM
+		     <input type="radio" name="end_time_frame" value="PM"> PM
+		     </div>
+		     </div>
+		     </td>
+		     </tr> -->
+	    </table>
+
+	    <br><br>
+
 	</form>
 
 	<div id="spacer" class="col-md-12 sspacer">
-    	</div>
+	</div>
 
       </div>
 </header>
