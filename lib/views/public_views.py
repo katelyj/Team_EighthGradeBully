@@ -8,7 +8,7 @@ public_views = Blueprint('public_views', __name__)
 
 @public_views.route('/')
 def home():
-    schedule = Schedule.Schedule('fall-14-regular')
+    schedule = Schedule.Schedule('Regular')
     now = datetime.datetime.now()
     midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
     seconds = (now - midnight).seconds

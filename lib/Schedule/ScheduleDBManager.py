@@ -4,8 +4,8 @@ from pymongo import MongoClient
 class ScheduleDBManager:
 
     def __init__(self):
-        client = MongoClient()
-        self.db = client['schedule']
+        self.client = MongoClient()
+        self.db = self.client['schedule']
 
     def add_schedule(self, schedule_name, data):
         self.db.schedules.insert_one({
@@ -22,3 +22,8 @@ class ScheduleDBManager:
             return eval(result.get('data'))
         else:
             return False
+
+    def drop_schedules(self):
+        self.client.drop_database('schedule')
+        self.db = self.client['schedule']
+        return True, 'Dropped all schedules!'

@@ -27,16 +27,17 @@ class ScheduleCSVExtracter:
         return schedule
 
 def main():
-    list_of_valid_schedules = ['fall-14-regular',
-                               'fall-14-homeroom',]
+    list_of_valid_schedules = ['Regular',
+                               'Homeroom',]
     schedule_csv_extracter = ScheduleCSVExtracter()
     schedule_db_manager = ScheduleDBManager.ScheduleDBManager()
+    schedule_db_manager.drop_schedules()
     for schedule_name in list_of_valid_schedules:
         schedule = schedule_csv_extracter.retrieve_schedule(schedule_name)
         # for period, period_data in schedule.items():
         #     print period, period_data
         schedule_db_manager.add_schedule(schedule_name, schedule)
-        return
+    return
 
 if __name__ == '__main__':
     main()

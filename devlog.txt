@@ -66,6 +66,12 @@ winstonV -- 2017-05-31 9:21
   Updated displays on the home page
   Optimizing font sizing
 
+patrickC -- 2017-05-31 23:58
+  Fixed frontend timer
+  Removed hardcoded table
+  Refactored clock.js and fixed bugs
+  Tweaked the check for whether user is logged in with the complete system
+
 winstonV -- 2017-06-01 0:35
   Did work on admin page
 
@@ -112,3 +118,7 @@ winstonV -- 2017-06-05 20:14
 
 kateJ -- 2017-06-05 20:30
   Started A/B day implementation
+
+patrickC -- 2017-06-05 23:16
+  Fixed the schedule naming
+  Added drop schedules in ScheduleDBManager

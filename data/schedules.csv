@@ -13,38 +13,38 @@ period,test,before,12:00a,4:47p
 period,test,Period 1,4:47p,5:06p
 period,test,after,5:06p,11:59p
 ,,,,
-property,fall-14-regular,button,Regular,
-property,fall-14-regular,urlarg,fall14a,
-property,fall-14-regular,description,No homeroom,
-period,fall-14-regular,Before school,12:00a,8:00a
-period,fall-14-regular,Period 1,8:00a,8:41a
-period,fall-14-regular,Period 2,8:45a,9:26a
-period,fall-14-regular,Period 3,9:31a,10:15a
-period,fall-14-regular,Period 4,10:20a,11:01a
-period,fall-14-regular,Period 5,11:06a,11:47a
-period,fall-14-regular,Period 6,11:52a,12:33p
-period,fall-14-regular,Period 7,12:38p,1:19p
-period,fall-14-regular,Period 8,1:24p,2:05p
-period,fall-14-regular,Period 9,2:09p,2:50p
-period,fall-14-regular,Period 10,2:54p,3:35p
-period,fall-14-regular,After school,3:35p,11:59p
+property,Regular,button,Regular,
+property,Regular,urlarg,fall14a,
+property,Regular,description,No homeroom,
+period,Regular,Before school,12:00a,8:00a
+period,Regular,Period 1,8:00a,8:41a
+period,Regular,Period 2,8:45a,9:26a
+period,Regular,Period 3,9:31a,10:15a
+period,Regular,Period 4,10:20a,11:01a
+period,Regular,Period 5,11:06a,11:47a
+period,Regular,Period 6,11:52a,12:33p
+period,Regular,Period 7,12:38p,1:19p
+period,Regular,Period 8,1:24p,2:05p
+period,Regular,Period 9,2:09p,2:50p
+period,Regular,Period 10,2:54p,3:35p
+period,Regular,After school,3:35p,11:59p
 ,,,,
-property,fall-14-homeroom,button,Homeroom,
-property,fall-14-homeroom,urlarg,fall14b,
-property,fall-14-homeroom,decription,12-minute homeroom,
-period,fall-14-homeroom,Before school,12:00a,8:00a
-period,fall-14-homeroom,Period 1,8:00a,8:40a
-period,fall-14-homeroom,Period 2,8:45a,9:25a
-period,fall-14-homeroom,Period 3,9:29a,10:09a
-period,fall-14-homeroom,Homeroom,10:13a,10:25a
-period,fall-14-homeroom,Period 4,10:30a,11:10a
-period,fall-14-homeroom,Period 5,11:14a,11:54a
-period,fall-14-homeroom,Period 6,11:58a,12:38p
-period,fall-14-homeroom,Period 7,12:42p,1:22p
-period,fall-14-homeroom,Period 8,1:26p,2:06p
-period,fall-14-homeroom,Period 9,2:10p,2:50p
-period,fall-14-homeroom,Period 10,2:55p,3:35p
-period,fall-14-homeroom,After school,3:35p,11:59p
+property,Homeroom,button,Homeroom,
+property,Homeroom,urlarg,fall14b,
+property,Homeroom,decription,12-minute homeroom,
+period,Homeroom,Before school,12:00a,8:00a
+period,Homeroom,Period 1,8:00a,8:40a
+period,Homeroom,Period 2,8:45a,9:25a
+period,Homeroom,Period 3,9:29a,10:09a
+period,Homeroom,Homeroom,10:13a,10:25a
+period,Homeroom,Period 4,10:30a,11:10a
+period,Homeroom,Period 5,11:14a,11:54a
+period,Homeroom,Period 6,11:58a,12:38p
+period,Homeroom,Period 7,12:42p,1:22p
+period,Homeroom,Period 8,1:26p,2:06p
+period,Homeroom,Period 9,2:10p,2:50p
+period,Homeroom,Period 10,2:55p,3:35p
+period,Homeroom,After school,3:35p,11:59p
 ,,,,
 property,fall-14-first-day,button,Wed 9/9,
 property,fall-14-first-day,urlarg,fall14first,

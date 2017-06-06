@@ -5,40 +5,28 @@
 {% endblock %}
 
 {% block adminbutton %}
-	{% if is_logged_in() %}
-		{% if is_admin() %}
-
-		<a href="/admin" onclick=$("#menu-close").click();>Admin Settings</a>
-
-		{% endif %}
+    {% if is_logged_in() %}
+	{% if is_admin() %}
+	    <a href="/admin" onclick=$("#menu-close").click();>Admin Settings</a>
 	{% endif %}
+    {% endif %}
 {% endblock %}
 
 
 {% block loginbutton %}
-{% if is_logged_in() %}
-
-<a href="/settings" onclick=$("#menu-close").click();>Settings</a>
-
-
-{% else %}
-
-<a href="/login" onclick=$("#menu-close").click();>Login</a>
-
-{% endif %}
+    {% if is_logged_in() %}
+	<a href="/settings" onclick=$("#menu-close").click();>Settings</a>
+    {% else %}
+	<a href="/login" onclick=$("#menu-close").click();>Login</a>
+    {% endif %}
 {% endblock %}
 
 {% block registerbutton %}
-{% if is_logged_in() %}
-
-<a href="/logout" onclick=$("#menu-close").click();>Logout</a>
-
-
-{% else %}
-
-<a href="/register" onclick=$("#menu-close").click();>Register</a>
-
-{% endif %}
+    {% if is_logged_in() %}
+	<a href="/logout" onclick=$("#menu-close").click();>Logout</a>
+    {% else %}
+	<a href="/register" onclick=$("#menu-close").click();>Register</a>
+    {% endif %}
 {% endblock %}
 
 
@@ -78,17 +66,17 @@
 
 		    <div class="row">
 
-		    <div class="col-xs-2">
-		    	<img width="50px" src="/static/img/a.png">
-		    </div>
+			<div class="col-xs-2">
+			    <img width="50px" src="/static/img/a.png">
+			</div>
 
-		    <div class="col-xs-8 text-center">
-			<h1><b><label id="PeriodName"></label></b></h1>
-		    </div>
+			<div class="col-xs-8 text-center">
+			    <h1><b><label id="PeriodName"></label></b></h1>
+			</div>
 
-		    <div class="col-xs-2">
-		    	<img width="50px" src="/static/img/a.png">
-		    </div>
+			<div class="col-xs-2">
+			    <img width="50px" src="/static/img/a.png">
+			</div>
 
 		    </div>
 
@@ -132,7 +120,7 @@
 
 		</div>
 
-		
+
 
 
 		<div class="col-md-4" align="center">
@@ -155,8 +143,8 @@
 		    </table>
 		</div>
 
-				<div id="spacer" class="col-md-12 sspacer">
-		    </div>
+		<div id="spacer" class="col-md-12 sspacer">
+		</div>
 
 
 
@@ -173,4 +161,4 @@
      var SERVER_START_TIME = {{starttime}};
     </script>
     <script src="/static/js/clock.js"></script>
-    {% endblock %}
+{% endblock %}

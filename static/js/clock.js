@@ -10,7 +10,7 @@ var periods_data = new Array();
 var getScheduleData = function(){
     schedule_data = '';
     $.ajax({
-	url: '/schedule_jsonify/fall-14-regular',
+	url: '/schedule_jsonify/Regular',
 	dataType: 'json',
 	async: false,
 	success: function(data){
