@@ -8,10 +8,18 @@ from lib.Schedule import Schedule
 admin_views = Blueprint('admin_views', __name__)
 
 @admin_views.route('/admin/', methods=['GET'])
+@security.login_required(admin_required=True)
 def admin():
-    return render_template('admin.html', is_logged_in=security.is_logged_in, is_admin=security.is_admin)
+    today_date = datetime.today().date()
+    date = (today_date - timedelta(days=today_date.weekday()) - timedelta(days=1)).strftime('%m:%d:%y')
+    weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
+
+    weekly_schedule = weekly_schedule_db_manager.retrieve_weekly_schedule(date)
+
+    return render_template('admin.html', weekly_schedule=weekly_schedule, is_logged_in=security.is_logged_in, is_admin=security.is_admin)
 
 @admin_views.route('/save/', methods=['POST'])
+@security.login_required(admin_required=True)
 def save():
     DAYS = ['mon', 'tues', 'wed', 'thurs', 'fri']
     today_date = datetime.today().date()

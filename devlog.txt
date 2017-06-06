@@ -126,3 +126,8 @@ patrickC -- 2017-06-05 23:16
 patrickC -- 2017-06-06 00:35
   Added the functionality for saving the weekly schedule
   Added the functionality for replacing the weekly schedule
+
+patrickC -- 2017-06-06 01:05
+  Modified the admin.html page to prefill the bubbles if database already contain data for this week
+  Increased security for admin pages, automatically redirect you to login page if you're not logged in as
+  admin

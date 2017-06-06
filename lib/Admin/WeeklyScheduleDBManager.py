@@ -4,7 +4,7 @@ class WeeklyScheduleDBManager(object):
 
     def __init__(self):
         self.client = MongoClient()
-        self.db = self.client['weekly_schedule']
+        self.db = self.client['weekly_schedules']
 
     def insert_weekly_schedule(self, date, weekly_schedule_data):
         self.db.weekly_schedules.insert_one({
@@ -27,3 +27,8 @@ class WeeklyScheduleDBManager(object):
         if result:
             return eval(result.get('weekly_schedule_data'))
         return None
+
+    def drop_weekly_schedules(self):
+        self.client.drop_database('weekly_schedules')
+        self.db = self.client['weekly_schedules']
+        return True, 'Dropped all weekly schedules!'

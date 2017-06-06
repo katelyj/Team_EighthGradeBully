@@ -95,55 +95,135 @@
 		</tr>
 		<tr>
 		    <td>
-			<input type="radio" name="day_mon" value="a_day"> A<br>
-			<input type="radio" name="day_mon" value="b_day"> B<br>
+			{% if weekly_schedule and weekly_schedule['mon'][1] == 'a_day' %}
+			    <input type="radio" name="day_mon" value="a_day" checked="checked"> A<br>
+			{% else %}
+			    <input type="radio" name="day_mon" value="a_day" > A<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['mon'][1] == 'b_day' %}
+			    <input type="radio" name="day_mon" value="b_day" checked="checked"> B<br>
+			{% else %}
+			    <input type="radio" name="day_mon" value="b_day"> B<br>
+			{% endif %}
 			<input id="no_school_mon" type="radio" name="day_mon" value="no_school"> No School
 		    </td>
 		    <td>
-			<input type="radio" name="day_tues" value="a_day"> A<br>
-			<input type="radio" name="day_tues" value="b_day"> B<br>
+			{% if weekly_schedule and weekly_schedule['tues'][1] == 'a_day' %}
+			    <input type="radio" name="day_tues" value="a_day" checked="checked"> A<br>
+			{% else %}
+			    <input type="radio" name="day_tues" value="a_day" > A<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['tues'][1] == 'b_day' %}
+			    <input type="radio" name="day_tues" value="b_day" checked="checked"> B<br>
+			{% else %}
+			    <input type="radio" name="day_tues" value="b_day"> B<br>
+			{% endif %}
 			<input id="no_school_tues" type="radio" name="day_tues" value="no_school"> No School
 		    </td>
 		    <td>
-			<input type="radio" name="day_wed" value="a_day"> A<br>
-			<input type="radio" name="day_wed" value="b_day"> B<br>
+			{% if weekly_schedule and weekly_schedule['wed'][1] == 'a_day' %}
+			    <input type="radio" name="day_wed" value="a_day" checked="checked"> A<br>
+			{% else %}
+			    <input type="radio" name="day_wed" value="a_day" > A<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['wed'][1] == 'b_day' %}
+			    <input type="radio" name="day_wed" value="b_day" checked="checked"> B<br>
+			{% else %}
+			    <input type="radio" name="day_wed" value="b_day"> B<br>
+			{% endif %}
 			<input id="no_school_wed" type="radio" name="day_wed" value="no_school"> No School
 		    </td>
 		    <td>
-			<input type="radio" name="day_thurs" value="a_day"> A<br>
-			<input type="radio" name="day_thurs" value="b_day"> B<br>
+			{% if weekly_schedule and weekly_schedule['thurs'][1] == 'a_day' %}
+			    <input type="radio" name="day_thurs" value="a_day" checked="checked"> A<br>
+			{% else %}
+			    <input type="radio" name="day_thurs" value="a_day" > A<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['thurs'][1] == 'b_day' %}
+			    <input type="radio" name="day_thurs" value="b_day" checked="checked"> B<br>
+			{% else %}
+			    <input type="radio" name="day_thurs" value="b_day"> B<br>
+			{% endif %}
 			<input id="no_school_thurs" type="radio" name="day_thurs" value="no_school"> No School
 		    </td>
 		    <td>
-			<input type="radio" name="day_fri" value="a_day"> A<br>
-			<input type="radio" name="day_fri" value="b_day"> B<br>
+			{% if weekly_schedule and weekly_schedule['fri'][1] == 'a_day' %}
+			    <input type="radio" name="day_fri" value="a_day" checked="checked"> A<br>
+			{% else %}
+			    <input type="radio" name="day_fri" value="a_day" > A<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['fri'][1] == 'b_day' %}
+			    <input type="radio" name="day_fri" value="b_day" checked="checked"> B<br>
+			{% else %}
+			    <input type="radio" name="day_fri" value="b_day"> B<br>
+			{% endif %}
 			<input id="no_school_fri" type="radio" name="day_fri" value="no_school"> No School
 		    </td>
 		</tr>
 		<tr>
 		    <td id="sched_select_mon">
-			<input type="radio" name="schedule_mon" value="Regular"> Regular Schedule<br>
-			<input type="radio" name="schedule_mon" value="Homeroom"> Homeroom<br>
+			{% if weekly_schedule and weekly_schedule['mon'][0] == 'Regular' %}
+			    <input type="radio" name="schedule_mon" value="Regular" checked="checked"> Regular Schedule<br>
+			{% else %}
+			    <input type="radio" name="schedule_mon" value="Regular"> Regular Schedule<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['mon'][0] == 'Homeroom' %}
+			    <input type="radio" name="schedule_mon" value="Homeroom" checked="checked"> Homeroom<br>
+			{% else %}
+			    <input type="radio" name="schedule_mon" value="Homeroom"> Homeroom<br>
+			{% endif %}
 			<input type="radio" name="schedule_mon" value="no_school"> Special Schedule
 		    </td>
 		    <td id="sched_select_tues">
-			<input type="radio" name="schedule_tues" value="Regular"> Regular Schedule<br>
-			<input type="radio" name="schedule_tues" value="Homeroom"> Homeroom<br>
+			{% if weekly_schedule and weekly_schedule['tues'][0] == 'Regular' %}
+			    <input type="radio" name="schedule_tues" value="Regular" checked="checked"> Regular Schedule<br>
+			{% else %}
+			    <input type="radio" name="schedule_tues" value="Regular"> Regular Schedule<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['tues'][0] == 'Homeroom' %}
+			    <input type="radio" name="schedule_tues" value="Homeroom" checked="checked"> Homeroom<br>
+			{% else %}
+			    <input type="radio" name="schedule_tues" value="Homeroom"> Homeroom<br>
+			{% endif %}
 			<input type="radio" name="schedule_tues" value="no_school"> Special Schedule
 		    </td>
 		    <td id="sched_select_wed">
-			<input type="radio" name="schedule_wed" value="Regular"> Regular Schedule<br>
-			<input type="radio" name="schedule_wed" value="Homeroom"> Homeroom<br>
+			{% if weekly_schedule and weekly_schedule['wed'][0] == 'Regular' %}
+			    <input type="radio" name="schedule_wed" value="Regular" checked="checked"> Regular Schedule<br>
+			{% else %}
+			    <input type="radio" name="schedule_wed" value="Regular"> Regular Schedule<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['wed'][0] == 'Homeroom' %}
+			    <input type="radio" name="schedule_wed" value="Homeroom" checked="checked"> Homeroom<br>
+			{% else %}
+			    <input type="radio" name="schedule_wed" value="Homeroom"> Homeroom<br>
+			{% endif %}
 			<input type="radio" name="schedule_wed" value="no_school"> Special Schedule
 		    </td>
 		    <td id="sched_select_thurs">
-			<input type="radio" name="schedule_thurs" value="Regular"> Regular Schedule<br>
-			<input type="radio" name="schedule_thurs" value="Homeroom"> Homeroom<br>
+			{% if weekly_schedule and weekly_schedule['thurs'][0] == 'Regular' %}
+			    <input type="radio" name="schedule_thurs" value="Regular" checked="checked"> Regular Schedule<br>
+			{% else %}
+			    <input type="radio" name="schedule_thurs" value="Regular"> Regular Schedule<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['thurs'][0] == 'Homeroom' %}
+			    <input type="radio" name="schedule_thurs" value="Homeroom" checked="checked"> Homeroom<br>
+			{% else %}
+			    <input type="radio" name="schedule_thurs" value="Homeroom"> Homeroom<br>
+			{% endif %}
 			<input type="radio" name="schedule_thurs" value="no_school"> Special Schedule
 		    </td>
 		    <td id="sched_select_fri">
-			<input type="radio" name="schedule_fri" value="Regular"> Regular Schedule<br>
-			<input type="radio" name="schedule_fri" value="Homeroom"> Homeroom<br>
+			{% if weekly_schedule and weekly_schedule['fri'][0] == 'Regular' %}
+			    <input type="radio" name="schedule_fri" value="Regular" checked="checked"> Regular Schedule<br>
+			{% else %}
+			    <input type="radio" name="schedule_fri" value="Regular"> Regular Schedule<br>
+			{% endif %}
+			{% if weekly_schedule and weekly_schedule['fri'][0] == 'Homeroom' %}
+			    <input type="radio" name="schedule_fri" value="Homeroom" checked="checked"> Homeroom<br>
+			{% else %}
+			    <input type="radio" name="schedule_fri" value="Homeroom"> Homeroom<br>
+			{% endif %}
 			<input type="radio" name="schedule_fri" value="no_school"> Special Schedule
 		    </td>
 		</tr>
