@@ -1,5 +1,4 @@
 import datetime
-
 import ScheduleDBManager
 
 def convert_to_datetime(period_time):
