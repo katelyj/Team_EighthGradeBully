@@ -1,0 +1,7 @@
+CHANGES BETWEEN THE DESIGN DOCUMENT AND THE FINISHED PRODUCT:
+
+- We decided not to implement Bell Warnings, as sending people notifications would become too obnoxious, and we didn't want to collect phone numbers and invade anyone's privacy.
+- We did not use a color alerts system, as it would've been a bit too distracting/not crucial enough for the home page.
+- Mr. Brooks won't need to update the weekly bell schedules... Ms. Damasek will, instead! (or one of her assistants...)
+- Admin has special page for updating bell schedules, that no one else can access
+- Certain features (outlined in the Readme) are still rough or partially developed, and still in ongoing development as per Mr. Brook's request!

@@ -1,0 +1,144 @@
+kateJ -- 2017-05-11 14:16
+  Design Document completed
+  README updated
+  hello
+
+kateJ -- 2017-05-16 14:16
+  Added data
+  Worked on database/timer backend stuff
+
+winstonV -- 2017-05-16
+  Got skeletal front end working
+  Started layout for modular front end design
+
+patrickC -- 2017-05-16
+  Added DBManger.py
+  Added security.py, utils.py
+
+winstonV -- 2017-05-21 21:36
+  Imported basic clock skeleton
+  Started work on clock presentation
+  Tried to make clock work for dev presentation tomorrow
+
+winstonV -- 2017-05-21 23:25
+  Got basic time table pushing from flask app
+  Got system time pushing from flask app
+
+winstonV -- 2017-05-22 15:14
+  Added collapsable scheduler
+
+winstonV -- 2017-05-22 18:26
+  Added color changing to collapse button for ease of use
+  Added AM and PM tags to timetables
+  Fixed top clock border bug
+
+winstonV -- 2017-05-22 21:55
+  Created herokuapp for deployment and mobile testing
+
+patrickC -- 2017-05-22 23:21
+  Fully integrated authentication system
+
+winstonV -- 2017-05-23 10:04
+  More jinja integration
+  Beautification of login and registration
+  Added login menubar options
+
+winstonV -- 2017-05-23 11:53
+  Added user customization for pages based on login
+  Added phone number input for registration
+
+winstonV -- 2017-05-24 20:32
+  Changed layout of homepage to better reflect what we're going for
+  It's still very buggy!
+
+kateJ -- 2017-05-24 22:15
+  User authentication things
+  Changing password, sort of
+
+patrickC -- 2017-05-26 22:13
+  Get rid of circular import and rewrote the interface
+
+kateJ -- 2017-05-30 22:22
+  User settings
+  Routing for settings page
+
+winstonV -- 2017-05-31 9:21
+  Updated displays on the home page
+  Optimizing font sizing
+
+patrickC -- 2017-05-31 23:58
+  Fixed frontend timer
+  Removed hardcoded table
+  Refactored clock.js and fixed bugs
+  Tweaked the check for whether user is logged in with the complete system
+
+winstonV -- 2017-06-01 0:35
+  Did work on admin page
+
+kateJ -- 2015-06-02 22:30
+  more settings things
+
+winstonV -- 2017-06-04 21:31
+  More work on admin page
+  Added A/B seperators on the front end
+  Optimized clock for new JS build
+
+winstonV -- 2017-06-05 9:25
+  Optimized A/B Display
+  Login flags from backend are not working on certain page!
+  Need Optimization!
+
+winstonV -- 2017-06-05 15:07
+  Added up/down arrows to dropdowns
+  Started about page
+
+kateJ -- 2017-06-05 15:00
+  what is wrong with change password
+  why isnt flash working
+  edited about page
+
+kateJ -- 2017-06-05 16:14
+  flash messages FINALLY works
+  still working on settings
+
+kateJ -- 2017-06-05 18:30
+  is_logged_in FINALLY works on every page
+
+winstonV -- 2017-06-05 18:53
+  fixed password changing
+  optimized background display on setting
+
+kateJ -- 2017-06-05 19:50
+  fixed admin page, created admin_views.py
+  started admin database functions
+
+winstonV -- 2017-06-05 20:14
+  General bugfixes
+  Fixed flash messages
+
+kateJ -- 2017-06-05 20:30
+  Started A/B day implementation
+
+patrickC -- 2017-06-05 23:16
+  Fixed the schedule naming
+  Added drop schedules in ScheduleDBManager
+
+patrickC -- 2017-06-06 00:35
+  Added the functionality for saving the weekly schedule
+  Added the functionality for replacing the weekly schedule
+
+patrickC -- 2017-06-06 01:05
+  Modified the admin.html page to prefill the bubbles if database already contain data for this week
+  Increased security for admin pages, automatically redirect you to login page if you're not logged in as
+  admin
+
+kateJ -- 2017-06-06 1:30
+  design changes doc
+  readme
+
+patrickC -- 2017-06-06 01:38
+  Added ajax call for getting user schedule and saving user schedule
+
+winstonV -- 2017-06-06 03:24
+  Wow, lots of work......
+  Finished first draft
