@@ -251,6 +251,8 @@
 
 		{% endif %}
 
+		
+
 
 
 
@@ -267,7 +269,7 @@
 				<br><img id="daily_arrow" width="50px" src="/static/img/up.png">
 			    {% endif %}
 			</b></th></tr>
-			{% if schedule != None %}
+			{% if weekly_schedule != None %}
 				{% for data in schedule %}
 				    <tr id={{ "period{}".format(loop.index0) }} style="display">
 					<td align="center">{{ data[0] }}</td>
@@ -337,6 +339,8 @@
 		<div id="spacer" class="col-md-12 sspacer">
 		</div>
 	    </div>
+
+
 
 
 
