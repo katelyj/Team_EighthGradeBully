@@ -57,25 +57,22 @@
     </div>
 
 
-    <div class="col-md-12 text-vertical-center">
+    <div class="col-md-6 col-md-offset-3 col-xs-12 text-vertical-center">
 
-      <div id="whitespace" class="col-md-3"></div>
-      <div id="schedule" class="col-md-6 container schedulecontainer">
+      <div id="schedule" class="col-md-12 container schedulecontainer">
 
 
-	<h2>Change     Schedule</h2>
+	<h2>Change Schedule</h2>
 
 	
 	{% with messages = get_flashed_messages() %}
 	{% if messages %}
-	<ul class=flashes><i>
-	    {% for message in messages %}
-	    {{ message }}
-	    {% endfor %}
-	</i></ul>
+	<div class="col-xs-12 sspacer"></div>
+	<div class="generalcontainer col-md-6 col-md-offset-3 col-xs-12 col-sm-6 col-sm-offset-3 flashes"><h4><b><i>{% for message in messages %}{{ message }}{% endfor %}</i></b></h4></div>
+	<div class="col-xs-12 sspacer">
+	</div>
 	{% endif %}
 	{% endwith %}
-	{% block body %}{% endblock %}
 
 	
 	<form action = "/changeschedule/" method="POST">
@@ -141,12 +138,9 @@
       <div class="col-md-12 sspacer">
       </div>
 
-      <div class="col-md-12 text-vertical-center">
-
-	<div id="whitespace" class="col-md-3"></div>
 
 
-	<div id="schedule" class="col-md-6 container schedulecontainer">
+	<div id="schedule" class="col-md-10 col-md-offset-1 col-xs-12 container schedulecontainer">
 
           <h2> Change Password</h2>
           <form action = "/changepassword/" method="POST">
@@ -165,7 +159,7 @@
 
         </div>
 
-        <div id="whitespace" class="col-md-12 sspacer"></div>
+        <div class="col-md-12 sspacer"></div>
 
 
 </header>
