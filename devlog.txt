@@ -122,3 +122,7 @@ kateJ -- 2017-06-05 20:30
 patrickC -- 2017-06-05 23:16
   Fixed the schedule naming
   Added drop schedules in ScheduleDBManager
+
+patrickC -- 2017-06-06 00:35
+  Added the functionality for saving the weekly schedule
+  Added the functionality for replacing the weekly schedule

@@ -19,14 +19,14 @@ def save():
     weekly_schedule_data = {}
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
 
+    for day in DAYS:
+        a_b_day = request.form.get('day_{0}'.format(day))
+        schedule_type = request.form.get('schedule_{0}'.format(day))
+        weekly_schedule_data[day] = [schedule_type, a_b_day]
+
     operation = request.form.get('new') or request.form.get('replace')
     if operation == 'replace':
-        pass
+        weekly_schedule_db_manager.modify_weekly_schedule(date, weekly_schedule_data)
     elif operation == 'save':
-        for day in DAYS:
-            print day
-            a_b_day = request.form.get('day_{0}'.format(day))
-            schedule_type = request.form.get('schedule_{0}'.format(day))
-            weekly_schedule_data[day] = [schedule_type, a_b_day]
         weekly_schedule_db_manager.insert_weekly_schedule(date, weekly_schedule_data)
     return redirect(url_for('admin_views.admin'))
