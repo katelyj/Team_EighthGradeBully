@@ -52,7 +52,28 @@
 		<div id="spacer" class="col-md-12 sspacer">
 		</div>
 
-		{% if curr_day == None %}
+		{% if weekly_schedule == None}
+			<div id="schedule" class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedulecontainer">
+
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
+
+		    <center>
+		    <h2> <b>Weekly Schedule Not Set!</b> </h2>
+		    <h4> <i>Please Contact an Administrator</i> </h4>
+
+		    <div id="spacer" class="col-xs-12 mspacer">
+		    </div>
+
+		    <h3> Click <a href="http://bert.stuy.edu/pbrooks/schedules/schedules.py?">here</a> for updated schedules. </h3>
+		    </center>
+
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
+
+		</div>
+
+		{% elif curr_day == None %}
 		<div id="schedule" class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedulecontainer">
 
 		    <div id="spacer" class="col-xs-12 sspacer">
