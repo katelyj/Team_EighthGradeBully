@@ -33,6 +33,7 @@ def home():
 
     else:
         today_data = weekly_schedule[weekday_name]
+        print(weekly_schedule)
         schedule = Schedule.Schedule(today_data[0])
         a_b_day = today_data[1]
         return render_template('schedule.html', curr_day = today_data[0], starttime=str(seconds), today_data=today_data, weekly_schedule=weekly_schedule, schedule=schedule, a_b_day=a_b_day, is_logged_in=security.is_logged_in, is_admin=security.is_admin)

@@ -52,19 +52,31 @@
 		<div id="spacer" class="col-md-12 sspacer">
 		</div>
 
-		{% if weekly_schedule != None %}
+		{% if curr_day == None %}
+		<div id="schedule" class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedulecontainer">
 
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
 
-		<div class="col-md-4" align="center">
+		    <center>
+		    <h2> <b>There is no school today!</b> </h2>
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
+		    </div>
+
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
+
+		    <div class="col-md-12 col-md-xs-3" align="center">
 		    <table>
-			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="3"><b>Weekly Schedule<br><img id="week_arrow" width="50px" src="/static/img/up.png"></b></th></tr>
-
-			{% if weekly_schedule != None %}
-				    <tr id="day0" style="display">
+			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="3"><b>Weekly Schedule<br></b></th></tr>
+		    	<tr id="day0" style="display">
 						<td align="center">Monday</td>
 						<td>
 						{% if weekly_schedule['mon'][0] == None %}
 							No School
+						{% elif weekly_schedule['mon'][0] == 'no_school' %}
+							Special Schedule
 						{% else %}
 							{{ weekly_schedule['mon'][0] }} Schedule
 						{% endif %}
@@ -84,6 +96,8 @@
 						<td>
 						{% if weekly_schedule['tues'][0] == None %}
 							No School
+						{% elif weekly_schedule['tues'][0] == 'no_school' %}
+							Special Schedule
 						{% else %}
 							{{ weekly_schedule['tues'][0] }} Schedule
 						{% endif %}
@@ -103,6 +117,8 @@
 						<td>
 						{% if weekly_schedule['wed'][0] == None %}
 							No School
+						{% elif weekly_schedule['wed'][0] == 'no_school' %}
+							Special Schedule
 						{% else %}
 							{{ weekly_schedule['wed'][0] }} Schedule
 						{% endif %}
@@ -122,6 +138,8 @@
 						<td>
 						{% if weekly_schedule['thurs'][0] == None %}
 							No School
+						{% elif weekly_schedule['thurs'][0] == 'no_school' %}
+							Special Schedule
 						{% else %}
 							{{ weekly_schedule['thurs'][0] }} Schedule
 						{% endif %}
@@ -141,6 +159,270 @@
 						<td>
 						{% if weekly_schedule['fri'][0] == None %}
 							No School
+						{% elif weekly_schedule['fri'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['fri'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['fri'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['fri'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				</table>
+
+		    </div>
+
+		</div>
+
+		{% elif curr_day == 'no_school' %}
+
+
+
+		<div id="schedule" class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedulecontainer">
+
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
+
+		    <center>
+		    <h2> <b>Today is a Special Schedule!</b> </h2>
+
+		    <div id="spacer" class="col-xs-12 mspacer">
+		    </div>
+
+		    <h3> Click <a href="http://bert.stuy.edu/pbrooks/schedules/schedules.py?">here</a> for updated schedules. </h3>
+		    </center>
+
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
+		    </div>
+
+		    <div id="spacer" class="col-xs-12 sspacer">
+		    </div>
+
+		    <div class="col-md-6 col-md-offset-3" align="center">
+		    <table>
+		    <tr id="schedule_header" style="display: hidden;" class="shown"><th class="text-center" colspan="2"></tr>
+			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="3"><b>Weekly Schedule<br></b></th></tr>
+		    	<tr id="day0" style="display">
+						<td align="center">Monday</td>
+						<td>
+						{% if weekly_schedule['mon'][0] == None %}
+							No School
+						{% elif weekly_schedule['mon'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['mon'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['mon'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['mon'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day1" style="display">
+						<td align="center">Tuesday</td>
+						<td>
+						{% if weekly_schedule['tues'][0] == None %}
+							No School
+						{% elif weekly_schedule['tues'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['tues'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['tues'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['tues'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day2" style="display">
+						<td align="center">Wednesday</td>
+						<td>
+						{% if weekly_schedule['wed'][0] == None %}
+							No School
+						{% elif weekly_schedule['wed'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['wed'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['wed'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['wed'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day3" style="display">
+						<td align="center">Thursday</td>
+						<td>
+						{% if weekly_schedule['thurs'][0] == None %}
+							No School
+						{% elif weekly_schedule['thurs'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['thurs'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['thurs'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['thurs'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day4" style="display">
+						<td align="center">Friday</td>
+						<td>
+						{% if weekly_schedule['fri'][0] == None %}
+							No School
+						{% elif weekly_schedule['fri'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['fri'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['fri'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['fri'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+
+				 </table>
+
+		    
+
+
+		</div>
+
+
+		{% elif weekly_schedule != None %}
+
+
+		<div class="col-md-4" align="center">
+		    <table>
+			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="3"><b>Weekly Schedule<br><img id="week_arrow" width="50px" src="/static/img/up.png"></b></th></tr>
+
+			{% if weekly_schedule != None %}
+				    <tr id="day0" style="display">
+						<td align="center">Monday</td>
+						<td>
+						{% if weekly_schedule['mon'][0] == None %}
+							No School
+						{% elif weekly_schedule['mon'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['mon'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['mon'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['mon'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day1" style="display">
+						<td align="center">Tuesday</td>
+						<td>
+						{% if weekly_schedule['tues'][0] == None %}
+							No School
+						{% elif weekly_schedule['tues'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['tues'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['tues'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['tues'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day2" style="display">
+						<td align="center">Wednesday</td>
+						<td>
+						{% if weekly_schedule['wed'][0] == None %}
+							No School
+						{% elif weekly_schedule['wed'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['wed'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['wed'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['wed'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day3" style="display">
+						<td align="center">Thursday</td>
+						<td>
+						{% if weekly_schedule['thurs'][0] == None %}
+							No School
+						{% elif weekly_schedule['thurs'][0] == 'no_school' %}
+							Special Schedule
+						{% else %}
+							{{ weekly_schedule['thurs'][0] }} Schedule
+						{% endif %}
+						</td>
+						<td>
+						{% if weekly_schedule['thurs'][1] == 'a_day' %}
+							A Day
+						{% elif weekly_schedule['thurs'][1] == 'b_day' %}
+							B Day
+						{% else %}
+							No School
+						{% endif %}
+						</td>
+				    </tr>
+				    <tr id="day4" style="display">
+						<td align="center">Friday</td>
+						<td>
+						{% if weekly_schedule['fri'][0] == None %}
+							No School
+						{% elif weekly_schedule['fri'][0] == 'no_school' %}
+							Special Schedule
 						{% else %}
 							{{ weekly_schedule['fri'][0] }} Schedule
 						{% endif %}
@@ -308,6 +590,7 @@
 
 		<div id="spacer" class="col-md-12 sspacer">
 		</div>
+
 
 		{% else %}
 
