@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../'))
 from lib.Schedule import Schedule, UserScheduleDBManager
 
 ajax_views = Blueprint('ajax_views', __name__)
