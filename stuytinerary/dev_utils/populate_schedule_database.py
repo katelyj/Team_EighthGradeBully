@@ -1,15 +1,20 @@
 import collections
 import csv
+import os
 import sys
 
-sys.path.insert(0, '../')
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../'))
 
 from lib.Schedule import ScheduleDBManager
+
+
+SCHEDULE_CSV_EXTACTER_DIR_NAME = os.path.dirname(__file__) or '.'
+DATA_FILE_PATH = '{0}{1}'.format(SCHEDULE_CSV_EXTACTER_DIR_NAME, '/../data/schedules.csv')
 
 class ScheduleCSVExtracter:
 
     def __init__(self):
-        self.data_file = open('../data/schedules.csv')
+        self.data_file = open(DATA_FILE_PATH)
         self.reader = csv.reader(self.data_file)
 
     def retrieve_schedule(self, schedule_name):

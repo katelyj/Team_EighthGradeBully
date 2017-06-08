@@ -143,7 +143,3 @@ class AuthManager:
             })
 
             return True, 'Developer dropped!'
-
-db_manager = AuthManager()
-if (db_manager.make_admin("mod")):
-    print("Admin Username = 'mod'")

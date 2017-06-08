@@ -17,7 +17,5 @@ app.register_blueprint(settings_views.settings_views)
 app.register_blueprint(admin_views.admin_views)
 
 if __name__ == '__main__':
-    os.system('python populate_schedule_database.py') #populates schedule database (hotfix for now)
-    print("Schedule Database Reset!\n")
     app.debug = True
     app.run(host='0.0.0.0')
