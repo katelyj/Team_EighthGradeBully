@@ -1,5 +1,9 @@
 from datetime import datetime, timedelta
 from flask import Blueprint, render_template, session, url_for
+import os
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../'))
 
 from lib.Admin import WeeklyScheduleDBManager
 from lib.Schedule import Schedule, UserScheduleDBManager
@@ -41,4 +45,3 @@ def home():
 @public_views.route('/about')
 def about():
     return render_template('about.html', is_logged_in=security.is_logged_in, is_admin=security.is_admin)
-
