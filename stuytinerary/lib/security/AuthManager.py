@@ -95,8 +95,8 @@ class AuthManager:
 
             return True, 'User dropped!'
 
-    def make_admin(self, username):
-        if not self.is_registered(username):
+    def make_admin(self, username, force=False):
+        if not self.is_registered(username) and not force:
             return False, 'User does not exist.'
         elif self.is_admin(username):
             return False, 'User is already an admin.'
