@@ -10,7 +10,7 @@ class ScheduleDBManager:
     def __init__(self):
         self.client = MongoClient()
         self.db = self.client['schedule']
-        if not self.db.schedules.find():
+        if not self.db.schedules.count():
             POPULATE_SCHEDULE_DATABASE_PATH = os.path.join(ScheduleDBManager.DIR_NAME, '../../dev_utils/populate_schedule_database.py')
             os.system('python {program_name}'.format(program_name=POPULATE_SCHEDULE_DATABASE_PATH))
             print 'Populated the database'
