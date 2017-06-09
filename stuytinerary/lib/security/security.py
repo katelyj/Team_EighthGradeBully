@@ -7,7 +7,6 @@ from security_utils import redirect_back
 
 security = Blueprint('security', __name__)
 db_manager = AuthManager.AuthManager()
-#db_manager.make_admin('admin', force=True)
 
 def login_required(admin_required = False, developer_required = False):
     def actual_decorator(function):

