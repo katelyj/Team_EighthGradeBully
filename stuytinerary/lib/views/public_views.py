@@ -20,17 +20,21 @@ def home():
     midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
     seconds = (now - midnight).seconds
 
-    weekday_to_string = {1: 'mon',
+    weekday_to_string = {0: 'sun',
+                         1: 'mon',
                          2: 'tues',
                          3: 'wed',
                          4: 'thurs',
-                         5: 'fri'}
+                         5: 'fri',
+                         6: 'sat'}
     today_date = datetime.today().date()
     date = (today_date - timedelta(days=today_date.weekday()) - timedelta(days=1)).strftime('%m:%d:%y')
 
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
     weekly_schedule = weekly_schedule_db_manager.retrieve_weekly_schedule(date)
     weekday_name = weekday_to_string[today_date.weekday() + 1]
+    if weekday_name == 'sat' or weekday_name == 'sun':
+        weekly_schedule = None
 
     raw_user_schedule = UserScheduleDBManager.UserScheduleDBManager().retrieve_user_schedule(session.get('username'))
 
