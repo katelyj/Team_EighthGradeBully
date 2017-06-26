@@ -32,21 +32,24 @@ def home():
 
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
     weekly_schedule = weekly_schedule_db_manager.retrieve_weekly_schedule(date)
+    print date
+    print weekly_schedule
     weekday_name = weekday_to_string[today_date.weekday() + 1]
+    weekday_name = 'mon'
     if weekday_name == 'sat' or weekday_name == 'sun':
         weekly_schedule = None
 
     raw_user_schedule = UserScheduleDBManager.UserScheduleDBManager().retrieve_user_schedule(session.get('username'))
 
     if (weekly_schedule == None):
-        return render_template('schedule.html', curr_day = None, starttime=str(seconds), today_data=None, weekly_schedule=None, schedule=None, a_b_day=None, is_logged_in=security.is_logged_in, is_admin=security.is_admin)
+        return render_template('schedule.html', SCHEDULE_NAME=None, starttime=str(seconds), today_data=None, weekly_schedule=None, schedule=None, a_b_day=None, is_logged_in=security.is_logged_in, is_admin=security.is_admin)
 
     else:
         today_data = weekly_schedule[weekday_name]
         print(weekly_schedule)
         schedule = Schedule.Schedule(today_data[0])
         a_b_day = today_data[1]
-        return render_template('schedule.html', curr_day = today_data[0], starttime=str(seconds), today_data=today_data, weekly_schedule=weekly_schedule, schedule=schedule, a_b_day=a_b_day, is_logged_in=security.is_logged_in, is_admin=security.is_admin)
+        return render_template('schedule.html', SCHEDULE_NAME=today_data[0], starttime=str(seconds), today_data=today_data, weekly_schedule=weekly_schedule, schedule=schedule, a_b_day=a_b_day, is_logged_in=security.is_logged_in, is_admin=security.is_admin)
 
 @public_views.route('/about')
 def about():

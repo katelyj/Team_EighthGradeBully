@@ -90,8 +90,8 @@
 
 		    <div class="col-md-12 col-md-xs-3" align="center">
 		    <table>
-			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="3"><b>Weekly Schedule<br></b></th></tr>
-		    	<tr id="day0" style="display">
+			<tr id="weekly_header" style="cursor: pointer;"><th class="text-center" colspan="3"><b>Weekly Schedule<br></b></th></tr>
+			<tr id="day0" style="display">
 						<td align="center">Monday</td>
 						<td>
 						{% if weekly_schedule['mon'][0] == None %}
@@ -229,8 +229,8 @@
 
 		    <div class="col-md-6 col-md-offset-3" align="center">
 		    <table>
-			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="3"><b>Weekly Schedule<br></b></th></tr>
-		    	<tr id="day0" style="display">
+			<tr id="weekly_header" style="cursor: pointer;"><th class="text-center" colspan="3"><b>Weekly Schedule<br></b></th></tr>
+			<tr id="day0" style="display">
 						<td align="center">Monday</td>
 						<td>
 						{% if weekly_schedule['mon'][0] == None %}
@@ -338,7 +338,7 @@
 
 				 </table>
 
-		    
+
 
 
 		</div>
@@ -349,7 +349,7 @@
 
 		<div class="col-md-4" align="center">
 		    <table>
-			<tr id="weekly_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="3"><b>Weekly Schedule<br><img id="week_arrow" width="50px" src="/static/img/up.png"></b></th></tr>
+			<tr id="weekly_header" style="cursor: pointer;"><th class="text-center" colspan="3"><b>Weekly Schedule<br><img id="weekly_arrow" width="50px" src="/static/img/up.png"></b></th></tr>
 
 			{% if weekly_schedule != None %}
 				    <tr id="day0" style="display">
@@ -533,7 +533,7 @@
 			    </tr>
 			    <tr id="clock">
 				<td class="text-center" width="50%" align="center" colspan="2">
-				    <font size="100" face="Verdana"><b><label id="hours_minutes">2:35</label></b></font><font size="5" face="Verdana"><label id="seconds">:12</label></font>
+				    <font size="100" face="Verdana"><b><label id="hours_and_minutes">2:35</label></b></font><font size="5" face="Verdana"><label id="seconds">:12</label></font>
 				</td>
 			    </tr>
 			</table>
@@ -553,7 +553,7 @@
 
 		{% endif %}
 
-		
+
 
 
 
@@ -562,7 +562,7 @@
 
 		<div class="col-md-4" align="center">
 		    <table>
-			<tr id="schedule_header" style="cursor: pointer;" class="shown"><th class="text-center" colspan="2"><b>
+			<tr id="schedule_header" style="cursor: pointer;"><th class="text-center" colspan="2"><b>
 			    {% if is_logged_in() %}
 				{{ "{0}'s {1}".format(session.get("username"), schedule.schedule_name) }} Schedule
 				<br><img id="daily_arrow" width="50px" src="/static/img/up.png">
@@ -651,7 +651,7 @@
     </header>
     <script>
      var SERVER_START_TIME = {{starttime}};
-     var CURR_DAY = '{{curr_day}}';
+     var SCHEDULE_NAME = '{{SCHEDULE_NAME}}';
     </script>
     <script src="/static/js/clock.js"></script>
 {% endblock %}

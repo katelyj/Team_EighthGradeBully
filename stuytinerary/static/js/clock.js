@@ -1,197 +1,225 @@
 var CLIENT_START_TIME;
+var NUMBER_OF_WEEKDAYS = 5;
 var HOURS_IN_DAY = 24;
 var SECONDS_IN_HOUR = 3600;
 var SECONDS_IN_MINUTE = 60;
 
-var current_period = '';
-var schedule_data = '';
 var periods_data = new Array();
 
-var getScheduleData = function(){
-    schedule_data = '';
-    $.ajax({
-	url: '/schedule_jsonify/' + CURR_DAY,
-	dataType: 'json',
-	async: false,
-	success: function(data){
-	    schedule_data = data;
-	}
-    });
+async function getScheduleData(){
+    var url = '/schedule_jsonify/' + SCHEDULE_NAME;
+    const fetch_response = await fetch(url);
+    var schedule_data = await fetch_response.text();
     return schedule_data;
 };
 
-var inititalizeSchedule = function(){
-    schedule_data = getScheduleData();
+async function inititalizeSchedule(){
+    var schedule_data = await getScheduleData();
     var schedule_data_list = schedule_data.split('~');
     for(var i = 0; i < schedule_data_list.length; i++){
+	// periods_data[i] = [period_start_time, period_end_time]
 	periods_data[i] = schedule_data_list[i].split('|');
 	periods_data[i][1] = parseInt(periods_data[i][1]);
 	periods_data[i][2] = parseInt(periods_data[i][2]);
     }
-    console.log(periods_data);
-    CLIENT_START_TIME = clientSeconds();
-    tick();
+    var daily_header = document.getElementById('schedule_header');
+    daily_header.addEventListener('click', updateScheduleHeaderInterface);
+
+    var weekly_header = document.getElementById('weekly_header');
+    weekly_header.addEventListener('click', updateWeeklyHeaderInterface);
+    CLIENT_START_TIME = getTotalSecondsOnClientSide();
+    updateTime();
 };
 
-var clientSeconds = function(){
+function getTotalSecondsOnClientSide(){
     var date = new Date();
     return date.getHours() * SECONDS_IN_HOUR + date.getMinutes() * SECONDS_IN_MINUTE + date.getSeconds();
 };
 
-var secondsNow = function(){
-    var seconds = SERVER_START_TIME + clientSeconds() - CLIENT_START_TIME;
+function getTotalSecondsFromCurrentTime(){
+    var seconds = SERVER_START_TIME + getTotalSecondsOnClientSide() - CLIENT_START_TIME;
     seconds %= (HOURS_IN_DAY * SECONDS_IN_HOUR);
     return seconds;
 };
 
-var secondsToMinutesHours = function(total_seconds){
+/*
+ * Defaults to use the current time
+ *
+ * Returns an array in the format: [hours, minutes, seconds]
+ */
+function getTimeFromTotalSeconds(total_seconds=getTotalSecondsFromCurrentTime()){
     var hours = Math.floor(total_seconds / SECONDS_IN_HOUR);
     total_seconds -= hours * SECONDS_IN_HOUR;
     var minutes = Math.floor(total_seconds / SECONDS_IN_MINUTE);
+    var seconds = total_seconds - (minutes * SECONDS_IN_MINUTE);
 
     if (hours == 0){
 	hours = 12;
     }else if (hours > 12){
 	hours -= 12;
     }
-    if (minutes < 10){
-	return hours + ':0' + minutes;
-    }else{
-	return hours + ':' + minutes;
-    }
+
+    return [hours, minutes, seconds];
 };
 
-var displaySeconds = function(){
-    var seconds = secondsNow() % 60;
+function getSecondsInDisplayFormat(){
+    var current_time = getTotalSecondsFromCurrentTime();
+    var [hours, minutes, seconds] = getTimeFromTotalSeconds(current_time);
+
+    var display_format;
     if (seconds < 10){
-	return ':0' + seconds;
+	display_format = ':0' + seconds;
     }else{
-	return ':' + seconds;
+	display_format = ':' + seconds;
     }
+    return display_format;
 };
 
-var displayHoursMinutes = function(){
-    var current_time = secondsNow();
-    return secondsToMinutesHours(current_time);
-};
+function getHoursAndMinutesInDisplayFormat(){
+    var [hours, minutes, seconds] = getTimeFromTotalSeconds();
 
-var tick = function(){
-    var hours_now = Math.floor(secondsNow() / SECONDS_IN_HOUR);
-    var time_suffix = " AM";
-    if (hours_now > 12){
-	time_suffix = " PM";
+    var display_format;
+    if (minutes < 10){
+	display_format = hours + ':0' + minutes;
+    }else{
+	display_format = hours + ':' + minutes;
     }
-    document.all['hours_minutes'].innerHTML = displayHoursMinutes();
-    document.all['seconds'].innerHTML = displaySeconds();
-    changePeriods();
-    setTimeout('tick()', 1000);
+    return display_format;
 };
 
-var changePeriods = function(){
-    var current_time = secondsNow();
+function updateTime(){
+    document.getElementById('hours_and_minutes').innerHTML = getHoursAndMinutesInDisplayFormat();
+    document.getElementById('seconds').innerHTML = getSecondsInDisplayFormat();
+    updateInterface();
+    setTimeout('updateTime()', 1000);
+};
+
+/*
+ * start_time, end_time, and time should be in seconds
+ *
+ * time defaults to current_time
+ */
+function time_in_range_inclusive(start_time, end_time, time=getTotalSecondsFromCurrentTime()){
+    return start_time <= time && time <= end_time;
+};
+
+/*
+ * start_time, end_time, and time should be in seconds
+ *
+ * time defaults to current_time
+ */
+function time_in_range_exclusive(start_time, end_time, time=getTotalSecondsFromCurrentTime()){
+    return start_time < time && time < end_time;
+};
+
+/*
+ * start_time_id and end_time_id are the period_id(s) for start_time and end_time respectively
+ * start_time_index and end_time_index specify which of the time pair you want
+ */
+function changeStartTimeAndEndTime(start_time_id, start_time_index, end_time_id, end_time_index){
+    var period_table_data_element = document.getElementById(start_time_id).getElementsByTagName('td')[1];
+    var period_times = period_table_data_element.innerText.split('-');
+    document.getElementById('start_time').innerHTML = period_times[start_time_index].trim();
+
+    if (start_time_id != end_time_id){
+	period_table_data_element = document.getElementById(end_time_id).getElementsByTagName('td')[1];
+	period_times = period_table_data_element.innerText.split('-');
+    }
+    document.getElementById('end_time').innerHTML = period_times[end_time_index].trim();
+};
+
+function updateScheduleInterface(current_time_in_seconds){
+    var FOUND_PERIOD_RANGE = false;
 
     for(var index = 0; index < periods_data.length; index++){
 	var period_id = 'period' + index;
-	var period_start_time = periods_data[index][1];
-	var period_end_time = periods_data[index][2];
 
-	if (period_start_time <= current_time && current_time <= period_end_time){
-	    document.all['PeriodName'].innerHTML = periods_data[index][0];
-	    document.all[period_id].className = 'active';
+	if (FOUND_PERIOD_RANGE){
+	    document.getElementById(period_id).className = 'inactive';
+	    continue;
+	}
 
-	    var minutes_into = Math.floor((current_time - period_start_time) / SECONDS_IN_MINUTE);
-	    var minutes_left = ((period_end_time - period_start_time) / SECONDS_IN_MINUTE) - minutes_into;
+	var [period_name, period_start_time, period_end_time] = periods_data[index];
+	if (time_in_range_inclusive(period_start_time, period_end_time, current_time_in_seconds)){
+	    FOUND_PERIOD_RANGE = true;
 
-	    var period_table_data_element = document.all[period_id].getElementsByTagName('td')[1];
-	    var period_times = period_table_data_element.innerText.split('-');
-	    document.all['start_time'].innerHTML = period_times[0].trim();
-	    document.all['end_time'].innerHTML = period_times[1].trim();
+	    changeStartTimeAndEndTime(period_id, 0, period_id, 1);
 
-	    var period_name = periods_data[index][0];
-	    console.log(period_name)
-	    if (period_name == 'Before school' || period_name == 'After school'){
-		document.getElementById('start_end').style.display='none';
-		document.getElementById('timer_row').style.display='none';
-		document.getElementById('clock').style.borderColor='black';
-	    }else{
-		document.getElementById('clock').style.borderColor='';
-		document.getElementById('start_end').style.display='';
-		document.getElementById('timer_row').style.display='';
-	    }
+	    document.getElementById('PeriodName').innerHTML = period_name;
+	    document.getElementById(period_id).className = 'active';
+	}else if (index > 0 && time_in_range_exclusive(periods_data[index - 1][2], periods_data[index][1], current_time_in_seconds)){
+	    FOUND_PERIOD_RANGE = true;
+	    period_start_time = periods_data[index - 1][2];
+	    period_end_time = periods_data[index][1];
 
-	}else if(index > 0 && periods_data[index - 1][2] < current_time && current_time < periods_data[index][1]){
-	    document.all[period_id].className = 'active';
-	    var period_table_data_element = document.all[period_id].getElementsByTagName('td')[1];
-	    var period_times = period_table_data_element.innerText.split('-');
-	    document.all['end_time'].innerHTML = period_times[0].trim();
-	    document.all['PeriodName'].innerHTML = 'Before ' + periods_data[index][0];
+	    var previous_period_id = 'period' + (index - 1);
+	    changeStartTimeAndEndTime(previous_period_id, 1, period_id, 0);
 
-	    period_id = 'period' + (index - 1);
-	    document.all[period_id].className = 'active';
-	    var period_table_data_element = document.all[period_id].getElementsByTagName('td')[1];
-	    var period_times = period_table_data_element.innerText.split('-');
-	    document.all['start_time'].innerHTML = period_times[1].trim();
-
-	    var period_start_time = periods_data[index - 1][2];
-	    var period_end_time = periods_data[index][1];
-
-	    var minutes_into = Math.floor((current_time - period_start_time) / SECONDS_IN_MINUTE);
-	    var minutes_left = ((period_end_time - period_start_time) / SECONDS_IN_MINUTE) - minutes_into;
-	}else{
-	    document.all[period_id].className = 'inactive';
+	    document.getElementById('PeriodName').innerHTML = 'Before ' + period_name;
+	    document.getElementById(period_id).className = 'active';
+	    document.getElementById(previous_period_id).className = 'active';
 	}
     }
+    return [period_name, period_start_time, period_end_time];
+}
 
-    document.all['minutes_into'].innerHTML = minutes_into;
-    document.all['minutes_left'].innerHTML = minutes_left;
+function updateInterface(){
+    var current_time_in_seconds = getTotalSecondsFromCurrentTime();
+
+    var current_period_data = updateScheduleInterface(current_time_in_seconds);
+    var [period_name, period_start_time, period_end_time] = current_period_data;
+
+    var STYLE_ATTRIBUTES = ['', '', ''];
+    if (period_name == 'Before school' || period_name == 'After school'){
+	STYLE_ATTRIBUTES = ['none', 'none', 'black'];
+    }
+    document.getElementById('start_end').style.display = STYLE_ATTRIBUTES[0];
+    document.getElementById('timer_row').style.display = STYLE_ATTRIBUTES[1];
+    document.getElementById('clock').style.borderColor = STYLE_ATTRIBUTES[2];
+
+    var minutes_into = Math.floor((current_time_in_seconds - period_start_time) / SECONDS_IN_MINUTE);
+    var minutes_left = ((period_end_time - period_start_time) / SECONDS_IN_MINUTE) - minutes_into;
+
+    document.getElementById('minutes_into').innerHTML = minutes_into;
+    document.getElementById('minutes_left').innerHTML = minutes_left;
 };
 
-var schedule_header = document.getElementById('schedule_header');
-schedule_header.addEventListener("click", function(){
-	var arrow_image = document.getElementById('daily_arrow');
-    var schedule_header_class_attribute = schedule_header.getAttribute('class');
-    if (schedule_header_class_attribute == "notshown"){
-		schedule_header.className = "shown";
-		arrow_image.setAttribute("src", "/static/img/up.png");
-		for (var index = 0; index < periods_data.length; index++){
-		    var period_id = 'period' + index;
-		    var period_row = document.getElementById(period_id);
-		    period_row.style.display = '';
-		}
-	}
-    else {
-	schedule_header.className = "notshown";
-	arrow_image.setAttribute("src", "/static/img/down.png");
-	for (var index = 0; index < periods_data.length; index++){
-	    var period_id = 'period' + index;
-	    var period_row = document.getElementById(period_id);
-	    period_row.style.display = 'none';
-	}
+function updatePeriodStyle(style_name){
+    for (var index = 0; index < periods_data.length; index++){
+	var period_id = 'period' + index;
+	var period_row = document.getElementById(period_id);
+	period_row.style.display = style_name;
     }
-});
+};
 
-var weekly_header = document.getElementById('weekly_header');
-weekly_header.addEventListener("click", function(){
-	var arrow_image = document.getElementById('week_arrow');
-    var weekly_header_class_attribute = weekly_header.getAttribute('class');
-    if (weekly_header_class_attribute == "notshown"){
-		weekly_header.className = "shown";
-		arrow_image.setAttribute("src", "/static/img/up.png");
-		for (var index = 0; index < 5; index++){
-		    var period_id = 'day' + index;
-		    var period_row = document.getElementById(period_id);
-		    period_row.style.display = '';
-		}
-	}
-    else {
-	weekly_header.className = "notshown";
-	arrow_image.setAttribute("src", "/static/img/down.png");
-	for (var index = 0; index < 5; index++){
-	    var period_id = 'day' + index;
-	    var period_row = document.getElementById(period_id);
-	    period_row.style.display = 'none';
-	}
+function updateScheduleHeaderInterface(){
+    var arrow_element = document.getElementById('daily_arrow');
+    if (arrow_element.src.endsWith('down.png')){
+	arrow_element.setAttribute('src', '/static/img/up.png');
+	updatePeriodStyle('');
+    }else{
+	arrow_element.setAttribute('src', '/static/img/down.png');
+	updatePeriodStyle('none');
     }
-});
+};
+
+function updateDayStyle(style_name){
+    for (var index = 0; index < NUMBER_OF_WEEKDAYS; index++){
+	var day_id = 'day' + index;
+	var day_row = document.getElementById(day_id);
+	day_row.style.display = style_name;
+    }
+}
+
+function updateWeeklyHeaderInterface(){
+    var arrow_element = document.getElementById('weekly_arrow');
+    if (arrow_element.src.endsWith('down.png')){
+	arrow_element.setAttribute('src', '/static/img/up.png');
+	updateDayStyle('');
+    }else{
+	arrow_element.setAttribute('src', '/static/img/down.png');
+	updateDayStyle('none');
+    }
+}
 
 inititalizeSchedule();
