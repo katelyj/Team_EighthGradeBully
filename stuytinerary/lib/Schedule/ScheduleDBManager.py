@@ -1,29 +1,35 @@
-from collections import OrderedDict
-from pymongo import MongoClient
-
 import os
+import pymongo
+from collections import OrderedDict
 
-class ScheduleDBManager:
 
-    DIR_NAME = os.path.dirname(__file__)
+class ScheduleDBManager(object):
 
-    def __init__(self):
-        self.client = MongoClient()
-        self.db = self.client['schedule']
-        if not self.db.schedules.count():
-            POPULATE_SCHEDULE_DATABASE_PATH = os.path.join(ScheduleDBManager.DIR_NAME, '../../dev_utils/populate_schedule_database.py')
-            os.system('python {program_name}'.format(program_name=POPULATE_SCHEDULE_DATABASE_PATH))
-            print 'Populated the database'
+    def __init__(self, collection_name):
+        self.client = pymongo.MongoClient()
+
+        self.db = self.client['stuytinerary_schedules']
+        self.collection = eval('self.db.{collection_name}'.format(collection_name=collection_name))
+        self.db_size = self.collection.count()
+
+    def get_size(self):
+        return self.collection.count()
 
     def add_schedule(self, schedule_name, data):
-        self.db.schedules.insert_one({
+        self.collection.insert_one({
             'schedule_name': schedule_name,
             'data': str(data)
         })
         return True
 
+    def remove_schedule(self, schedule_name):
+        self.collection.delete_one({
+            'schedule_name': schedule_name
+        })
+        return True
+
     def get_schedule(self, schedule_name):
-        result = self.db.schedules.find_one({
+        result = self.collection.find_one({
             'schedule_name': schedule_name
         })
         if result:
@@ -32,6 +38,6 @@ class ScheduleDBManager:
             return False
 
     def drop_schedules(self):
-        self.client.drop_database('schedule')
-        self.db = self.client['schedule']
+        self.client.drop_database('stuytinerary_schedules')
+        self.db = self.client['stuytinerary_schedules']
         return True, 'Dropped all schedules!'

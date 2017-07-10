@@ -1,6 +1,6 @@
 import datetime
 
-import ScheduleDBManager
+import SchoolScheduleDBManager
 
 def convert_to_datetime(period_time):
     period_time_in_datetime_format = datetime.datetime.strptime(period_time, '%I:%M %p')
@@ -11,7 +11,8 @@ def in_range(time, period_start_time, period_end_time):
 
 def seconds_since_midnight(period_time):
     period_time_in_datetime_format = convert_to_datetime(period_time)
-    timedelta = datetime.datetime.combine(datetime.datetime.min, period_time_in_datetime_format.time()) - datetime.datetime.min
+    timedelta = datetime.datetime.combine(datetime.datetime.min,
+                                          period_time_in_datetime_format.time()) - datetime.datetime.min
     return int(timedelta.total_seconds())
 
 class Schedule:
@@ -42,7 +43,7 @@ class Schedule:
         '''
         Retrieve the schedule for the particular instance of Schedule
         '''
-        schedule_db_manager = ScheduleDBManager.ScheduleDBManager()
+        schedule_db_manager = SchoolScheduleDBManager.SchoolScheduleDBManager()
         schedule = schedule_db_manager.get_schedule(self.schedule_name)
         self.schedule = schedule
 

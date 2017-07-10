@@ -1,42 +1,50 @@
-from datetime import datetime, timedelta
-from flask import Blueprint, render_template, session, url_for, redirect, request, flash, get_flashed_messages
+import datetime
+import flask
+import os
+import sys
 
-from lib.Admin import WeeklyScheduleDBManager
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../'))
+
 from lib.security import AuthManager, security
-from lib.Schedule import Schedule
+from lib.Schedule import Schedule, WeeklyScheduleDBManager
 
-admin_views = Blueprint('admin_views', __name__)
+admin_views = flask.Blueprint('admin_views', __name__)
 
 @admin_views.route('/admin/', methods=['GET'])
 @security.login_required(admin_required=True)
-def admin():
-    today_date = datetime.today().date()
-    date = (today_date - timedelta(days=today_date.weekday()) - timedelta(days=1)).strftime('%m:%d:%y')
+def admin_homepage():
+    TODAY_DATE = datetime.datetime.today().date()
+    FIRST_DAY_OF_WEEK = (
+        TODAY_DATE - datetime.timedelta(days=TODAY_DATE.weekday()) - datetime.timedelta(days=0)
+    ).strftime('%m:%d:%y')
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
-
-    weekly_schedule = weekly_schedule_db_manager.retrieve_weekly_schedule(date)
-
-    return render_template('admin.html', weekly_schedule=weekly_schedule, is_logged_in=security.is_logged_in, is_admin=security.is_admin)
+    weekly_schedule = weekly_schedule_db_manager.get_schedule(FIRST_DAY_OF_WEEK)
+    return flask.render_template('admin.html', weekly_schedule=weekly_schedule, is_logged_in=security.logged_in,
+                                 is_admin=security.is_admin)
 
 @admin_views.route('/save/', methods=['POST'])
 @security.login_required(admin_required=True)
-def save():
-    DAYS = ['mon', 'tues', 'wed', 'thurs', 'fri']
-    today_date = datetime.today().date()
-    date = (today_date - timedelta(days=today_date.weekday()) - timedelta(days=1)).strftime('%m:%d:%y')
-    weekly_schedule_data = {}
+def save_weekly_schedule():
+    DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    TODAY_DATE = datetime.datetime.today().date()
+    FIRST_DAY_OF_WEEK = (
+        TODAY_DATE - datetime.timedelta(days=TODAY_DATE.weekday()) - datetime.timedelta(days=0)
+    ).strftime('%m:%d:%y')
+
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
+    weekly_schedule_data = {'Sunday': ['No School', 'No School'],
+                            'Saturday': ['No School', 'No School']}
 
     for day in DAYS:
-        a_b_day = request.form.get('day_{0}'.format(day))
-        schedule_type = request.form.get('schedule_{0}'.format(day))
-        weekly_schedule_data[day] = [schedule_type, a_b_day]
+        day_type = flask.request.form.get('{0}_day_type'.format(day))
+        schedule_type = flask.request.form.get('{0}_schedule_type'.format(day)) or 'No School'
+        weekly_schedule_data[day] = [schedule_type, day_type]
 
-    operation = request.form.get('new') or request.form.get('replace')
-    if operation == 'replace':
-        flash("Schedule Replaced!")
-        weekly_schedule_db_manager.modify_weekly_schedule(date, weekly_schedule_data)
-    elif operation == 'save':
-        flash("Schedule Saved!")
-        weekly_schedule_db_manager.insert_weekly_schedule(date, weekly_schedule_data)
-    return redirect(url_for('admin_views.admin'))
+    operation = flask.request.form.get('request_type')
+    if operation == 'new':
+        flask.flash('Schedule Saved!')
+        weekly_schedule_db_manager.add_schedule(FIRST_DAY_OF_WEEK, weekly_schedule_data)
+    elif operation == 'update':
+        flask.flash('Schedule Updated!')
+        weekly_schedule_db_manager.update_schedule(FIRST_DAY_OF_WEEK, weekly_schedule_data)
+    return flask.redirect(flask.url_for('admin_views.admin_homepage'))

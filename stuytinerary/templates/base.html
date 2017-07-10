@@ -1,182 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <title>{% block title %}Stuytinerary{% endblock %}</title>
+        <title>
+            {% block title %}
+                Stuytinerary
+            {% endblock %}
+        </title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/custom.css" rel="stylesheet">
+        <!-- Bootstrap Core CSS -->
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/stylish-portfolio.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="/static/css/stylish-portfolio.css" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="/static/css/custom.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+        <!-- Custom Fonts -->
+            <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+            <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
 
-    <!-- jQuery -->
-    <script src="/static/js/jquery.js"></script>
+            <!-- jQuery -->
+            <script src="/static/js/jquery.js"></script>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+            <![endif]-->
 
-</head>
+    </head>
 
-<body onload="Init()">
+    <body>
+        <!-- Navigation -->
+        <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
 
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-	<ul class="sidebar-nav">
-	    <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-	    <li class="sidebar-brand">
-		<a href="/" onclick=$("#menu-close").click();><h3><b>Stuytinerary</b></h3></a>
-	    </li>
-        <hr>
-	    <li>
-		<a href="/" onclick=$("#menu-close").click();>Schedule</a>
-	    </li>
-	    <li>
-		{% block loginbutton %}<a href="/login" onclick=$("#menu-close").click();>Login</a>{% endblock %}
-	    </li>
-	    <li>
-		{% block registerbutton %}<a href="/register" onclick=$("#menu-close").click();>Register</a>{% endblock %}
-	    </li>
-	    <li>
-		<a href="/about" onclick=$("#menu-close").click();>About</a>
-	    </li>
-        <li style="margin: 25px 0;">
-        </li>
-        <li>
-        {% block adminbutton %}{% endblock %}
-        </li>
-	</ul>
-    </nav>
+        <nav id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+                    <i class="fa fa-times"></i>
+                </a>
+                <li class="sidebar-brand">
+                    <a href="/" onclick=$("#menu-close").click();>
+                        <h3><b>Stuytinerary</b></h3>
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a href="/" onclick=$("#menu-close").click();>Schedule</a>
+                </li>
+                <li>
+                    {% block loginbutton %}
+                        <a href="/login" onclick=$("#menu-close").click();>Login</a>
+                    {% endblock %}
+                </li>
+                <li>
+                    {% block registerbutton %}
+                        <a href="/register" onclick=$("#menu-close").click();>Register</a>
+                    {% endblock %}
+                </li>
+                <li>
+                    <a href="/about" onclick=$("#menu-close").click();>About</a>
+                </li>
+                <li style="margin: 25px 0;">
+                </li>
+                <li>
+                    {% block adminbutton %}{% endblock %}
+                </li>
+            </ul>
+        </nav>
 
-    
+        {% block content %}
+        {% endblock %}
 
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/static/js/bootstrap.min.js"></script>
 
-    {% block content %}
-    {% endblock %}
+        <!-- Bootstrap Notify Javascript -->
+        <script src="/static/js/bootstrap-notify.min.js"></script>
 
-    <!-- Footer -->
-    <footer>
-	<div class="container">
-	    <div class="row">
-		<div class="col-lg-10 col-lg-offset-1 text-center">
-		    <h4><strong>Stuytinerary</strong>
-		    </h4>
-		    <p>345 Chambers Street
-			<br>New York, NY 10282</p>
-		    <ul class="list-unstyled">
-			<li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:name@example.com">pbrooks@micromind.com</a>
-			</li>
-		    </ul>
-		    <br>
-		    <hr class="small">
-		    <p class="text-muted">Created by Winston Venderbush, Kate Johnston, Maddie Ostergaard, and Patrick Chan</p>
-		    <p class="text-muted">With help from Peter Brooks and JonAlf Dyrland-Weaver</p>
-		</div>
-	    </div>
-	</div>
-	<a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
-    </footer>
+        <!-- Custom Theme JavaScript -->
+        <script>
+         // Closes the sidebar menu
+         $("#menu-close").click(function(e){
+           e.preventDefault();
+           $("#sidebar-wrapper").toggleClass("active");
+         });
+         // Opens the sidebar menu
+         $("#menu-toggle").click(function(e){
+           e.preventDefault();
+           $("#sidebar-wrapper").toggleClass("active");
+         });
+         // Scrolls to the selected menu item on the page
+         $(function() {
+           $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function(){
+             if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname){
+               var target = $(this.hash);
+               target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+               if (target.length){
+                 $('html,body').animate({
+                   scrollTop: target.offset().top
+                 }, 1000);
+                 return false;
+               }
+             }
+           });
+         });
+         //#to-top button appears after scrolling
+         var fixed = false;
+         $(document).scroll(function(){
+           if ($(this).scrollTop() > 250){
+             if (!fixed) {
+               fixed = true;
+               $('#to-top').show("slow", function(){
+                 $('#to-top').css({
+                   position: 'fixed',
+                   display: 'block'
+                 });
+               });
+             }
+           } else{
+             if (fixed){
+               fixed = false;
+               $('#to-top').hide("slow", function(){
+                 $('#to-top').css({
+                   display: 'none'
+                 });
+               });
+             }
+           }
+         });
+         // Disable Google Maps scrolling
+         // See http://stackoverflow.com/a/25904582/1607849
+         // Disable scroll zooming and bind back the click event
+         var onMapMouseleaveHandler = function(event){
+           var that = $(this);
+           that.on('click', onMapClickHandler);
+           that.off('mouseleave', onMapMouseleaveHandler);
+           that.find('iframe').css("pointer-events", "none");
+         }
+         var onMapClickHandler = function(event){
+           var that = $(this);
+           // Disable the click handler until the user leaves the map area
+           that.off('click', onMapClickHandler);
+           // Enable scrolling zoom
+           that.find('iframe').css("pointer-events", "auto");
+           // Handle the mouse leave event
+           that.on('mouseleave', onMapMouseleaveHandler);
+         }
+         // Enable map zooming with mouse scroll when the user clicks the map
+         $('.map').on('click', onMapClickHandler);
+        </script>
 
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h4>
+                        <strong>Stuytinerary</strong>
+                    </h4>
+                    <p>
+                        345 Chambers Street
+                        <br>
+                        New York, NY 10282
+                    </p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="mailto:pbrooks@micromind.com">pbrooks@micromind.com</a>
+                        </li>
+                    </ul>
+                    <hr class="small">
+                    <p class="text-muted">
+                        Created by Winston Venderbush, Kate Johnston, Maddie Ostergaard, and Patrick Chan
+                        <br>
+                        Further expanded upon by PChan
+                    </p>
+                    <p class="text-muted">
+                        With help from Peter Brooks and JonAlf Dyrland-Weaver
+                    </p>
+                </div>
+            </div>
+            <div class="container-fluid">
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/static/js/bootstrap.min.js"></script>
+            </div>
+            <a id="to-top" href="#top" class="btn btn-dark btn-lg">
+                <i class="fa fa-chevron-up fa-fw fa-1x"></i>
+            </a>
+        </footer>
 
-    <!-- Bootstrap Notify Javascript -->
-    <script src="/static/js/bootstrap-notify.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script>
-     // Closes the sidebar menu
-     $("#menu-close").click(function(e) {
-       e.preventDefault();
-       $("#sidebar-wrapper").toggleClass("active");
-     });
-     // Opens the sidebar menu
-     $("#menu-toggle").click(function(e) {
-       e.preventDefault();
-       $("#sidebar-wrapper").toggleClass("active");
-     });
-     // Scrolls to the selected menu item on the page
-     $(function() {
-       $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function() {
-	 if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-	   var target = $(this.hash);
-	   target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-	   if (target.length) {
-	     $('html,body').animate({
-	       scrollTop: target.offset().top
-	     }, 1000);
-	     return false;
-	   }
-	 }
-       });
-     });
-     //#to-top button appears after scrolling
-     var fixed = false;
-     $(document).scroll(function() {
-       if ($(this).scrollTop() > 250) {
-	 if (!fixed) {
-	   fixed = true;
-	   // $('#to-top').css({position:'fixed', display:'block'});
-	   $('#to-top').show("slow", function() {
-	     $('#to-top').css({
-	       position: 'fixed',
-	       display: 'block'
-	     });
-	   });
-	 }
-       } else {
-	 if (fixed) {
-	   fixed = false;
-	   $('#to-top').hide("slow", function() {
-	     $('#to-top').css({
-	       display: 'none'
-	     });
-	   });
-	 }
-       }
-     });
-     // Disable Google Maps scrolling
-     // See http://stackoverflow.com/a/25904582/1607849
-     // Disable scroll zooming and bind back the click event
-     var onMapMouseleaveHandler = function(event) {
-       var that = $(this);
-       that.on('click', onMapClickHandler);
-       that.off('mouseleave', onMapMouseleaveHandler);
-       that.find('iframe').css("pointer-events", "none");
-     }
-     var onMapClickHandler = function(event) {
-       var that = $(this);
-       // Disable the click handler until the user leaves the map area
-       that.off('click', onMapClickHandler);
-       // Enable scrolling zoom
-       that.find('iframe').css("pointer-events", "auto");
-       // Handle the mouse leave event
-       that.on('mouseleave', onMapMouseleaveHandler);
-     }
-     // Enable map zooming with mouse scroll when the user clicks the map
-     $('.map').on('click', onMapClickHandler);
-    </script>
-
-</body>
+    </body>
 
 </html>

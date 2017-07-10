@@ -16,7 +16,7 @@ def nocache(view):
 
 def redirect_back():
     destination = session.get('next')
-    return redirect(destination) if destination else redirect(url_for('public_views.home'))
+    return redirect(destination) if destination else redirect(url_for('public_views.home_page'))
 
 def secure_hash_password(password):
     return argon2.using(rounds=12).hash(password)

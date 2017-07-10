@@ -4,7 +4,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../'))
 from lib.security import AuthManager, security
-from lib.Schedule import Schedule, UserScheduleDBManager
+from lib.Schedule import Schedule#, UserScheduleDBManager
 
 settings_views = Blueprint('settings_views', __name__)
 
