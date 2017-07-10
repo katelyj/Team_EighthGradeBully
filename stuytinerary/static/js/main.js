@@ -39,18 +39,6 @@ function addTableRowForDailySchedule(daily_schedule_table, period_data, period_i
     cell_1.style.textAlign = "center";
 }
 
-function displayOrHideWeeklyScheduleTable(){
-    var today = new Date();
-    var weekly_schedule_table = document.getElementById("weekly_schedule");
-    if (today.getDay() != 0 && today.getDay() != 6){
-        weekly_schedule_table.style.display = "table";
-        var weekly_schedule_header = document.getElementById("weekly_header");
-        weekly_schedule_header.addEventListener("click", updateWeeklyHeaderInterface);
-    }else{
-        weekly_schedule_table.style.display = "none";
-    }
-}
-
 async function inititalizeSchedule(){
     displayOrHideWeeklyScheduleTable();
     CLIENT_START_TIME = getTotalSecondsOnClientSide();

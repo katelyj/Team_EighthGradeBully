@@ -169,6 +169,34 @@ function displayClockInterface(){
     setTimeout("displayClockInterface()", 1000);
 }
 
+function displayOrHideWeeklyScheduleTable(){
+    var today = new Date();
+    var weekly_schedule_table = document.getElementById("weekly_schedule");
+    if (today.getDay() != 0 && today.getDay() != 6){
+        weekly_schedule_table.style.display = "table";
+        var weekly_schedule_header = document.getElementById("weekly_header");
+        weekly_schedule_header.addEventListener("click", updateWeeklyHeaderInterface);
+        updateWeeklyScheduleInterface();
+    }else{
+        weekly_schedule_table.style.display = "none";
+        if (today.getDay() == 6){
+            var weekly_schedule_yesterday = document.getElementById("day" + (today.getDay() - 2));
+            weekly_schedule_yesterday.className = '';
+        }
+    }
+    setTimeout("displayOrHideWeeklyScheduleTable()", 1000);
+}
+
+function updateWeeklyScheduleInterface(){
+    var today = new Date();
+    if (today.getDay() - 2 > 0){
+        var weekly_schedule_yesterday = document.getElementById("day" + (today.getDay() - 2));
+        weekly_schedule_yesterday.className = '';
+    }
+    var weekly_schedule_today = document.getElementById("day" + (today.getDay() - 1));
+    weekly_schedule_today.className = 'active';
+}
+
 function updatePeriodStyle(style_name){
     for (var index = 0; index < list_of_period_data.length; index++){
         var period_id = 'period' + index;
