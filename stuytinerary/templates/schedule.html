@@ -42,49 +42,70 @@
         <div id="spacer" class="col-xs-12 small-space">
         </div>
 
+
         <div class="col-xs-12 col-md-6 col-md-offset-3 container-fluid">
 
-            <div class="row-fluid">
-                <div class="col-md-4" align="center">
-                    <table id="weekly_schedule">
-                        <tr id="weekly_header" style="cursor: pointer;">
-                            <th class="text-center" colspan="3">
-                                Weekly Schedule
-                                <br>
-                                <img id="weekly_arrow" width="50px" src="/static/img/up.png">
-                            </th>
-                        </tr>
-                        {% set WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] %}
-                        {% for DAY in WEEKDAYS %}
-                            <tr id="day{{ loop.index0 }}">
-                                <td align="center"> {{ DAY }} </td>
-                                <td> {{ WEEKLY_SCHEDULE[DAY][0] }} </td>
-                                <td> {{ WEEKLY_SCHEDULE[DAY][1] }} </td>
+            {% if WEEKLY_SCHEDULE %}
+                <div class="row-fluid">
+                    <div class="col-md-4" align="center">
+                        <table id="weekly_schedule">
+                            <tr id="weekly_header" style="cursor: pointer;">
+                                <th class="text-center" colspan="3">
+                                    Weekly Schedule
+                                    <br>
+                                    <img id="weekly_arrow" width="50px" src="/static/img/up.png">
+                                </th>
                             </tr>
-                        {% endfor %}
-                    </table>
+                            {% set WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] %}
+                            {% for DAY in WEEKDAYS %}
+                                <tr id="day{{ loop.index0 }}">
+                                    <td align="center"> {{ DAY }} </td>
+                                    <td> {{ WEEKLY_SCHEDULE[DAY][0] }} </td>
+                                    <td> {{ WEEKLY_SCHEDULE[DAY][1] }} </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
-            </div>
-
-            <div id="spacer" class="col-xs-12 small-space">
-            </div>
-
-            <div class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedule-container">
 
                 <div id="spacer" class="col-xs-12 small-space">
                 </div>
 
-                <div class="row">
+            {% endif %}
+            <div class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedule-container">
 
-                    {{ show_day_type() }}
-                    <div class="col-xs-8 text-center">
-                        <h1>
-                            <b><label id="PeriodName"></label></b>
-                        </h1>
+                {% if WEEKLY_SCHEDULE %}
+                    <div id="spacer" class="col-xs-12 small-space">
                     </div>
-                    {{ show_day_type() }}
 
-                </div>
+                    <div class="row">
+
+                        {{ show_day_type() }}
+                        <div class="col-xs-8 text-center">
+                            <h1>
+                                <b><label id="PeriodName"></label></b>
+                            </h1>
+                        </div>
+                        {{ show_day_type() }}
+
+                    </div>
+
+                    <div id="spacer" class="col-xs-12 small-space">
+                    </div>
+                {% endif %}
+
+                {% if not WEEKLY_SCHEDULE %}
+                    <div class="row">
+                        <center>
+                            <h2>
+                                <b>Weekly Schedule Not Set!</b>
+                            </h2>
+                            <h4>
+                                <i>Please contact an Administrator</i>
+                            </h4>
+                        </center>
+                    </div>
+                {% endif%}
 
                 <div id="spacer" class="col-xs-12 small-space">
                 </div>

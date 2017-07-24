@@ -44,7 +44,7 @@ async function inititalizeSchedule(){
     CLIENT_START_TIME = getTotalSecondsOnClientSide();
 
     //SCHEDULE_NAME = "Regular";
-    if (SCHEDULE_NAME != "No School"){
+    if (SCHEDULE_NAME != "No School" && SCHEDULE_NAME != "None"){
         var schedule_data = await getScheduleData();
         var schedule_data_list = schedule_data.split('~');
 

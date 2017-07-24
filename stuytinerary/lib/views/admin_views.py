@@ -6,7 +6,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../'))
 
 from lib.security import AuthManager, security
-from lib.Schedule import Schedule, WeeklyScheduleDBManager
+from lib.Schedule import WeeklyScheduleDBManager
 
 admin_views = flask.Blueprint('admin_views', __name__)
 

@@ -172,16 +172,18 @@ function displayClockInterface(){
 function displayOrHideWeeklyScheduleTable(){
     var today = new Date();
     var weekly_schedule_table = document.getElementById("weekly_schedule");
-    if (today.getDay() != 0 && today.getDay() != 6){
-        weekly_schedule_table.style.display = "table";
-        var weekly_schedule_header = document.getElementById("weekly_header");
-        weekly_schedule_header.addEventListener("click", updateWeeklyHeaderInterface);
-        updateWeeklyScheduleInterface();
-    }else{
-        weekly_schedule_table.style.display = "none";
-        if (today.getDay() == 6){
-            var weekly_schedule_yesterday = document.getElementById("day" + (today.getDay() - 2));
-            weekly_schedule_yesterday.className = '';
+    if (!(weekly_schedule_table == null)){
+        if (today.getDay() != 0 && today.getDay() != 6){
+            weekly_schedule_table.style.display = "table";
+            var weekly_schedule_header = document.getElementById("weekly_header");
+            weekly_schedule_header.addEventListener("click", updateWeeklyHeaderInterface);
+            updateWeeklyScheduleInterface();
+        }else{
+            weekly_schedule_table.style.display = "none";
+            if (today.getDay() == 6){
+                var weekly_schedule_yesterday = document.getElementById("day" + (today.getDay() - 2));
+                weekly_schedule_yesterday.className = '';
+            }
         }
     }
     setTimeout("displayOrHideWeeklyScheduleTable()", 1000);
