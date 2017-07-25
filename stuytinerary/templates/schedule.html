@@ -14,8 +14,8 @@
     <script src="/static/js/clock.js"></script>
     <script src="/static/js/main.js" defer></script>
 
-    {% macro show_day_type() %}
-        <div class="col-xs-2">
+    {% macro show_day_type(align_type) %}
+        <div class="col-xs-2" align={{ align_type }}>
             {% if DAY_TYPE == "A Day" %}
                 <img width="50px" src="/static/img/a.png">
             {% elif DAY_TYPE == "B Day" %}
@@ -43,11 +43,11 @@
         </div>
 
 
-        <div class="col-xs-12 col-md-6 col-md-offset-3 container-fluid">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 container-fluid" align="center">
 
             {% if WEEKLY_SCHEDULE %}
                 <div class="row-fluid">
-                    <div class="col-md-4" align="center">
+                    <div class="col-md-4 col-md-offset-4" align="center">
                         <table id="weekly_schedule">
                             <tr id="weekly_header" style="cursor: pointer;">
                                 <th class="text-center" colspan="3">
@@ -72,7 +72,8 @@
                 </div>
 
             {% endif %}
-            <div class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedule-container">
+
+            <div class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedule-container" align="center">
 
                 {% if WEEKLY_SCHEDULE %}
                     <div id="spacer" class="col-xs-12 small-space">
@@ -80,13 +81,13 @@
 
                     <div class="row">
 
-                        {{ show_day_type() }}
-                        <div class="col-xs-8 text-center">
+                        {{ show_day_type("left") }}
+                        <div class="col-xs-8" align="center">
                             <h1>
                                 <b><label id="PeriodName"></label></b>
                             </h1>
                         </div>
-                        {{ show_day_type() }}
+                        {{ show_day_type("right") }}
 
                     </div>
 
@@ -110,7 +111,7 @@
                 <div id="spacer" class="col-xs-12 small-space">
                 </div>
 
-                <div class="col-md-6" align="center">
+                <div class="col-md-6 col-md-offset-3" align="center">
 
                     <table class="table-fill" border="1" cellspacing="3" cellpadding="10" width="100%">
                         <tr id="timer_row">
@@ -159,7 +160,7 @@
                 <div id="spacer" class="col-xs-12 small-space">
                 </div>
 
-                <div class="col-md-4" align="center">
+                <div class="col-md-4 col-md-offset-4" align="center">
                     <table id="daily_schedule"></table>
                 </div>
             </div>
