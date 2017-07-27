@@ -1,376 +1,153 @@
 {% extends "base.html" %}
 
-{% block title %}Admin Settings{% endblock %}
+{% block title %}
+    Admin Settings
+{% endblock %}
 
 
 {% block adminbutton %}
-{% if is_logged_in() %}
-{% if is_admin() %}
-
-<a href="/admin" onclick=$("#menu-close").click();>Admin Settings</a>
-
-{% endif %}
-{% endif %}
+    {% if is_logged_in() and is_admin() %}
+        <a href="/admin" onclick=$("#menu-close").click();>Admin Settings</a>
+    {% endif %}
 {% endblock %}
 
 
 {% block loginbutton %}
-{% if is_logged_in() %}
-
-<a href="/settings" onclick=$("#menu-close").click();>Settings</a>
-
-{% else %}
-
-<a href="/login" onclick=$("#menu-close").click();>Login</a>
-
-{% endif %}
+    {% if is_logged_in() %}
+        <a href="/settings" onclick=$("#menu-close").click();>Settings</a>
+    {% else %}
+        <a href="/login" onclick=$("#menu-close").click();>Login</a>
+    {% endif %}
 {% endblock %}
 
 
 {% block registerbutton %}
-{% if is_logged_in() %}
-
-<a href="/logout" onclick=$("#menu-close").click();>Logout</a>
-
-{% else %}
-
-<a href="/register" onclick=$("#menu-close").click();>Register</a>
-
-{% endif %}
+    {% if is_logged_in() %}
+        <a href="/logout" onclick=$("#menu-close").click();>Logout</a>
+    {% else %}
+        <a href="/register" onclick=$("#menu-close").click();>Register</a>
+    {% endif %}
 {% endblock %}
 
 
 {% block content %}
-<!-- Header -->
-<header id="top" class="header">
 
-  <div class="row-fluid">
-
-    <div id="spacer" class="col-md-12 sspacer">
-    </div>
-
-    <div class="col-md-12 text-vertical-center">
-      <h1>Stuytinerary</h1>
-      <h4>The Official Stuyvesant High School Schedule</h4>
-    </div>
-
-    <div id="spacer" class="col-md-12 mspacer">
-    </div>
-
-
-    <div class="col-md-12 text-vertical-center">
-
-      <div id="whitespace" class="col-md-3"></div>
-      <div id="schedule" class="col-md-12 container schedulecontainer">
-
-
-        <h2>Admin Settings</h2>
-        <div id="spacer" class="col-md-12 xsspacer">
-        </div>
-
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="col-xs-12 sspacer"></div>
-        <div class="generalcontainer col-md-6 col-md-offset-3 col-xs-12 col-sm-6 col-sm-offset-3 flashes"><h4><b><i>{% for message in messages %}{{ message }}{% endfor %}</i></b></h4></div>
-        <div class="col-xs-12 sspacer">
-        </div>
+    {% macro day_type_selection(DAY, DAY_TYPE) %}
+        {% if weekly_schedule and weekly_schedule[DAY][1] == DAY_TYPE %}
+            <input type="radio" name="{{ DAY }}_day_type" value="{{ DAY_TYPE }}" checked="checked">
+            {{ DAY_TYPE }}
+            <br>
+        {% else %}
+            <input type="radio" name="{{ DAY }}_day_type" value="{{ DAY_TYPE }}">
+            {{ DAY_TYPE }}
+            <br>
         {% endif %}
-        {% endwith %}
+    {% endmacro%}
 
-        <div id="spacer" class="col-md-12 xsspacer">
+    {% macro schedule_type_selection(DAY, SCHEDULE_TYPE) %}
+        {% if weekly_schedule and weekly_schedule[DAY][0] == SCHEDULE_TYPE %}
+            <input type="radio" name="{{ DAY }}_schedule_type" value="{{ SCHEDULE_TYPE }}" checked="checked">
+            {{ SCHEDULE_TYPE }} Schedule
+            <br>
+        {% else %}
+            <input type="radio" name="{{ DAY }}_schedule_type" value="{{ SCHEDULE_TYPE }}">
+            {{ SCHEDULE_TYPE }} Schedule
+            <br>
+        {% endif %}
+    {% endmacro %}
+
+    <div class="row-fluid">
+        <div class ="main-content">
+            <!-- Page Header -->
+            <div class="row-fluid">
+                <div id="spacer" class="col-md-12 small-space">
+                </div>
+
+                <div class="col-md-12 text-vertical-center">
+                    <h1>Stuytinerary</h1>
+                    <h4>The Official Stuyvesant High School Schedule</h4>
+                </div>
+
+                <div id="spacer" class="col-md-12 small-space">
+                </div>
+            </div>
+            <!-- Page Header Ends Here -->
+
+            <div id="spacer" class="col-md-12 small-space">
+            </div>
+
+            <div class="row-fluid schedule-container container-fluid">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" align="center">
+                    <h2>Admin Settings</h2>
+
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            <div class="col-md-12 small-space">
+                            </div>
+
+                            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 container-fluid">
+                                <h4>
+                                    <b><i>
+                                        {% for message in messages %}
+                                            {{ message }}
+                                        {% endfor %}
+                                    </i></b>
+                                </h4>
+                            </div>
+
+                            <div class="col-md-12 small-space">
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+
+                    <div class="row-fluid">
+                        <form action="/save/" method="POST">
+                            <input type="submit" class="btn btn-dark btn-lg" name="request_type" value="New Schedule">
+                            <input type="submit" class="btn btn-dark btn-lg" name="request_type" value="Update Schedule">
+
+                            <div class="col-md-12 small-space">
+                            </div>
+
+                            {% set WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] %}
+                            <table cellspacing="0" cellpadding="0">
+                                <tr>
+                                    {% for DAY in WEEKDAYS %}
+                                        <td>{{ DAY }}</td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    {% for DAY in WEEKDAYS %}
+                                        <td>
+                                            {{ day_type_selection(DAY, "A Day") }}
+                                            {{ day_type_selection(DAY, "B Day") }}
+                                            {{ day_type_selection(DAY, "No School") }}
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    {% for DAY in WEEKDAYS %}
+                                        <td>
+                                            {{ schedule_type_selection(DAY, "Regular") }}
+                                            {{ schedule_type_selection(DAY, "Homeroom") }}
+                                            {{ schedule_type_selection(DAY, "Special") }}
+                                        </td>
+                                    {% endfor%}
+                                </tr>
+                            </table>
+
+                            <div class="col-md-12 small-space">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 small-space">
+            </div>
+
         </div>
+    </div>
 
-
-        <div class="col-xs-12">
-        <form action = "/save/" id="adminform" method="POST">
-
-            <input type="submit" class="btn btn-dark btn-lg" name="request_type" value="update">
-            <input type="submit" class="btn btn-dark btn-lg" name="request_type" value="new">
-            <br><br>
-
-            <table class="admintable" cellspacing="0" cellpadding="0">
-                <tr>
-                    <td>Monday</td>
-                    <td>Tuesday</td>
-                    <td>Wednesday</td>
-                    <td>Thursday</td>
-                    <td>Friday</td>
-                </tr>
-                <tr>
-                    <td>
-                        {% if weekly_schedule and weekly_schedule['Monday'][1] == 'A Day' %}
-                            <input type="radio" name="Monday_day_type" value="A Day" checked="checked"> A<br>
-                        {% else %}
-                            <input type="radio" name="Monday_day_type" value="A Day" > A<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Monday'][1] == 'B Day' %}
-                            <input type="radio" name="Monday_day_type" value="B Day" checked="checked"> B<br>
-                        {% else %}
-                            <input type="radio" name="Monday_day_type" value="B Day"> B<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Monday'][1] == 'No School' %}
-                            <input id="Monday_day_type" type="radio" name="Monday_day_type" value="No School" checked="checked"> No School
-                        {% else %}
-                            <input id="Monday_day_type" type="radio" name="Monday_day_type" value="No School"> No School
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if weekly_schedule and weekly_schedule['Tuesday'][1] == 'A Day' %}
-                            <input type="radio" name="Tuesday_day_type" value="A Day" checked="checked"> A<br>
-                        {% else %}
-                            <input type="radio" name="Tuesday_day_type" value="A Day" > A<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Tuesday'][1] == 'B Day' %}
-                            <input type="radio" name="Tuesday_day_type" value="B Day" checked="checked"> B<br>
-                        {% else %}
-                            <input type="radio" name="Tuesday_day_type" value="B Day"> B<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Tuesday'][1] == 'No School' %}
-                            <input id="Tuesday_day_type" type="radio" name="Tuesday_day_type" value="No School" checked="checked"> No School
-                        {% else %}
-                            <input id="Tuesday_day_type" type="radio" name="Tuesday_day_type" value="No School"> No School
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if weekly_schedule and weekly_schedule['Wednesday'][1] == 'A Day' %}
-                            <input type="radio" name="Wednesday_day_type" value="A Day" checked="checked"> A<br>
-                        {% else %}
-                            <input type="radio" name="Wednesday_day_type" value="A Day" > A<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Wednesday'][1] == 'B Day' %}
-                            <input type="radio" name="Wednesday_day_type" value="B Day" checked="checked"> B<br>
-                        {% else %}
-                            <input type="radio" name="Wednesday_day_type" value="B Day"> B<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Wednesday'][1] == 'No School' %}
-                            <input id="Wednesday_day_type" type="radio" name="Wednesday_day_type" value="No School" checked="checked"> No School
-                        {% else %}
-                            <input id="Wednesday_day_type" type="radio" name="Wednesday_day_type" value="No School"> No School
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if weekly_schedule and weekly_schedule['Thursday'][1] == 'A Day' %}
-                            <input type="radio" name="Thursday_day_type" value="A Day" checked="checked"> A<br>
-                        {% else %}
-                            <input type="radio" name="Thursday_day_type" value="A Day" > A<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Thursday'][1] == 'B Day' %}
-                            <input type="radio" name="Thursday_day_type" value="B Day" checked="checked"> B<br>
-                        {% else %}
-                            <input type="radio" name="Thursday_day_type" value="B Day"> B<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Thursday'][1] == 'No School' %}
-                            <input id="Thursday_day_type" type="radio" name="Thursday_day_type" value="No School" checked="checked"> No School
-                        {% else %}
-                            <input id="Thursday_day_type" type="radio" name="Thursday_day_type" value="No School"> No School
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if weekly_schedule and weekly_schedule['Friday'][1] == 'A Day' %}
-                            <input type="radio" name="Friday_day_type" value="A Day" checked="checked"> A<br>
-                        {% else %}
-                            <input type="radio" name="Friday_day_type" value="A Day" > A<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Friday'][1] == 'B Day' %}
-                            <input type="radio" name="Friday_day_type" value="B Day" checked="checked"> B<br>
-                        {% else %}
-                            <input type="radio" name="Friday_day_type" value="B Day"> B<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Friday'][1] == 'No School' %}
-                            <input id="Friday_day_type" type="radio" name="Friday_day_type" value="No School" checked="checked"> No School
-                        {% else %}
-                            <input id="Friday_day_type" type="radio" name="Friday_day_type" value="No School"> No School
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <td id="sched_select_mon">
-                        {% if weekly_schedule and weekly_schedule['Monday'][0] == 'Regular' %}
-                            <input type="radio" name="Monday_schedule_type" value="Regular" checked="checked"> Regular Schedule<br>
-                        {% else %}
-                            <input type="radio" name="Monday_schedule_type" value="Regular"> Regular Schedule<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Monday'][0] == 'Homeroom' %}
-                            <input type="radio" name="Monday_schedule_type" value="Homeroom" checked="checked"> Homeroom<br>
-                        {% else %}
-                            <input type="radio" name="Monday_schedule_type" value="Homeroom"> Homeroom<br>
-                        {% endif %}
-                        <input type="radio" name="Monday_schedule_type" value="No School"> Special Schedule
-                    </td>
-                    <td id="sched_select_tues">
-                        {% if weekly_schedule and weekly_schedule['Tuesday'][0] == 'Regular' %}
-                            <input type="radio" name="Tuesday_schedule_type" value="Regular" checked="checked"> Regular Schedule<br>
-                        {% else %}
-                            <input type="radio" name="Tuesday_schedule_type" value="Regular"> Regular Schedule<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Tuesday'][0] == 'Homeroom' %}
-                            <input type="radio" name="Tuesday_schedule_type" value="Homeroom" checked="checked"> Homeroom<br>
-                        {% else %}
-                            <input type="radio" name="Tuesday_schedule_type" value="Homeroom"> Homeroom<br>
-                        {% endif %}
-                        <input type="radio" name="Tuesday_schedule_type" value="No School"> Special Schedule
-                    </td>
-                    <td id="sched_select_wed">
-                        {% if weekly_schedule and weekly_schedule['Wednesday'][0] == 'Regular' %}
-                            <input type="radio" name="Wednesday_schedule_type" value="Regular" checked="checked"> Regular Schedule<br>
-                        {% else %}
-                            <input type="radio" name="Wednesday_schedule_type" value="Regular"> Regular Schedule<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Wednesday'][0] == 'Homeroom' %}
-                            <input type="radio" name="Wednesday_schedule_type" value="Homeroom" checked="checked"> Homeroom<br>
-                        {% else %}
-                            <input type="radio" name="Wednesday_schedule_type" value="Homeroom"> Homeroom<br>
-                        {% endif %}
-                        <input type="radio" name="Wednesday_schedule_type" value="No School"> Special Schedule
-                    </td>
-                    <td id="sched_select_thurs">
-                        {% if weekly_schedule and weekly_schedule['Thursday'][0] == 'Regular' %}
-                            <input type="radio" name="Thursday_schedule_type" value="Regular" checked="checked"> Regular Schedule<br>
-                        {% else %}
-                            <input type="radio" name="Thursday_schedule_type" value="Regular"> Regular Schedule<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Thursday'][0] == 'Homeroom' %}
-                            <input type="radio" name="Thursday_schedule_type" value="Homeroom" checked="checked"> Homeroom<br>
-                        {% else %}
-                            <input type="radio" name="Thursday_schedule_type" value="Homeroom"> Homeroom<br>
-                        {% endif %}
-                        <input type="radio" name="Thursday_schedule_type" value="No School"> Special Schedule
-                    </td>
-                    <td id="sched_select_fri">
-                        {% if weekly_schedule and weekly_schedule['Friday'][0] == 'Regular' %}
-                            <input type="radio" name="Friday_schedule_type" value="Regular" checked="checked"> Regular Schedule<br>
-                        {% else %}
-                            <input type="radio" name="Friday_schedule_type" value="Regular"> Regular Schedule<br>
-                        {% endif %}
-                        {% if weekly_schedule and weekly_schedule['Friday'][0] == 'Homeroom' %}
-                            <input type="radio" name="Friday_schedule_type" value="Homeroom" checked="checked"> Homeroom<br>
-                        {% else %}
-                            <input type="radio" name="Friday_schedule_type" value="Homeroom"> Homeroom<br>
-                        {% endif %}
-                        <input type="radio" name="Friday_schedule_type" value="No School"> Special Schedule
-                    </td>
-                </tr>
-
-                <!-- <tr>
-                     <td>
-                     <div id="container">
-                     <div class="form-group text-center">
-                     <label for="inputsm">Period Name</label>
-                     <input class="form-control input-sm" id="period_name" type="text">
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>Start</label>
-                     <input class="form-control input-sm" id="start" type="text">
-                     <input type="radio" name="start_time_frame" value="AM"> AM
-                     <input type="radio" name="start_time_frame" value="PM"> PM
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>End</label>
-                     <input class="form-control input-sm" id="end" type="text">
-                     <input type="radio" name="end_time_frame" value="AM"> AM
-                     <input type="radio" name="end_time_frame" value="PM"> PM
-                     </div>
-                     <div class="col-xs-12">
-                     <hr class="vis">
-                     </div>
-                     <span id="writenode"></span>
-                     </div>
-                     <input type="button" value="Add language" onClick="add_language()" >
-                     </td>
-                     <td>
-                     <div id="container">
-                     <div class="form-group text-center">
-                     <label for="inputsm">Period Name</label>
-                     <input class="form-control input-sm" id="period_name" type="text">
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>Start</label>
-                     <input class="form-control input-sm" id="start" type="text">
-                     <input type="radio" name="start_time_frame" value="AM"> AM
-                     <input type="radio" name="start_time_frame" value="PM"> PM
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>End</label>
-                     <input class="form-control input-sm" id="end" type="text">
-                     <input type="radio" name="end_time_frame" value="AM"> AM
-                     <input type="radio" name="end_time_frame" value="PM"> PM
-                     </div>
-                     </div>
-                     </td>
-                     <td>
-                     <div id="container">
-                     <div class="form-group text-center">
-                     <label for="inputsm">Period Name</label>
-                     <input class="form-control input-sm" id="period_name" type="text">
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>Start</label>
-                     <input class="form-control input-sm" id="start" type="text">
-                     <input type="radio" name="start_time_frame" value="AM"> AM
-                     <input type="radio" name="start_time_frame" value="PM"> PM
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>End</label>
-                     <input class="form-control input-sm" id="end" type="text">
-                     <input type="radio" name="end_time_frame" value="AM"> AM
-                     <input type="radio" name="end_time_frame" value="PM"> PM
-                     </div>
-                     </div>
-                     </td>
-                     <td>
-                     <div id="container">
-                     <div class="form-group text-center">
-                     <label for="inputsm">Period Name</label>
-                     <input class="form-control input-sm" id="period_name" type="text">
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>Start</label>
-                     <input class="form-control input-sm" id="start" type="text">
-                     <input type="radio" name="start_time_frame" value="AM"> AM
-                     <input type="radio" name="start_time_frame" value="PM"> PM
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>End</label>
-                     <input class="form-control input-sm" id="end" type="text">
-                     <input type="radio" name="end_time_frame" value="AM"> AM
-                     <input type="radio" name="end_time_frame" value="PM"> PM
-                     </div>
-                     </div>
-                     </td>
-                     <td>
-                     <div id="container">
-                     <div class="form-group text-center">
-                     <label for="inputsm">Period Name</label>
-                     <input class="form-control input-sm" id="period_name" type="text">
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>Start</label>
-                     <input class="form-control input-sm" id="start" type="text">
-                     <input type="radio" name="start_time_frame" value="AM"> AM
-                     <input type="radio" name="start_time_frame" value="PM"> PM
-                     </div>
-                     <div class="form-group col-xs-6">
-                     <label for="inputsm"><center>End</label>
-                     <input class="form-control input-sm" id="end" type="text">
-                     <input type="radio" name="end_time_frame" value="AM"> AM
-                     <input type="radio" name="end_time_frame" value="PM"> PM
-                     </div>
-                     </div>
-                     </td>
-                     </tr> -->
-            </table>
-
-            <br><br>
-
-        </form>
-        </div>
-
-        <div id="spacer" class="col-md-12 sspacer">
-        </div>
-
-      </div>
-</header>
-
-<script src="/static/js/admin.js"></script>
+    <script src="/static/js/admin.js"></script>
 
 {% endblock %}

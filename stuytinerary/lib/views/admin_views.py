@@ -41,10 +41,10 @@ def save_weekly_schedule():
         weekly_schedule_data[day] = [schedule_type, day_type]
 
     operation = flask.request.form.get('request_type')
-    if operation == 'new':
+    if operation == 'New Schedule':
         flask.flash('Schedule Saved!')
         weekly_schedule_db_manager.add_schedule(FIRST_DAY_OF_WEEK, weekly_schedule_data)
-    elif operation == 'update':
+    elif operation == 'Update Schedule':
         flask.flash('Schedule Updated!')
         weekly_schedule_db_manager.update_schedule(FIRST_DAY_OF_WEEK, weekly_schedule_data)
     return flask.redirect(flask.url_for('admin_views.admin_homepage'))

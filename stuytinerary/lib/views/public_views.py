@@ -41,7 +41,8 @@ def homepage():
     current_seconds = (now - midnight).seconds
 
     return flask.render_template('schedule.html', SCHEDULE_TYPE=schedule_type, START_TIME=str(current_seconds),
-                                 WEEKLY_SCHEDULE=weekly_schedule, DAY_TYPE=day_type)
+                                 WEEKLY_SCHEDULE=weekly_schedule, DAY_TYPE=day_type,
+                                 is_logged_in=security.is_logged_in, is_admin=security.is_admin)
 
 @public_views.route('/about')
 def about_page():

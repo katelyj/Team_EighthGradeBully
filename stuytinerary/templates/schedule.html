@@ -4,6 +4,32 @@
     Stuytinerary
 {% endblock %}
 
+
+{% block adminbutton %}
+    {% if is_logged_in() and is_admin() %}
+        <a href="/admin" onclick=$("#menu-close").click();>Admin Settings</a>
+    {% endif %}
+{% endblock %}
+
+
+{% block loginbutton %}
+    {% if is_logged_in() %}
+        <a href="/settings" onclick=$("#menu-close").click();>Settings</a>
+    {% else %}
+        <a href="/login" onclick=$("#menu-close").click();>Login</a>
+    {% endif %}
+{% endblock %}
+
+
+{% block registerbutton %}
+    {% if is_logged_in() %}
+        <a href="/logout" onclick=$("#menu-close").click();>Logout</a>
+    {% else %}
+        <a href="/register" onclick=$("#menu-close").click();>Register</a>
+    {% endif %}
+{% endblock %}
+
+
 {% block content %}
 
     <script>
