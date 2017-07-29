@@ -1,6 +1,7 @@
 var HOURS_IN_DAY = 24;
 var SECONDS_IN_HOUR = 3600;
 var SECONDS_IN_MINUTE = 60;
+var DAY;
 
 function enableScheduleViewButton(DAY){
     var schedule_view_button = document.querySelectorAll("[data-day='" + DAY + "']")[0];
@@ -121,8 +122,13 @@ function addTableRowForDailySchedule(daily_schedule_table, period_data, period_i
 }
 
 async function viewSchedule(SCHEDULE_NAME){
-    $(".view-schedule-header").show();
+    $(".view-schedule").show();
     $(".view-schedule-header").html(SCHEDULE_NAME + " Schedule");
+    if (document.getElementsByClassName("btn-basic")[0].onclick == null){
+        console.log(document.getElementsByClassName("btn-basic")[0].onclick);
+        $(".btn-basic").hide();
+    }
+
     var schedule_data = await getScheduleData(SCHEDULE_NAME);
     var schedule_data_list = schedule_data.split('~');
     var list_of_period_data = [];
@@ -145,7 +151,7 @@ function specialScheduleSearch(){
             $(this).attr('data-search-term', $(this).text().toLowerCase());
         });
 
-        $('#query').on('keyup', function(){
+        $('#filter').on('keyup', function(){
             var searchTerm = $(this).val().toLowerCase();
 
             $('#schedules option').each(function(){
@@ -163,11 +169,29 @@ function editSpecialSchedule(e){
     var selected_schedule_value =  $("#schedules").val();
     var SCHEDULE_NAME = selected_schedule_value.split(" ")[0];
     $("#special-schedule").hide();
+    $(".btn-basic").show();
+    document.getElementsByClassName("btn-basic")[0].onclick = function(){
+        var daily_schedule_table = document.getElementById("daily_schedule");
+        while (daily_schedule_table.children[0].children.length > 1){
+            daily_schedule_table.children[0].removeChild(daily_schedule_table.children[0].lastChild);
+        }
+
+        $(".view-schedule").hide();
+        $("#special-schedule").show();
+        specialScheduleSearch();
+        var select_button = document.getElementById("select-special-schedule");
+        select_button.addEventListener("click", editSpecialSchedule);
+    };
+    document.getElementsByClassName("selected-ok")[0].onclick = function(){
+        document.getElementsByName(DAY + "_schedule_type")[2].value = selected_schedule_value;
+        document.getElementsByName(DAY + "_schedule_type")[2].nextElementSibling.innerText = selected_schedule_value + " Schedule";
+        $("#scheduleModal").modal("hide");
+    };
     viewSchedule(SCHEDULE_NAME);
 }
 
 async function viewOrEditSchedule(e){
-    var DAY = e.target.dataset.day;
+    DAY = e.target.dataset.day;
     var SCHEDULE_NAME = $("input[name=" + DAY + "_schedule_type]:checked").val();
     $(".modal-title").html(DAY + ": " + SCHEDULE_NAME + " Schedule");
 
@@ -176,11 +200,18 @@ async function viewOrEditSchedule(e){
         daily_schedule_table.children[0].removeChild(daily_schedule_table.children[0].lastChild);
     }
 
-    if (SCHEDULE_NAME != "Special"){
+    if ($("input[name=" + DAY + "_schedule_type]:checked")[0] != document.getElementsByName(DAY + "_schedule_type")[2]){
+        $("#special-schedule").hide();
+        document.getElementsByClassName("selected-ok")[0].onclick = function(){
+            $("#scheduleModal").modal("hide");
+        };
+        document.getElementsByClassName("btn-basic")[0].onclick = null;
+        viewSchedule(SCHEDULE_NAME);
+    }else if (SCHEDULE_NAME != "Special"){
         $("#special-schedule").hide();
         viewSchedule(SCHEDULE_NAME);
     }else{
-        $(".view-schedule-header").hide();
+        $(".view-schedule").hide();
         $("#special-schedule").show();
         specialScheduleSearch();
         var select_button = document.getElementById("select-special-schedule");

@@ -196,3 +196,8 @@ td.text-right {
 .minutes-left{
   color: #FF0000;
 }
+
+.select-box{
+  border-radius:4px;
+  border:1px solid #AAAAAA;
+}
