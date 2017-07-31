@@ -108,8 +108,8 @@ function updateScheduleInterface(current_time_in_seconds){
     for(var index = 0; index < list_of_period_data.length; index++){
         var period_id = 'period' + index;
 
+        document.getElementById(period_id).className = 'inactive';
         if (FOUND_PERIOD_RANGE){
-            document.getElementById(period_id).className = 'inactive';
             continue;
         }
 
