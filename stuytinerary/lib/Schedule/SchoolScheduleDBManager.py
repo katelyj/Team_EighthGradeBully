@@ -31,6 +31,9 @@ class SchoolScheduleDBManager(ScheduleDBManager.ScheduleDBManager):
                 json_formatted_string += '{0}|{1}|{2}~'.format(period_name, period_start_time, period_end_time)
             return json_formatted_string.strip('~')
 
+    def get_all_schedule_names(self):
+        return [schedule['schedule_name'] for schedule in self.collection.find({})]
+
     def populate_database(self):
         print 'Populating the database...'
         list_of_valid_schedules = ['Regular',

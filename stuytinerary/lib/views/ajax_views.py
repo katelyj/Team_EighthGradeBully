@@ -14,3 +14,7 @@ def schedule_jsonify(schedule_name):
 @ajax_views.route('/user_schedule/')
 def user_schedule_jsonify():
     return jsonify(UserScheduleDBManager.UserScheduleDBManager().retrieve_user_schedule(session.get('username')))
+
+@ajax_views.route('/all_schedules_names/')
+def all_schedule_names_jsonify():
+    return jsonify(SchoolScheduleDBManager.SchoolScheduleDBManager().get_all_schedule_names())

@@ -169,6 +169,7 @@ function editSpecialSchedule(e){
     var selected_schedule_value =  $("#schedules").val();
     var SCHEDULE_NAME = selected_schedule_value.split(" ")[0];
     $("#special-schedule").hide();
+    $("#new-special-schedule").hide();
     $(".btn-basic").show();
     document.getElementsByClassName("btn-basic")[0].onclick = function(){
         var daily_schedule_table = document.getElementById("daily_schedule");
@@ -178,6 +179,7 @@ function editSpecialSchedule(e){
 
         $(".view-schedule").hide();
         $("#special-schedule").show();
+        document.getElementById("new-schedule").addEventListener("click", newSpecialSchedule);
         specialScheduleSearch();
         var select_button = document.getElementById("select-special-schedule");
         select_button.addEventListener("click", editSpecialSchedule);
@@ -188,6 +190,39 @@ function editSpecialSchedule(e){
         $("#scheduleModal").modal("hide");
     };
     viewSchedule(SCHEDULE_NAME);
+}
+
+function newSpecialSchedule(){
+    $(".view-schedule").hide();
+    $("#special-schedule").hide();
+    $("#new-special-schedule").show();
+
+    $("#new-schedule-form div:first").hide();
+    $(".add-row").click(function(){
+        var form_field = $("#new-schedule-form div:first").clone(true);
+        var referenceNode = $(this).parent().parent();
+        referenceNode.after(referenceNode.next().clone(true));
+        referenceNode.next().after(form_field.show());
+    });
+
+    $(".remove-row").click(function(){
+        var referenceNode = $(this).parent().parent();
+        referenceNode.next().remove();
+        referenceNode.remove();
+    });
+}
+
+function sendToServer(serialized_form){
+    var form_array = serialized_form.split("&");
+    console.log(form_array);
+    $.post("/new_schedule/", {new_schedule: serialized_form}, function(status){
+        console.log(status);
+    });
+    var selected_schedule_value = form_array[0].split('=')[1];
+    document.getElementsByName(DAY + "_schedule_type")[2].value = selected_schedule_value;
+    document.getElementsByName(DAY + "_schedule_type")[2].nextElementSibling.innerText = selected_schedule_value + " Schedule";
+    $("#scheduleModal").modal("hide");
+    return false;
 }
 
 async function viewOrEditSchedule(e){
@@ -202,6 +237,7 @@ async function viewOrEditSchedule(e){
 
     if ($("input[name=" + DAY + "_schedule_type]:checked")[0] != document.getElementsByName(DAY + "_schedule_type")[2]){
         $("#special-schedule").hide();
+        $("#new-special-schedule").hide();
         document.getElementsByClassName("selected-ok")[0].onclick = function(){
             $("#scheduleModal").modal("hide");
         };
@@ -209,10 +245,26 @@ async function viewOrEditSchedule(e){
         viewSchedule(SCHEDULE_NAME);
     }else if (SCHEDULE_NAME != "Special"){
         $("#special-schedule").hide();
+        $("#new-special-schedule").hide();
+        document.getElementsByClassName("btn-basic")[0].onclick = function(){
+            var daily_schedule_table = document.getElementById("daily_schedule");
+            while (daily_schedule_table.children[0].children.length > 1){
+                daily_schedule_table.children[0].removeChild(daily_schedule_table.children[0].lastChild);
+            }
+
+            $(".view-schedule").hide();
+            $("#special-schedule").show();
+            document.getElementById("new-schedule").addEventListener("click", newSpecialSchedule);
+            specialScheduleSearch();
+            var select_button = document.getElementById("select-special-schedule");
+            select_button.addEventListener("click", editSpecialSchedule);
+        };
         viewSchedule(SCHEDULE_NAME);
     }else{
         $(".view-schedule").hide();
         $("#special-schedule").show();
+        $("#new-special-schedule").hide();
+        document.getElementById("new-schedule").addEventListener("click", newSpecialSchedule);
         specialScheduleSearch();
         var select_button = document.getElementById("select-special-schedule");
         select_button.addEventListener("click", editSpecialSchedule);

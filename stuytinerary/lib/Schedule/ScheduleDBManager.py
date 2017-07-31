@@ -9,6 +9,7 @@ class ScheduleDBManager(object):
         self.client = pymongo.MongoClient()
 
         self.db = self.client['stuytinerary_schedules']
+        self.collection_name = collection_name
         self.collection = eval('self.db.{collection_name}'.format(collection_name=collection_name))
         self.db_size = self.collection.count()
 
@@ -38,6 +39,7 @@ class ScheduleDBManager(object):
             return False
 
     def drop_schedules(self):
-        self.client.drop_database('stuytinerary_schedules')
-        self.db = self.client['stuytinerary_schedules']
+        self.collection.drop()
+        self.collection = eval('self.db.{collection_name}'.format(collection_name=self.collection_name))
+        self.db_size = self.collection.count()
         return True, 'Dropped all schedules!'
