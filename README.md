@@ -11,43 +11,43 @@ Our project is a revamped version of Mr. Brooks’s bell schedule application, b
 
 Check the bell schedule, whether it's an A or B day, log in and customize your home schedule to see which classes you have next... and more!
 
-# HOW TO USE ON TERMINAL
+# HOW TO USE LOCALLY
+
+0. Open a terminal and make sure git and virtualenv are installed
 
 1. Clone this repository.
 
 ```
-$ git clone <https link... found above!>
+$ git clone https://github.com/katelyj/Team_EighthGradeBully.git
 ```
 
-2. If never run before:
-
-- CD into 'dev_utils'
-- Run the following command to initialize the database:
-
-```
-$ python populate_schedule_database.py
-```
-
-3. Enter the repository, and run the flask app:
+2. Enter the repository, and run the flask app:
 
   *If never used before:*
 
 ```
-  $ pip install docs/requirements.txt
-  $ python app.py
+  $ virtualenv softdev
+  $ source softdev/bin/activate
+  $ cd Team_EighthGradeBully/stuytinerary
+  $ pip install requirements.txt
+  $ python __init__.py
 ```
 
   *If already used:*
 
   ```
-  $ python app.py
+  $ cd Team_EighthGradeBully/stuytinerary
+  $ python __init__.py
   ```
 
-4. Go to the app, view the schedule, make an account... anything you want!
+3. Open up a browser, and navigate to <localhost:5000>
 
 # Features In Development
 
-- Display User Schedule Info
-- Custom Schedules / No Schedule Error Handling
+- Support for special schedules (available in beta version)
 - Logging
 - Robustification
+
+# Future Plans
+
+- Display User Schedule Info
