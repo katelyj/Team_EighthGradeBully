@@ -23,6 +23,10 @@ class ScheduleDBManager(object):
         })
         return True
 
+    def update_schedule(self, schedule_name, data):
+        self.remove_schedule(schedule_name)
+        return self.add_schedule(schedule_name, data)
+
     def remove_schedule(self, schedule_name):
         self.collection.delete_one({
             'schedule_name': schedule_name

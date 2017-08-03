@@ -2,6 +2,7 @@ import collections
 import datetime
 import flask
 import itertools
+import json
 import os
 import sys
 
@@ -22,9 +23,8 @@ def admin_homepage():
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
     weekly_schedule = weekly_schedule_db_manager.get_schedule(FIRST_DAY_OF_WEEK)
 
-    all_schedules_names=SchoolScheduleDBManager.SchoolScheduleDBManager().get_all_schedule_names()
     return flask.render_template('admin.html', weekly_schedule=weekly_schedule, is_logged_in=security.logged_in,
-                                 is_admin=security.is_admin, all_schedules_names=all_schedules_names)
+                                 is_admin=security.is_admin)
 
 @admin_views.route('/save/', methods=['POST'])
 @security.login_required(admin_required=True)
@@ -45,10 +45,10 @@ def save_weekly_schedule():
         weekly_schedule_data[day] = [schedule_type, day_type]
 
     operation = flask.request.form.get('request_type')
-    if operation == 'New Schedule':
+    if operation == 'New Weekly Schedule':
         flask.flash('Schedule Saved!')
         weekly_schedule_db_manager.add_schedule(FIRST_DAY_OF_WEEK, weekly_schedule_data)
-    elif operation == 'Update Schedule':
+    elif operation == 'Update Weekly Schedule':
         flask.flash('Schedule Updated!')
         weekly_schedule_db_manager.update_schedule(FIRST_DAY_OF_WEEK, weekly_schedule_data)
     return flask.redirect(flask.url_for('admin_views.admin_homepage'))
@@ -57,26 +57,26 @@ def grouper(iterable, group_size, fill_value=None):
     args = [iter(iterable)] * group_size
     return itertools.izip_longest(*args, fillvalue=fill_value)
 
-def get_value(query_string):
-    name, value = query_string.split('=')
-    value = value.replace('%3A', ':')
-    value = value.replace('+', ' ')
-    return value
+def get_value(dictionary):
+    return dictionary.get('value')
 
-@admin_views.route('/new_schedule/', methods=['POST'])
+@admin_views.route('/new_or_update_schedule/', methods=['POST'])
 def create_new_schedule():
-    raw_schedule = flask.request.form['new_schedule']
-    raw_schedule_as_list = raw_schedule.split('&')
+    raw_schedule = json.loads(flask.request.form['new_schedule'])
     new_schedule = collections.OrderedDict()
 
-    new_schedule_name = get_value(raw_schedule_as_list[0])
-    for period_data in grouper(raw_schedule_as_list[1:], 3):
+    new_schedule_name = get_value(raw_schedule[0])
+    # Next three after the first field exist for cloning purposes
+    for period_data in grouper(raw_schedule[4:], 3):
         period_name, period_start_time, period_end_time = map(get_value, period_data)
         if period_name and period_start_time and period_end_time:
             new_schedule[period_name] = [period_start_time, period_end_time]
         else:
             break
+
     school_schedule_db_manager = SchoolScheduleDBManager.SchoolScheduleDBManager()
-    school_schedule_db_manager.add_schedule(new_schedule_name, new_schedule)
-    print new_schedule
+    if school_schedule_db_manager.get_schedule(new_schedule_name):
+        school_schedule_db_manager.update_schedule(new_schedule_name, new_schedule)
+    else:
+        school_schedule_db_manager.add_schedule(new_schedule_name, new_schedule)
     return 'Success!'

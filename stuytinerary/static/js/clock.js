@@ -4,6 +4,9 @@ var HOURS_IN_DAY = 24;
 var SECONDS_IN_HOUR = 3600;
 var SECONDS_IN_MINUTE = 60;
 
+// Used for testing purposes as in: var OFFSET= new Date(2017, 7, 1, 23, 59, 55, 0) - new Date();
+var OFFSET = 0;
+
 function getTotalSecondsOnClientSide(){
     var date = new Date();
     return date.getHours() * SECONDS_IN_HOUR + date.getMinutes() * SECONDS_IN_MINUTE + date.getSeconds();
@@ -163,6 +166,7 @@ function updateInterface(){
 
 function displayClockInterface(){
     updateTime();
+    document.getElementById("PeriodName").parentElement.parentElement.parentElement.parentElement.style.display = "none";
     document.getElementById('start_end').style.display = "none";
     document.getElementById('timer_row').style.display = "none";
     document.getElementById('clock').style.borderColor = "black";
@@ -170,7 +174,8 @@ function displayClockInterface(){
 }
 
 function displayOrHideWeeklyScheduleTable(){
-    var today = new Date();
+    var today = new Date(Date.now() + OFFSET);
+
     var weekly_schedule_table = document.getElementById("weekly_schedule");
     if (!(weekly_schedule_table == null)){
         if (today.getDay() != 0 && today.getDay() != 6){
@@ -190,7 +195,7 @@ function displayOrHideWeeklyScheduleTable(){
 }
 
 function updateWeeklyScheduleInterface(){
-    var today = new Date();
+    var today = new Date(Date.now() + OFFSET);
     if (today.getDay() - 2 > 0){
         var weekly_schedule_yesterday = document.getElementById("day" + (today.getDay() - 2));
         weekly_schedule_yesterday.className = '';

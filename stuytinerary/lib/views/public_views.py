@@ -24,6 +24,7 @@ def homepage():
                          5: 'Friday',
                          6: 'Saturday'}
     TODAY_DATE = datetime.datetime.today().date()
+    #TODAY_DATE = TODAY_DATE.replace(day=5)
     FIRST_DAY_OF_WEEK = (
         TODAY_DATE - datetime.timedelta(days=TODAY_DATE.weekday()) - datetime.timedelta(days=0)
     ).strftime('%m:%d:%y')
@@ -37,6 +38,7 @@ def homepage():
         schedule_type, day_type = None, None
 
     now = datetime.datetime.now()
+    #now = now.replace(hour=23, minute=59, second=55, microsecond=0)
     midnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
     current_seconds = (now - midnight).seconds
 

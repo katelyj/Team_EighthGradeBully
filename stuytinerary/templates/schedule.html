@@ -14,7 +14,7 @@
 
 {% block loginbutton %}
     {% if is_logged_in() %}
-        <a href="/settings" onclick=$("#menu-close").click();>Settings</a>
+        <!-- <a href="/settings" onclick=$("#menu-close").click();>Settings</a> -->
     {% else %}
         <a href="/login" onclick=$("#menu-close").click();>Login</a>
     {% endif %}
@@ -37,6 +37,7 @@
      var SCHEDULE_NAME = "{{ SCHEDULE_TYPE }}";
     </script>
 
+    <script src="/static/js/utils.js"></script>
     <script src="/static/js/clock.js"></script>
     <script src="/static/js/main.js" defer></script>
 
@@ -102,27 +103,29 @@
             <div class="col-xs-12 col-md-6 col-md-offset-3 container-fluid schedule-container" align="center">
 
                 {% if WEEKLY_SCHEDULE %}
-                    <div id="spacer" class="col-xs-12 small-space">
-                    </div>
-
-                    <div class="row">
-
-                        {{ show_day_type("left") }}
-                        <div class="col-xs-8" align="center">
-                            <h1>
-                                <b><label id="PeriodName"></label></b>
-                            </h1>
+                    <div id="weekly_schedule_present">
+                        <div id="spacer" class="col-xs-12 small-space">
                         </div>
-                        {{ show_day_type("right") }}
 
-                    </div>
+                        <div class="row">
 
-                    <div id="spacer" class="col-xs-12 small-space">
+                            {{ show_day_type("left") }}
+                            <div class="col-xs-8" align="center">
+                                <h1>
+                                    <b><label id="PeriodName"></label></b>
+                                </h1>
+                            </div>
+                            {{ show_day_type("right") }}
+
+                        </div>
+
+                        <div id="spacer" class="col-xs-12 small-space">
+                        </div>
                     </div>
                 {% endif %}
 
                 {% if not WEEKLY_SCHEDULE %}
-                    <div class="row">
+                    <div class="row" id="weekly_schedule_not_present">
                         <center>
                             <h2>
                                 <b>Weekly Schedule Not Set!</b>
