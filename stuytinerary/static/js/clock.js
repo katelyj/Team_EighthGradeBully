@@ -147,7 +147,7 @@ function updateInterface(){
     var [period_name, period_start_time, period_end_time] = current_period_data;
 
     var STYLE_ATTRIBUTES = ['', '', ''];
-    if (period_name == 'Before school' || period_name == 'After school'){
+    if (period_name.toLowerCase() == 'before school' || period_name.toLowerCase() == 'after school'){
         STYLE_ATTRIBUTES = ['none', 'none', 'black'];
     }
     document.getElementById('start_end').style.display = STYLE_ATTRIBUTES[0];
