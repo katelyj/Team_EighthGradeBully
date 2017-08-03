@@ -13,7 +13,7 @@ Check the bell schedule, whether it's an A or B day, log in and customize your h
 
 # HOW TO USE LOCALLY
 
-0. Open a terminal and make sure git and virtualenv are installed
+0. Make sure that virtualenv is installed via [pip](https://dojo.stuycs.org/resources/software_installation_and_tips/installation_instructions/programming_languages/installing_python.html), [git](https://dojo.stuycs.org/resources/software_installation_and_tips/installation_instructions/programming_tools/installing_git.html) is installed, and [mongodb](https://dojo.stuycs.org/resources/software_installation_and_tips/installation_instructions/programming_tools/installing_mongodb.html) is installed.
 
 1. Clone this repository.
 
@@ -30,12 +30,14 @@ $ git clone https://github.com/katelyj/Team_EighthGradeBully.git
   $ source softdev/bin/activate
   $ cd Team_EighthGradeBully/stuytinerary
   $ pip install requirements.txt
+  // start up mongodb (instructions can be found in the installation link above)
   $ python __init__.py
 ```
 
   *If already used:*
 
   ```
+  // start up mongodb (instructions can be found in the installation link above)
   $ cd Team_EighthGradeBully/stuytinerary
   $ python __init__.py
   ```
