@@ -53,7 +53,7 @@
             <input type="radio" name="{{ DAY }}_schedule_type" value="{{ SCHEDULE_TYPE }}" checked="checked">
             <span>{{ SCHEDULE_TYPE }} Schedule</span>
             <br>
-        {% elif weekly_schedule and SCHEDULE_TYPE == "Special" and weekly_schedule[DAY][0] not in ["Special", "Regular", "Homeroom"] %}
+        {% elif weekly_schedule and SCHEDULE_TYPE == "Special" and weekly_schedule[DAY][0] not in ["Special", "Regular", "Homeroom", "No School"] %}
             <input type="radio" name="{{ DAY }}_schedule_type" value="{{ weekly_schedule[DAY][0] }}" checked="checked">
             <span>{{ weekly_schedule[DAY][0] }} Schedule</span>
             <br>
