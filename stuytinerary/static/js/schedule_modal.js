@@ -42,10 +42,11 @@ function sendToServer(form){
     var serialized_form = form.serializeArray();
     $.post("/new_or_update_schedule/", {new_schedule: JSON.stringify(serialized_form)}, function(status){
         if (status === "Success!"){
-            setSpecialSchedule(schedule_name_field.value);
-            showViewOrEditScheduleButton(DAY);
+            if (!["Regular", "Homeroom"].includes(schedule_name_field.value)){
+                setSpecialSchedule(schedule_name_field.value);
+                showViewOrEditScheduleButton(DAY);
+            }
             $("#scheduleModal").modal("hide");
-            location.reload(true);
         }else{
             schedule_name_field.disabled = schedule_name_field_disabled_state;
             alert("There is something wrong with the values you inputted!");
@@ -212,7 +213,7 @@ async function showEditScheduleInterface(SCHEDULE_NAME){
     }
 
     for(var j = i; j < period_name_fields.length; j++){
-        period_name_fields.parentElement.parentElement.remove();
+        period_name_fields[j].parentElement.parentElement.remove();
     }
 }
 

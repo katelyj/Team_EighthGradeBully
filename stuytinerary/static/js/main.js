@@ -1,10 +1,9 @@
 var midnight_timer;
 var weekly_schedule_hourly_timer;
-var list_of_period_data = new Array();
+var list_of_period_data;
 
 async function inititalizeSchedule(){
     displayOrHideWeeklyScheduleTable();
-    CLIENT_START_TIME = getTotalSecondsOnClientSide();
 
     var weekly_schedule_schedule_active_rows = $("#weekly_schedule tr.active");
     if (weekly_schedule_schedule_active_rows.length > 0){
@@ -22,14 +21,15 @@ async function inititalizeSchedule(){
         $("#daily_schedule").empty();
         createTableHeaderForDailySchedule(SCHEDULE_NAME);
 
+        list_of_period_data = new Array();
         for(var i = 0; i < schedule_data_list.length; i++){
-            // list_of_period_data[i] = [period_start_time, period_end_time]
-            list_of_period_data[i] = schedule_data_list[i].split('|');
-            list_of_period_data[i][1] = parseInt(list_of_period_data[i][1]);
-            list_of_period_data[i][2] = parseInt(list_of_period_data[i][2]);
+                // list_of_period_data[i] = [period_start_time, period_end_time]
+                list_of_period_data[i] = schedule_data_list[i].split('|');
+                list_of_period_data[i][1] = parseInt(list_of_period_data[i][1]);
+                list_of_period_data[i][2] = parseInt(list_of_period_data[i][2]);
 
-            addTableRowForDailySchedule(daily_schedule_table, list_of_period_data[i], i);
-        }
+                addTableRowForDailySchedule(daily_schedule_table, list_of_period_data[i], i);
+            }
         // Account for the 59 seconds difference between after school and before school
         list_of_period_data[list_of_period_data.length - 1][2] += 59;
         updateInterface();
@@ -77,4 +77,4 @@ async function updateWeeklySchedule(){
 }
 
 updateWeeklySchedule();
-inititalizeSchedule();
+CLIENT_START_TIME = getTotalSecondsOnClientSide();
