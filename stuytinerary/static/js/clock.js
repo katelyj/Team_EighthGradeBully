@@ -4,6 +4,8 @@ var HOURS_IN_DAY = 24;
 var SECONDS_IN_HOUR = 3600;
 var SECONDS_IN_MINUTE = 60;
 
+var daily_schedule_update_timer;
+
 // Used for testing purposes as in: var OFFSET= new Date(2017, 7, 1, 23, 59, 55, 0) - new Date();
 var OFFSET = 0;
 
@@ -161,7 +163,7 @@ function updateInterface(){
     document.getElementById('minutes_left').innerHTML = minutes_left;
 
     updateTime();
-    setTimeout('updateInterface()', 1000);
+    daily_schedule_update_timer = setTimeout('updateInterface()', 1000);
 };
 
 function displayClockInterface(){

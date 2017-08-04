@@ -65,6 +65,7 @@ async function updateWeeklySchedule(){
         $("#weekly_schedule_not_present").show();
     }
 
+    clearTimeout(daily_schedule_update_timer);
     inititalizeSchedule();
 
     clearInterval(weekly_schedule_hourly_timer);
