@@ -1,5 +1,5 @@
 var midnight_timer;
-var saturday_midnight_timer;
+var weekly_schedule_hourly_timer;
 var list_of_period_data = new Array();
 
 async function inititalizeSchedule(){
@@ -65,15 +65,12 @@ async function updateWeeklySchedule(){
         $("#weekly_schedule_not_present").show();
     }
 
-    clearInterval(saturday_midnight_timer);
-    var midnight = new Date(Date.now() + OFFSET);
-    var days_before_midnight = 6 - midnight.getDay();
-    midnight.setHours(24, 0, 0, 0);
+    clearInterval(weekly_schedule_hourly_timer);
+    var current_date = new Date(Date.now() + OFFSET);
+    current_date.setHours(current_date.getHours() + 1, 0, 0, 0);
 
-    var time_till_midnight = midnight.getTime() - new Date(Date.now() + OFFSET).getTime();
-    var time_till_saturday_midnight = days_before_midnight * 86400000 + time_till_midnight;
-
-    saturday_midnight_timer = setInterval(updateWeeklySchedule, time_till_saturday_midnight);
+    var time_till_next_hour = current_date.getTime() - new Date(Date.now() + OFFSET).getTime();
+    weekly_schedule_hourly_timer = setInterval(updateWeeklySchedule, time_till_next_hour);
 }
 
 inititalizeSchedule();
