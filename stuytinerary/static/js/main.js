@@ -65,6 +65,8 @@ async function updateWeeklySchedule(){
         $("#weekly_schedule_not_present").show();
     }
 
+    inititalizeSchedule();
+
     clearInterval(weekly_schedule_hourly_timer);
     var current_date = new Date(Date.now() + OFFSET);
     current_date.setHours(current_date.getHours() + 1, 0, 0, 0);
@@ -73,5 +75,5 @@ async function updateWeeklySchedule(){
     weekly_schedule_hourly_timer = setInterval(updateWeeklySchedule, time_till_next_hour);
 }
 
-inititalizeSchedule();
 updateWeeklySchedule();
+inititalizeSchedule();
