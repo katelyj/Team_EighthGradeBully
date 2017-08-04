@@ -55,7 +55,7 @@ def logged_in():
 @security.route('/register/')
 def register_form():
     if is_logged_in():
-        return redirect(url_for('public_views.home'))
+        return redirect(url_for('public_views.homepage'))
     else:
         return render_template('register.html')
 
@@ -81,7 +81,7 @@ def register():
 @security.route('/login/')
 def login_form():
     if is_logged_in():
-        return redirect(url_for('public_views.home'))
+        return redirect(url_for('public_views.homepage'))
     else:
         return render_template('login.html')
 
@@ -98,11 +98,9 @@ def login():
 
         if results[0]:
             session['username'] = username
-            print 'bye'
             return redirect_back()
         else:
             flash(results[1])
-            print 'hello'
             return redirect(url_for('security.login_form'))
 
 @security.route('/logout/')
@@ -113,4 +111,4 @@ def logout():
         if 'next' in session:
             session.pop('next')
 
-    return redirect(url_for('public_views.home'))
+    return redirect(url_for('public_views.homepage'))

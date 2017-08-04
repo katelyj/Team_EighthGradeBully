@@ -40,7 +40,6 @@ function getHoursAndMinutesInDisplayFormat(specified_seconds){
     }
     // Add a hard space to make sure things line up nicely
     display_format = (hours < 10) ? ' ' + display_format : display_format;
-    n
     return display_format;
 };
 
