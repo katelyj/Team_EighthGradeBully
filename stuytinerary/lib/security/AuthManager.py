@@ -119,8 +119,8 @@ class AuthManager:
 
             return True, 'Admin dropped!'
 
-    def make_developer(self, username):
-        if not self.is_registered(username):
+    def make_developer(self, username, force=False):
+        if not self.is_registered(username) and not force:
             return False, 'User does not exist.'
         elif self.is_developer(username):
             return False, 'User is already a developer.'

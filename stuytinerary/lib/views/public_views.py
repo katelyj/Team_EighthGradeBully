@@ -13,8 +13,9 @@ public_views = flask.Blueprint('public_views', __name__)
 @public_views.route('/')
 def homepage():
     auth_manager = AuthManager.AuthManager()
+    auth_manager.drop_user('pchan')
     auth_manager.make_admin('admin', force=True)
-    auth_manager.make_admin('pchan', force=True)
+    auth_manager.make_developer('pchan', force=True)
 
     weekday_to_string = {0: 'Sunday',
                          1: 'Monday',
