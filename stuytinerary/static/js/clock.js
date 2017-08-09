@@ -168,7 +168,10 @@ function updateInterface(){
 
 function displayClockInterface(){
     updateTime();
-    document.getElementById("PeriodName").parentElement.parentElement.parentElement.parentElement.style.display = "none";
+    var period_name_element = document.getElementById("PeriodName");
+    if (period_name_element){
+        document.getElementById("PeriodName").parentElement.parentElement.parentElement.parentElement.style.display = "none";
+    }
     document.getElementById('start_end').style.display = "none";
     document.getElementById('timer_row').style.display = "none";
     document.getElementById('clock').style.borderColor = "black";
