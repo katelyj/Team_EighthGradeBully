@@ -10,7 +10,7 @@ var daily_schedule_update_timer;
 var OFFSET = 0;
 
 function getTotalSecondsOnClientSide(){
-    var date = new Date();
+    var date = new Date(Date.now() + OFFSET);
     return date.getHours() * SECONDS_IN_HOUR + date.getMinutes() * SECONDS_IN_MINUTE + date.getSeconds();
 };
 
@@ -201,7 +201,7 @@ function displayOrHideWeeklyScheduleTable(){
 
 function updateWeeklyScheduleInterface(){
     var today = new Date(Date.now() + OFFSET);
-    if (today.getDay() - 2 > 0){
+    if (today.getDay() - 2 > -1){
         var weekly_schedule_yesterday = document.getElementById("day" + (today.getDay() - 2));
         weekly_schedule_yesterday.className = '';
     }
