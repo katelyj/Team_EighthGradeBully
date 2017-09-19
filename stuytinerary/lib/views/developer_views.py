@@ -5,7 +5,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../'))
 from lib.Schedule import SchoolScheduleDBManager, WeeklyScheduleDBManager#, UserScheduleDBManager
-from lib.security import security
+from lib.security import AuthManager, security
 
 developer_views = Blueprint('developers_views', __name__)
 
@@ -23,9 +23,22 @@ def list_schedules():
 @developer_views.route('/drop_schedules/')
 @security.login_required(developer_required=True)
 def drop_schedules():
-    return SchoolScheduleDBManager.SchoolScheduleDBManager().drop_schedules()
+    SchoolScheduleDBManager.SchoolScheduleDBManager().drop_schedules()
+    return 'Success!'
 
 @developer_views.route('/populate_database/')
 @security.login_required(developer_required=True)
 def populate_database():
-    return SchoolScheduleDBManager.SchoolScheduleDBManager().populate_database()
+    SchoolScheduleDBManager.SchoolScheduleDBManager().populate_database()
+    return 'Success!'
+
+@developer_views.route('/drop_user/<username>')
+@security.login_required(developer_required=True)
+def drop_user(username):
+    AuthManager.AuthManager().drop_user(username)
+    return 'Success!'
+
+@developer_views.route('/make_admin/<username>')
+def add_admin(username):
+    AuthManager.AuthManager().make_admin(username, True)
+    return 'Success!'
