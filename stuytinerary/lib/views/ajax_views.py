@@ -23,9 +23,10 @@ def all_schedule_names_jsonify():
 @ajax_views.route('/weekly_schedule/')
 def get_weekly_schedule():
     TODAY_DATE = datetime.datetime.today().date()
+    CURRENT_DAY_OF_WEEK = (TODAY_DATE.weekday() + 1) % 7
     FIRST_DAY_OF_WEEK = (
-        TODAY_DATE - datetime.timedelta(days=TODAY_DATE.weekday()) - datetime.timedelta(days=0)
-    ).strftime('%m:%d:%y')
+        TODAY_DATE - datetime.timedelta(days=CURRENT_DAY_OF_WEEK) - datetime.timedelta(days=0)
+    ).strftime('%m/%d/%y')
     weekday_to_string = {0: 'Sunday',
                          1: 'Monday',
                          2: 'Tuesday',

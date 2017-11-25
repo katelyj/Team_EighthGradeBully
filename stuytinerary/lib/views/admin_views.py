@@ -17,9 +17,10 @@ admin_views = flask.Blueprint('admin_views', __name__)
 @security.login_required(admin_required=True)
 def admin_homepage():
     TODAY_DATE = datetime.datetime.today().date()
+    CURRENT_DAY_OF_WEEK = ((TODAY_DATE.weekday() + 1) % 7)
     FIRST_DAY_OF_WEEK = (
-        TODAY_DATE - datetime.timedelta(days=TODAY_DATE.weekday()) - datetime.timedelta(days=0)
-    ).strftime('%m:%d:%y')
+        TODAY_DATE - datetime.timedelta(days=CURRENT_DAY_OF_WEEK) - datetime.timedelta(days=0)
+    ).strftime('%m/%d/%y')
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
     weekly_schedule = weekly_schedule_db_manager.get_schedule(FIRST_DAY_OF_WEEK)
 
@@ -31,9 +32,10 @@ def admin_homepage():
 def save_weekly_schedule():
     DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
     TODAY_DATE = datetime.datetime.today().date()
+    CURRENT_DAY_OF_WEEK = ((TODAY_DATE.weekday() + 1) % 7)
     FIRST_DAY_OF_WEEK = (
-        TODAY_DATE - datetime.timedelta(days=TODAY_DATE.weekday()) - datetime.timedelta(days=0)
-    ).strftime('%m:%d:%y')
+        TODAY_DATE - datetime.timedelta(days=CURRENT_DAY_OF_WEEK) - datetime.timedelta(days=0)
+    ).strftime('%m/%d/%y')
 
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
     weekly_schedule_data = {'Sunday': ['No School', 'No School'],

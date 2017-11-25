@@ -24,16 +24,18 @@ def homepage():
                          5: 'Friday',
                          6: 'Saturday'}
     TODAY_DATE = datetime.datetime.today().date()
-    #TODAY_DATE = TODAY_DATE.replace(day=5)
+    CURRENT_DAY_OF_WEEK = (TODAY_DATE.weekday() + 1) % 7
     FIRST_DAY_OF_WEEK = (
-        TODAY_DATE - datetime.timedelta(days=TODAY_DATE.weekday()) - datetime.timedelta(days=0)
-    ).strftime('%m:%d:%y')
+        TODAY_DATE - datetime.timedelta(days=CURRENT_DAY_OF_WEEK) - datetime.timedelta(days=0)
+    ).strftime('%m/%d/%y')
 
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
     weekly_schedule = weekly_schedule_db_manager.get_schedule(FIRST_DAY_OF_WEEK)
-    weekday_name = weekday_to_string[(TODAY_DATE.weekday() + 1) % 7]
+    weekday_name = weekday_to_string[CURRENT_DAY_OF_WEEK]
     if weekly_schedule:
         schedule_type, day_type = weekly_schedule[weekday_name]
+    elif CURRENT_DAY_OF_WEEK == 'Saturday' or CURRENT_DAY_OF_WEEK == 'Sunday':
+        schedule_type, DAY_TYPE = 'No School', 'No School'
     else:
         schedule_type, day_type = None, None
 
