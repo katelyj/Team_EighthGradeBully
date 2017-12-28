@@ -10,6 +10,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../'))
 from lib.security import AuthManager, security
 from lib.Schedule import SchoolScheduleDBManager, WeeklyScheduleDBManager
 from lib.utils import admin_utils, utils
+from lib.WeeklyScheduleScraper import WeeklyScheduleScraper
 
 admin_views = flask.Blueprint('admin_views', __name__)
 
@@ -24,8 +25,11 @@ def admin_homepage():
     weekly_schedule_db_manager = WeeklyScheduleDBManager.WeeklyScheduleDBManager()
 
     # Test New Feature
-    weekly_schedule_data = admin_utils.get_weekly_schedule()
-    admin_utils.insert_into_schedule_database(weekly_schedule_data, True)
+    try:
+        weekly_schedule_data = admin_utils.get_weekly_schedule()
+        admin_utils.insert_into_schedule_database(weekly_schedule_data, True)
+    except WeeklyScheduleScraper.WeeklyScheduleScraperException:
+        flask.flash('Error: Unable to grab the latest data!')
 
     weekly_schedule = weekly_schedule_db_manager.get_schedule(FIRST_DAY_OF_WEEK)
 
