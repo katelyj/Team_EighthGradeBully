@@ -1,28 +1,26 @@
-from flask import (Blueprint, flash, get_flashed_messages, jsonify,
-                   redirect, render_template, request, session, url_for)
-from functools import wraps
+import flask
+import functools
 
 import AuthManager
 from security_utils import redirect_back
 
-security = Blueprint('security', __name__)
+security = flask.Blueprint('security', __name__)
 db_manager = AuthManager.AuthManager()
 
-def login_required(admin_required = False, developer_required = False):
+def login_required(admin_required=False, developer_required=False):
     def actual_decorator(function):
-        @wraps(function)
+        @functools.wraps(function)
         def wrapper(*args, **kwargs):
-            session['next'] = request.url
-
             if is_logged_in(admin_required, developer_required):
                 return function(*args, **kwargs)
             else:
-                return redirect(url_for('security.login_form'))
+                flask.session['next'] = flask.request.url
+                return flask.redirect(flask.url_for('security.login_form'))
         return wrapper
     return actual_decorator
 
 def is_admin():
-    username = session.get('username')
+    username = flask.session.get('username')
 
     if not username:
         return False
@@ -31,8 +29,8 @@ def is_admin():
     else:
         return False
 
-def is_logged_in(admin_required = False, developer_required = False):
-    username = session.get('username')
+def is_logged_in(admin_required=False, developer_required=False):
+    username = flask.session.get('username')
 
     if not username:
         return False
@@ -45,70 +43,70 @@ def is_logged_in(admin_required = False, developer_required = False):
     elif (admin_required and not db_manager.is_admin(username)) or (developer_required and not db_manager.is_developer(username)):
         return False
     else:
-        session.pop('username')
+        flask.session.pop('username')
         return False
 
 @security.route('/logged_in/')
 def logged_in():
-    return jsonify(result=True if session.get('username') else False)
+    return flask.jsonify(result=True if flask.session.get('username') else False)
 
 @security.route('/register/')
 def register_form():
     if is_logged_in():
-        return redirect(url_for('public_views.homepage'))
+        return flask.redirect(flask.url_for('public_views.homepage'))
     else:
-        return render_template('register.html')
+        return flask.render_template('register.html')
 
 @security.route('/register/', methods = ['POST'])
 def register():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    confirm_password = request.form.get('confirm_password')
+    username = flask.request.form.get('username')
+    password = flask.request.form.get('password')
+    confirm_password = flask.request.form.get('confirm_password')
 
     if not username or not password or not confirm_password:
-        flash('Please fill out all fields!')
-        return redirect(url_for('security.register_form'))
+        flask.flash('Please fill out all fields!')
+        return flask.redirect(flask.url_for('security.register_form'))
 
     results = db_manager.register(username, password, confirm_password)
     print results
-    flash(results[1])
+    flask.flash(results[1])
 
     if results[0]:
-        return redirect(url_for('security.login_form'))
+        return flask.redirect(flask.url_for('security.login_form'))
     else:
-        return redirect(url_for('security.register_form'))
+        return flask.redirect(flask.url_for('security.register_form'))
 
 @security.route('/login/')
 def login_form():
     if is_logged_in():
-        return redirect(url_for('public_views.homepage'))
+        return flask.redirect(flask.url_for('public_views.homepage'))
     else:
-        return render_template('login.html')
+        return flask.render_template('login.html')
 
-@security.route('/login/', methods = ['POST'])
+@security.route('/login/', methods=['POST'])
 def login():
-    username = request.form.get('username')
-    password = request.form.get('password')
+    username = flask.request.form.get('username')
+    password = flask.request.form.get('password')
 
     if not username or not password:
-        flash('Please fill out all fields!')
-        return redirect(url_for('security.login_form'))
+        flask.flash('Please fill out all fields!')
+        return flask.redirect(flask.url_for('security.login_form'))
     else:
         results = db_manager.login(username, password)
 
         if results[0]:
-            session['username'] = username
+            flask.session['username'] = username
             return redirect_back()
         else:
-            flash(results[1])
-            return redirect(url_for('security.login_form'))
+            flask.flash(results[1])
+            return flask.redirect(flask.url_for('security.login_form'))
 
 @security.route('/logout/')
 def logout():
     if is_logged_in():
-        session.pop('username')
+        flask.session.pop('username')
 
-        if 'next' in session:
-            session.pop('next')
+        if 'next' in flask.session:
+            flask.session.pop('next')
 
-    return redirect(url_for('public_views.homepage'))
+    return flask.redirect(flask.url_for('public_views.homepage'))

@@ -82,16 +82,16 @@ class AuthManager:
         return True, 'Password successfully updated!'
 
 
-    def drop_user(self, username):
-        if not self.is_registered(username):
+    def drop_user(self, username, force=False):
+        if not self.is_registered(username) and not force:
             return False, 'User does not exist.'
         else:
             self.db.users.remove({
                 'username': username
             })
 
-            self.drop_admin(username)
-            self.drop_developer(username)
+            self.drop_admin(username, True)
+            self.drop_developer(username, True)
 
             return True, 'User dropped!'
 
@@ -107,8 +107,8 @@ class AuthManager:
 
             return True, 'User is now an admin!'
 
-    def drop_admin(self, username):
-        if not self.is_registered(username):
+    def drop_admin(self, username, force=False):
+        if not self.is_registered(username) and not force:
             return False, 'User does not exist.'
         elif not self.is_admin(username):
             return False, 'User is not an admin.'
@@ -129,11 +129,11 @@ class AuthManager:
                 'username': username,
             })
 
-            self.make_admin(username)
+            self.make_admin(username, force)
             return True, 'User is now a developer!'
 
-    def drop_developer(self, username):
-        if not self.is_registered(username):
+    def drop_developer(self, username, force=False):
+        if not self.is_registered(username) and not force:
             return False, 'User does not exist.'
         elif not self.is_developer(username):
             return False, 'User is not a developer.'
