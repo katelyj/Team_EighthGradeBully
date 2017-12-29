@@ -1,13 +1,13 @@
-from passlib.hash import argon2
-from pymongo import MongoClient
-from flask import flash
+import flask
+import passlib
+import pymongo
 
-from security_utils import secure_hash_password
+import security_utils
 
 class AuthManager:
 
     def __init__(self):
-        client = MongoClient()
+        client = pymongo.MongoClient()
         self.db = client['schedule_login']
 
     def is_registered(self, username):
@@ -39,10 +39,10 @@ class AuthManager:
         else:
             self.db.users.insert_one({
                 'username': username,
-                'passhash': secure_hash_password(password)
+                'passhash': security_utils.secure_hash_password(password)
             })
 
-            print("Registered " + username + " with password " + password)
+            print('Registered ' + username + ' with password ' + password)
 
             return True, 'Successfully registered!'
 
@@ -50,35 +50,33 @@ class AuthManager:
         result = self.db.users.find_one({
             'username': username
         })
-
         if not result:
             return False, 'User does not exist.'
 
         hashed_password = result.get('passhash')
-
-        if result and argon2.verify(password, hashed_password):
+        if result and passlib.hash.argon2.verify(password, hashed_password):
             return True, 'Successfully logged in!'
         else:
             return False, 'Invalid username or password.'
 
-    def change_pass(self, username, old_pass, new_pass, conf_new_pass):
-
-        if new_pass != conf_new_pass:
+    # TO DO: REWRITE REQUIRED
+    def change_password(self, username, old_password, new_password, confirm_new_password):
+        if new_password != confirmation_new_password:
+            flask.flash('Sorry, your passwords do not match.')
             return False, 'Passwords do not match.'
 
         result = self.db.users.find_one({
             'username': username,
+            'passhash': security_utils.secure_hash_password(old_password)
         })
-
         if not result:
+            flask.flash('Password not correct.')
             return False, 'Incorrect password.'
 
         self.db.users.update_one({'username': username}, {
-            '$set': {'passhash': secure_hash_password(new_pass)}
+            '$set': {'passhash': security_utils.secure_hash_password(new_password)}
         })
-
-        flash("Password successfully changed!")
-
+        flask.flash('Password successfully changed!')
         return True, 'Password successfully updated!'
 
 

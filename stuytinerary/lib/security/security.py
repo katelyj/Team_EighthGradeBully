@@ -2,7 +2,7 @@ import flask
 import functools
 
 import AuthManager
-from security_utils import redirect_back
+import security_utils
 
 security = flask.Blueprint('security', __name__)
 db_manager = AuthManager.AuthManager()
@@ -96,7 +96,7 @@ def login():
 
         if results[0]:
             flask.session['username'] = username
-            return redirect_back()
+            return security_utils.redirect_back()
         else:
             flask.flash(results[1])
             return flask.redirect(flask.url_for('security.login_form'))

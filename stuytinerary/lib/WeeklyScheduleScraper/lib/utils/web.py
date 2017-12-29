@@ -1,7 +1,10 @@
 import bs4
+import os
+import sys
 import urllib2
 
-from lib.Logging import Logger
+sys.path.insert(0, os.path.join(os.path.abspath(os.path.dirname(__file__)), '../'))
+from Logging import Logger
 
 web_logger = Logger.Logger('web.log')
 

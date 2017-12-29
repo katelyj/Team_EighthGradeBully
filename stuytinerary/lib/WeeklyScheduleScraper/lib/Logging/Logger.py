@@ -1,12 +1,12 @@
-from datetime import datetime
+import datetime
 
 import interrupt
 
 class LoggerConfig(object):
 
     def __init__(self, include_time):
-        """
-        Logger configuration class
+        '''
+        Logger configuration manager
 
         An interface to modify the settings of the Logger class; meant only to be
         instantiated inside the Logger class.
@@ -16,7 +16,7 @@ class LoggerConfig(object):
 
         Returns:
              LoggerConfig: An instance of the class
-        """
+        '''
         self.logging_levels = {'NOT_SET': 0,
                                'DEBUG': 10,
                                'INFO': 20,
@@ -26,26 +26,27 @@ class LoggerConfig(object):
         self.include_time = include_time
 
     def overwrite_logging_levels(self, new_logging_levels):
-        """
+        '''
         Overwrites the levels you can log at
 
         Overwrites the internal dictionary keeping track of the different logging levels
         with the given one.
 
         Args:
-            new_logging_level (dict): new dictionary defining your own set of logging levels
+            new_logging_levels (dict): new dictionary defining your own set of logging levels
 
         Returns:
             bool: whether the operation was successful or not
-        """
+        '''
         self.logging_levels = new_logging_levels
         return True
 
     def set_logging_level(self, logging_level, new_logging_level_value):
-        """
+        '''
         Changes the value of a specific logging level
 
-        Sets the value of the given logging level to the new value
+        Changes the value of the given logging level to the new value only if the given logging level
+        exists in the internal dictionary.
 
         Args:
             logging_level (str): the name of the logging level you wish to modify the value of
@@ -53,18 +54,18 @@ class LoggerConfig(object):
 
         Returns:
             bool: whether the operation was successful or not
-        """
-        if logging_level in self.logging_levels and str(new_logging_level_value).isdigit():
+        '''
+        if logging_level in self.logging_levels and type(new_logging_level_value) is int:
             self.logging_levels[logging_level] = new_logging_level_value
             return True
         else:
             return False
 
     def add_logging_level(self, logging_level, logging_level_value):
-        """
+        '''
         Adds a new logging level and its corresponding value
 
-        Adds a new logging level along with the priority of the level.  Levels with higher priority
+        Adds a new logging level along with the priority of it.  Levels with higher priority
         will be logged more frequently.
 
         Args:
@@ -73,16 +74,16 @@ class LoggerConfig(object):
 
         Returns:
             bool: whether the operation was successful or not
-        """
-        if logging_level.isalpha() and str(logging_level_value).isdigit():
+        '''
+        if logging_level.isalpha() and type(logging_level_value) is int:
             self.logging_levels[logging_level] = logging_level_value
             return True
         else:
             return False
 
     def remove_logging_level(self, logging_level):
-        """
-        Delete a logging level
+        '''
+        Deletes a logging level
 
         Removes the given logging level from the internal dictionary.  Users may no longer log
         at that level.
@@ -92,17 +93,17 @@ class LoggerConfig(object):
 
         Returns:
             bool: whether the operation was successful or not
-        """
+        '''
         if logging_level in self.logging_levels:
             del self.logging_levels[logging_level]
             return True
         else:
             return False
 
-class Logger:
+class Logger(object):
 
     def __init__(self, filename, include_time=True):
-        """
+        '''
         A logger class to simplify the logging process
 
         Abstracts the logging process by opening and writing files behind the scenes and
@@ -114,13 +115,13 @@ class Logger:
 
         Returns:
             Logger: an instance of the class
-        """
+        '''
         self.filename = filename
         self.config = LoggerConfig(include_time)
         self.current_logging_level = 'WARNING'
 
     def set_current_level(self, new_logging_level):
-        """
+        '''
         Changes the current logging level
 
         Verify that the new logging level is valid and change the current logging level
@@ -131,7 +132,7 @@ class Logger:
 
         Returns:
             bool: whether the operation was successful or not
-        """
+        '''
         if new_logging_level in self.config.logging_levels:
             self.current_logging_level = new_logging_level
             return True
@@ -139,7 +140,7 @@ class Logger:
             return False
 
     def log(self, message, logging_level=None):
-        """
+        '''
         Log a message
 
         If the logging_level specified is greater than or equal to the current logging
@@ -151,8 +152,7 @@ class Logger:
 
         Returns:
             bool: whether the operation was successful or not
-        """
-
+        '''
         if logging_level:
             current_logging_value = self.config.logging_levels[self.current_logging_level]
             given_logging_value = self.config.logging_levels[logging_level]
@@ -174,7 +174,7 @@ class Logger:
         return True
 
     def log_debug(self, message):
-        """
+        '''
         Log a message under the debug level
 
         If the current logging level is lower than 'DEBUG', log the message.
@@ -185,11 +185,11 @@ class Logger:
 
         Returns:
             bool: whether the operation was successful or not
-        """
+        '''
         return self.log(message, logging_level='DEBUG')
 
     def log_info(self, message):
-        """
+        '''
         Log a message under the info level
 
         If the current logging level is lower than 'INFO', log the message.
@@ -200,11 +200,11 @@ class Logger:
 
         Returns:
             bool: whether the operation was successful or not
-        """
+        '''
         return self.log(message, logging_level='INFO')
 
     def log_warning(self, message):
-        """
+        '''
         Log a message under the warning level
 
         If the current logging level is lower than 'WARNING', log the message.
@@ -215,11 +215,11 @@ class Logger:
 
         Returns:
             bool: whether the operation was successful or not
-        """
+        '''
         return self.log(message, logging_level='WARNING')
 
     def log_error(self, message):
-        """
+        '''
         Log a message under the error level
 
         If the current logging level is lower than 'ERROR', log the message.
@@ -230,11 +230,11 @@ class Logger:
 
         Returns:
             bool: whether the operation was successful or not
-        """
+        '''
         return self.log(message, logging_level='ERROR')
 
     def log_critical(self, message):
-        """
+        '''
         Log a message under the critcal level
 
         If the current logging level is lower than 'CRITICAL', log the message.
@@ -245,5 +245,5 @@ class Logger:
 
         Returns:
             bool: whether the operation was successful or not
-        """
+        '''
         return self.log(message, logging_level='CRITICAL')

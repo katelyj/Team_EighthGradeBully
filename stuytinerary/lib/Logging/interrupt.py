@@ -4,10 +4,11 @@ class KeyboardInterruptBlocked(object):
 
     def __init__(self, ProgressBarObject=None):
         '''
-        Blocks the KeyboradInterrupt signal
+        Blocks the KeyboardInterrupt signal
 
-        Temporarily block the KeyboardInterrupt signal, restore the handler for SIGINT,
-        and raise KeyboardInterrupt if necessary.
+        Temporarily block the KeyboardInterrupt signal by overriding the handler for
+        SIGINT and then restore the handler for SIGINT upon exit.  Raise KeyboardInterrupt
+        exception again if it was raised while blocked.
 
         Args:
 
@@ -70,7 +71,7 @@ class KeyboardInterruptBlocked(object):
             self.old_handler(*self.received_signal)
 
 def assert_extended(condition, assert_message='', function=None):
-    """
+    '''
     Assert the given condition and run a function if it fails
 
     Try to assert condition.  Catch the AssertionError upon failure and run function if it
@@ -87,7 +88,7 @@ def assert_extended(condition, assert_message='', function=None):
 
     Raises:
         AssertionError: Occurs when the condition asserted is False, should never happen
-    """
+    '''
     try:
         if assert_message:
             assert condition, assert_message

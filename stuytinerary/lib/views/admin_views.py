@@ -53,6 +53,7 @@ def save_weekly_schedule():
     return flask.redirect(flask.url_for('admin_views.admin_homepage'))
 
 @admin_views.route('/new_or_update_schedule/', methods=['POST'])
+@security.login_required(admin_required=True)
 def create_new_schedule():
     raw_schedule = json.loads(flask.request.form['new_schedule'])
     new_schedule = collections.OrderedDict()

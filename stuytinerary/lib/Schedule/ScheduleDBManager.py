@@ -1,7 +1,7 @@
-import os
 import pymongo
-from collections import OrderedDict
 
+# Need OrderedDict for ``eval(result.get('data'))``
+from collections import OrderedDict
 
 class ScheduleDBManager(object):
 
@@ -11,7 +11,6 @@ class ScheduleDBManager(object):
         self.db = self.client['stuytinerary_schedules']
         self.collection_name = collection_name
         self.collection = eval('self.db.{collection_name}'.format(collection_name=collection_name))
-        self.db_size = self.collection.count()
 
     def get_size(self):
         return self.collection.count()
@@ -45,5 +44,4 @@ class ScheduleDBManager(object):
     def drop_schedules(self):
         self.collection.drop()
         self.collection = eval('self.db.{collection_name}'.format(collection_name=self.collection_name))
-        self.db_size = self.collection.count()
         return True, 'Dropped all schedules!'
